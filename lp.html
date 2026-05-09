@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>家業女子のためのLINE×SNS伴走サポート｜Mam</title>
+  <style>
+    :root {
+      --bg:           #faf8f5;
+      --bg-alt:       #f2ece5;
+      --surface:      #fefdfb;
+      --text:         #1e1e1e;
+      --text-sub:     #6a6a6a;
+      --border:       #e0d6ce;
+      --accent:       #8b6458;
+      --accent-light: #f0e3dd;
+      --dark:         #1a1614;
+
+      --font-sans:    'Hiragino Kaku Gothic ProN', 'Yu Gothic Medium', 'Yu Gothic', sans-serif;
+      --font-display: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+      --font-ui:      'Helvetica Neue', Arial, sans-serif;
+
+      --radius: 8px;
+      --shadow: 0 8px 30px rgba(0,0,0,0.05);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 64px 0; }
+    @media (max-width: 640px) { section { padding: 48px 0; } }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 7vw, 48px);
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text);
+    }
+    h2 {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+    }
+    h3 {
+      font-size: clamp(17px, 4vw, 22px);
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+    }
+    p { font-size: 16px; line-height: 1.75; color: var(--text-sub); }
+    strong { color: var(--text); font-weight: 700; }
+
+    .label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .note { font-family: var(--font-ui); font-size: 12px; color: var(--text-sub); }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: var(--radius);
+      transition: opacity 0.18s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-lg { padding: 20px 56px; font-size: 17px; }
+    .btn-inv {
+      display: inline-block;
+      background: #fff;
+      color: var(--accent);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 700;
+      padding: 20px 56px;
+      border-radius: var(--radius);
+      transition: opacity 0.18s;
+    }
+    .btn-inv:hover { opacity: 0.9; }
+
+    .dash-list { list-style: none; display: grid; gap: 8px; }
+    .dash-list li {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-sub);
+      padding-left: 20px;
+      position: relative;
+    }
+    .dash-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 11px;
+      width: 8px; height: 1px;
+      background: var(--accent);
+    }
+
+    .callout {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+    .callout p {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════════
+       HEADER
+    ══════════════════════════════ */
+    .site-header {
+      position: sticky;
+      top: 0; z-index: 100;
+      background: rgba(250,248,245,0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .site-header-name {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: var(--text-sub);
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+    }
+    .site-header .btn { font-size: 13px; padding: 10px 24px; white-space: nowrap; }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero { padding: 88px 0 72px; }
+    @media (max-width: 640px) { .hero { padding: 64px 0 56px; } }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 640px) { .hero-grid { grid-template-columns: 1fr; } }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 12px;
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+    }
+    .hero-service {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--text-sub);
+      margin-bottom: 16px;
+    }
+    .hero h1 { margin-bottom: 24px; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub { font-size: 17px; line-height: 1.85; color: var(--text-sub); margin-bottom: 40px; }
+    .hero-cta-group { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+
+    .hero-photo img {
+      width: 100%;
+      border-radius: var(--radius);
+      object-fit: cover;
+      aspect-ratio: 3/4;
+    }
+
+    /* ══════════════════════════════
+       STATS — dark bg
+    ══════════════════════════════ */
+    .stats-dark { background: var(--dark); }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 560px) { .stats-row { grid-template-columns: 1fr; } }
+
+    .stat-box {
+      padding: 48px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-box:last-child { border-right: none; }
+
+    .stat-big {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: clamp(40px, 9vw, 72px);
+      font-weight: 700;
+      color: var(--accent-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-unit { font-size: clamp(20px, 4vw, 30px); font-weight: 400; opacity: 0.8; }
+    .stat-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.55; }
+
+    /* ══════════════════════════════
+       ACHIEVEMENTS — visual graphs
+    ══════════════════════════════ */
+    .achievements { background: var(--bg-alt); }
+
+    .ach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    @media (max-width: 560px) { .ach-grid { grid-template-columns: 1fr; } }
+
+    .ach-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+    }
+    .ach-card.wide { grid-column: 1 / -1; }
+
+    .ach-card-label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .ach-card h3 {
+      font-size: clamp(17px, 4vw, 22px);
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    /* Bar comparison chart */
+    .bar-compare { display: grid; gap: 16px; }
+    .bc-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 56px;
+      align-items: center;
+      gap: 12px;
+    }
+    .bc-year {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: var(--text-sub);
+      text-align: right;
+    }
+    .bc-track {
+      height: 16px;
+      background: var(--bg-alt);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .bc-fill {
+      height: 100%;
+      border-radius: var(--radius);
+      background: var(--border);
+    }
+    .bc-fill.current { background: var(--accent); }
+    .bc-val {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-sub);
+    }
+    .bc-val.accent { color: var(--accent); }
+
+    .ach-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--text-sub);
+      font-family: var(--font-ui);
+    }
+
+    /* Dot grid (LINE 50件) */
+    .dot-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 16px 0;
+    }
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      display: block;
+    }
+    .dot.empty { background: var(--bg-alt); border: 1px solid var(--border); }
+
+    .ach-big-num {
+      font-family: var(--font-ui);
+      font-size: clamp(36px, 8vw, 56px);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .ach-big-unit {
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 400;
+    }
+    .ach-sub { font-size: 16px; color: var(--text-sub); line-height: 1.7; }
+
+    /* Investment visual — stacked bars */
+    .invest-visual {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 80px;
+      margin: 16px 0;
+    }
+    .invest-bar {
+      flex: 1;
+      background: var(--accent);
+      border-radius: 4px 4px 0 0;
+      opacity: 0.15;
+    }
+    .invest-bar:nth-child(1) { height: 30%; opacity: 0.2; }
+    .invest-bar:nth-child(2) { height: 45%; opacity: 0.3; }
+    .invest-bar:nth-child(3) { height: 55%; opacity: 0.4; }
+    .invest-bar:nth-child(4) { height: 68%; opacity: 0.55; }
+    .invest-bar:nth-child(5) { height: 78%; opacity: 0.65; }
+    .invest-bar:nth-child(6) { height: 88%; opacity: 0.75; }
+    .invest-bar:nth-child(7) { height: 100%; opacity: 1; background: var(--accent); }
+    .invest-label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ══════════════════════════════
+       EMPATHY
+    ══════════════════════════════ */
+    .pain-list { list-style: none; display: grid; gap: 8px; margin-top: 32px; }
+    .pain-list li {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 20px;
+    }
+
+    .strength-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    @media (max-width: 480px) { .strength-grid { grid-template-columns: 1fr; } }
+
+    .strength-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+    }
+    .strength-num {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .strength-item p { font-size: 16px; font-weight: 600; color: var(--text); }
+
+    /* ══════════════════════════════
+       SERVICES
+    ══════════════════════════════ */
+    .service-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .service-badge {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .service-lead { font-size: 16px; line-height: 1.85; color: var(--text-sub); margin-bottom: 24px; }
+
+    .detail-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .detail-box h4 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 16px; }
+
+    .why-box {
+      background: var(--bg-alt);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 32px 0;
+    }
+    .why-box h4 { font-size: clamp(17px, 4vw, 20px); font-weight: 700; color: var(--text); margin-bottom: 16px; }
+    .why-box p { font-size: 16px; line-height: 1.85; }
+    .why-quote {
+      font-family: var(--font-display);
+      font-size: clamp(17px, 4vw, 22px);
+      color: var(--accent);
+      font-weight: 400;
+      line-height: 1.6;
+      margin: 16px 0;
+    }
+    .content-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .content-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    /* ══════════════════════════════
+       STORY / PROFILE
+    ══════════════════════════════ */
+    .story-section { background: var(--bg-alt); }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 40px;
+    }
+    @media (max-width: 600px) { .story-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+    .story-photo img {
+      width: 100%;
+      border-radius: var(--radius);
+      object-fit: cover;
+    }
+
+    .profile-name {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .profile-role {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: var(--text-sub);
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+    .story-p { font-size: 16px; line-height: 1.9; color: var(--text-sub); margin-bottom: 16px; }
+
+    /* Speech bubble */
+    .speech-bubble {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 8px 0 32px;
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -14px; left: 28px;
+      width: 0; height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 14px solid var(--border);
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -12px; left: 29px;
+      width: 0; height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-top: 13px solid var(--surface);
+      z-index: 1;
+    }
+    .speech-bubble p {
+      font-family: var(--font-display);
+      font-size: clamp(17px, 4vw, 22px);
+      color: var(--accent);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════
+       TIMELINE
+    ══════════════════════════════ */
+    .timeline-list { margin-top: 40px; position: relative; }
+    .timeline-list::before {
+      content: '';
+      position: absolute;
+      left: 31px; top: 40px; bottom: 40px;
+      width: 1px;
+      background: var(--border);
+    }
+    .timeline-item { display: flex; gap: 24px; padding-bottom: 48px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      flex-shrink: 0;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-ui);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-align: center;
+      line-height: 1.4;
+      position: relative; z-index: 1;
+      box-shadow: var(--shadow);
+    }
+    .timeline-content { padding-top: 16px; }
+    .timeline-content h3 { margin-bottom: 8px; }
+    .timeline-content p { font-size: 16px; line-height: 1.8; }
+
+    /* ══════════════════════════════
+       WHO IT'S FOR
+    ══════════════════════════════ */
+    .who-list { list-style: none; display: grid; gap: 8px; margin-top: 32px; }
+    .who-list li {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+    }
+    .who-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ══════════════════════════════
+       PRICING
+    ══════════════════════════════ */
+    .price-stack { display: grid; gap: 16px; margin-top: 40px; }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .price-card-head { padding: 20px 24px; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+    .price-card-head h3 { font-size: clamp(17px, 4vw, 20px); margin-bottom: 4px; }
+    .price-detail { font-size: 13px; color: var(--text-sub); line-height: 1.5; }
+    .price-card-body { padding: 24px; display: flex; align-items: baseline; gap: 8px; }
+    .price-amount { font-family: var(--font-ui); font-size: 36px; font-weight: 700; color: var(--text); line-height: 1; }
+    .price-tax { font-family: var(--font-ui); font-size: 13px; color: var(--text-sub); }
+    .price-card.total { border: 2px solid var(--accent); }
+    .price-card.total .price-card-head { background: var(--accent); }
+    .price-card.total .price-card-head h3 { color: #fff; }
+    .price-card.total .price-detail { color: rgba(255,255,255,0.75); }
+    .price-card.total .price-amount { font-size: 44px; color: var(--accent); }
+
+    /* ══════════════════════════════
+       FAQ
+    ══════════════════════════════ */
+    .faq-list { margin-top: 40px; display: grid; gap: 16px; }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .faq-q { padding: 20px 24px; font-size: 16px; font-weight: 700; color: var(--text); display: flex; gap: 16px; align-items: flex-start; }
+    .faq-mark {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      background: var(--accent-light); color: var(--accent);
+      border-radius: 50%;
+      font-family: var(--font-ui); font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .faq-a { padding: 16px 24px 20px calc(24px + 24px + 16px); font-size: 16px; line-height: 1.8; color: var(--text-sub); border-top: 1px solid var(--border); }
+
+    /* ══════════════════════════════
+       FINAL CTA
+    ══════════════════════════════ */
+    .final-cta { padding: 88px 0 80px; background: var(--accent); }
+    @media (max-width: 640px) { .final-cta { padding: 64px 0; } }
+    .final-cta .label { color: rgba(255,255,255,0.55); }
+    .final-cta h2 { color: #fff; margin-bottom: 24px; }
+    .final-cta p { color: rgba(255,255,255,0.8); font-size: 17px; max-width: 560px; margin-bottom: 40px; }
+    .cta-note { display: block; margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.45); font-family: var(--font-ui); }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer { background: var(--dark); padding: 32px 24px; text-align: center; }
+    footer p { font-family: var(--font-ui); font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+  </style>
+</head>
+<body>
+
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <span class="site-header-name">LINE×SNS伴走サポート by Mam</span>
+  <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdA5NHRBUyfmZL9h4mnwUMLjr8BhPJiQ_KX4cX-t1Dyx5k37A/viewform?usp=header" target="_blank" rel="noopener">
+    お申し込みフォームへ
+  </a>
+</header>
+
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-badge">家業女子のための</span>
+        <p class="hero-service">LINE × SNS 伴走サポート</p>
+        <h1>「家業だから仕方ない」を、<br><em>私の強み</em>に変える。</h1>
+        <p class="hero-sub">
+          牛肉専門卸問屋で前年比150%を達成したメソッドで、<br>
+          あなたの家業のSNS・LINE・売上導線を一緒に設計。<br>
+          <strong>90分コンサル×6回＋週2〜3回の添削、3ヶ月伴走。</strong>
+        </p>
+        <div class="hero-cta-group">
+          <a class="btn btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSdA5NHRBUyfmZL9h4mnwUMLjr8BhPJiQ_KX4cX-t1Dyx5k37A/viewform?usp=header" target="_blank" rel="noopener">
+            お申し込み・お問い合わせはこちら
+          </a>
+          <span class="note">フォーム送信後、2営業日以内にご連絡します</span>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="./cloud使用写真/date1.jpg" alt="Mam" />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ STATS — dark ══ -->
+<div class="stats-dark">
+  <div class="stats-row">
+    <div class="stat-box">
+      <span class="stat-big">150<span class="stat-unit">%</span></span>
+      <p class="stat-desc">毎月の前年比<br>売上達成率</p>
+    </div>
+    <div class="stat-box">
+      <span class="stat-big">50<span class="stat-unit">件</span></span>
+      <p class="stat-desc">1投稿での<br>LINE登録数</p>
+    </div>
+    <div class="stat-box">
+      <span class="stat-big">300<span class="stat-unit">万+</span></span>
+      <p class="stat-desc">マーケティング<br>自己投資額</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ ACHIEVEMENTS — visual graphs ══ -->
+<section class="achievements">
+  <div class="wrap">
+    <span class="label">Results</span>
+    <h2>数字で見る実績</h2>
+
+    <div class="ach-grid">
+
+      <!-- 売上比較バーチャート -->
+      <div class="ach-card wide">
+        <span class="ach-card-label">Sales Growth</span>
+        <h3>売上推移 — 前年比較</h3>
+        <div class="bar-compare">
+          <div class="bc-row">
+            <span class="bc-year">前年</span>
+            <div class="bc-track">
+              <div class="bc-fill" style="width: 67%;"></div>
+            </div>
+            <span class="bc-val">100%</span>
+          </div>
+          <div class="bc-row">
+            <span class="bc-year">今年</span>
+            <div class="bc-track">
+              <div class="bc-fill current" style="width: 100%;"></div>
+            </div>
+            <span class="bc-val accent">150%+</span>
+          </div>
+        </div>
+        <p class="ach-note">※ 牛肉専門卸問屋にてSNS×LINE×EC導線を設計し直した結果。毎月継続達成（1年間）。</p>
+      </div>
+
+      <!-- LINE登録 ドットグリッド -->
+      <div class="ach-card">
+        <span class="ach-card-label">LINE Registrations</span>
+        <h3>1投稿でのLINE登録</h3>
+        <span class="ach-big-num">50<span class="ach-big-unit">件</span></span>
+        <!-- 50個のドット = 50人を視覚化 -->
+        <div class="dot-grid">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+        <p class="ach-note">1ドット = 1人。SNS投稿1本からの実績。</p>
+      </div>
+
+      <!-- 自己投資 積み上げバー -->
+      <div class="ach-card">
+        <span class="ach-card-label">Commitment to Growth</span>
+        <h3>マーケティングを、<br>学び続けている</h3>
+        <div class="invest-visual">
+          <div class="invest-bar"></div>
+          <div class="invest-bar"></div>
+          <div class="invest-bar"></div>
+          <div class="invest-bar"></div>
+          <div class="invest-bar"></div>
+          <div class="invest-bar"></div>
+          <div class="invest-bar"></div>
+        </div>
+        <p class="ach-note">セミナー・コンサル・書籍・実践。止まらずに学び続け、現場で使えるメソッドを積み上げてきた。現在も継続中。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ EMPATHY ══ -->
+<section style="background:var(--bg-alt);">
+  <div class="wrap">
+    <span class="label">For Family Business Women</span>
+    <h2>家業で働く女性へ。<br>毎日頑張っているのに——</h2>
+    <ul class="pain-list">
+      <li>売上に関われない</li>
+      <li>発信しても反応がない</li>
+      <li>SNSが苦手</li>
+      <li>家族経営だから評価されにくい</li>
+      <li>"お手伝い"扱いされる</li>
+      <li>頑張ってもキャリアにならない</li>
+    </ul>
+    <p style="margin-top:32px; font-size:17px; line-height:1.9; color:var(--text-sub);">
+      私は、牛肉専門卸問屋の娘として、家業の中で同じ悩みを抱えてきました。<br>
+      家業には外から見えない難しさがある。でも同時に、<strong>他では代替できない武器</strong>がある。
+    </p>
+    <div class="strength-grid" style="margin-top:24px;">
+      <div class="strength-item">
+        <span class="strength-num">Strength 01</span>
+        <p>長年積み上げた信頼</p>
+      </div>
+      <div class="strength-item">
+        <span class="strength-num">Strength 02</span>
+        <p>本物の商品力</p>
+      </div>
+      <div class="strength-item">
+        <span class="strength-num">Strength 03</span>
+        <p>現場のリアル</p>
+      </div>
+      <div class="strength-item">
+        <span class="strength-num">Strength 04</span>
+        <p>人の温度感</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ PAIN ══ -->
+<section>
+  <div class="wrap">
+    <span class="label">Pain Points</span>
+    <h2>家業女子あるある</h2>
+    <ul class="pain-list">
+      <li>SNSをなんとなく更新している</li>
+      <li>発信しても売上につながらない</li>
+      <li>LINEを作っただけで活用できていない</li>
+      <li>家族に提案しても通らない</li>
+      <li>何を発信したらいいか分からない</li>
+      <li>お客様のニーズが分からない</li>
+      <li>毎日忙しくて整理できない</li>
+      <li>数字を見るのが苦手</li>
+      <li>「センスがない」と思っている</li>
+      <li>頑張っても自信が持てない</li>
+    </ul>
+    <div class="callout">
+      <p>成果が出ない理由は"才能不足"ではなく、<br>「設計」がないだけ。</p>
+    </div>
+    <p style="font-size:16px; color:var(--text-sub); line-height:1.85;">
+      誰に・何を・どの順番で届けるかの設計さえあれば、センスや経験年数に関係なく、数字は動きます。
+    </p>
+  </div>
+</section>
+
+
+<!-- ══ SERVICE ① ══ -->
+<section style="background:var(--bg-alt);">
+  <div class="wrap">
+    <span class="label">Service 01</span>
+    <div class="service-header">
+      <div class="service-badge">1</div>
+      <h2>LINE活用設計</h2>
+    </div>
+    <p class="service-lead"><strong>「誰に、何を届けるか」</strong>を整理して設計します。</p>
+    <div class="why-box">
+      <h4>なぜLINEが重要なのか</h4>
+      <p>SNSは"流れる"。でもLINEは、お客様と直接つながれる場所です。</p>
+      <p class="why-quote">「困った時に思い出してもらえる場所」を作れる。</p>
+      <p>家業は特に"関係性"で選ばれるビジネス。だからLINEが強い。</p>
+    </div>
+    <div class="detail-box">
+      <h4>設計・構築できること</h4>
+      <ul class="dash-list">
+        <li>toB / toCの顧客分けの整理</li>
+        <li>お客様アンケート設計</li>
+        <li>タグ付け・セグメント配信の設計</li>
+        <li>ブロック防止設計</li>
+        <li>リピートにつながる導線設計</li>
+        <li>商品オファー・キャンペーン設計</li>
+        <li>LINE登録導線の構築</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ SERVICE ② ══ -->
+<section>
+  <div class="wrap">
+    <span class="label">Service 02</span>
+    <div class="service-header">
+      <div class="service-badge">2</div>
+      <h2>SNS活用サポート</h2>
+    </div>
+    <p class="service-lead"><strong>売上につながる発信</strong>を一緒に設計します。</p>
+    <div class="why-box">
+      <h4>家業には"ネタ"がある</h4>
+      <div class="content-tags">
+        <span class="content-tag">現場</span><span class="content-tag">職人</span>
+        <span class="content-tag">商品</span><span class="content-tag">家族</span>
+        <span class="content-tag">日常</span><span class="content-tag">歴史</span>
+        <span class="content-tag">想い</span>
+      </div>
+      <p style="margin-top:16px;">大手には出せない"リアル"が、家業にはある。自分たちには当たり前すぎて価値に気づけない。だから一緒に整理します。</p>
+    </div>
+    <div class="detail-box">
+      <h4>サポート内容</h4>
+      <ul class="dash-list">
+        <li>Instagram運用・Threads活用</li>
+        <li>投稿ネタ・世界観の設計</li>
+        <li>リール導線・LINE誘導の設計</li>
+        <li>投稿の発信添削（フック・タイトル・構成）</li>
+        <li>お客様目線での言語化サポート</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ SERVICE ③ ══ -->
+<section style="background:var(--bg-alt);">
+  <div class="wrap">
+    <span class="label">Service 03</span>
+    <div class="service-header">
+      <div class="service-badge">3</div>
+      <h2>数字から課題を見つける</h2>
+    </div>
+    <p class="service-lead"><strong>数字を見ながら改善</strong>していきます。</p>
+    <div class="detail-box">
+      <h4>確認する数字の例</h4>
+      <ul class="dash-list">
+        <li>売上・利益率・売れている商品</li>
+        <li>リピート率</li>
+        <li>LINE登録数・配信反応率</li>
+        <li>SNSからの導線データ</li>
+      </ul>
+    </div>
+    <div class="callout">
+      <p>家業女子って、"全部やろう"としてしまう。<br>でも本当は、「強い商品」を伸ばす方が早い。<br>だから数字から"柱"を見つける。</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ STORY ══ -->
+<section class="story-section">
+  <div class="wrap">
+    <span class="label">Story</span>
+    <h2>私自身も、家業で悩んできた</h2>
+    <div class="story-grid">
+      <div class="story-photo">
+        <img src="./cloud使用写真/date1.jpg" alt="Mam" />
+      </div>
+      <div>
+        <p class="profile-name">Mam</p>
+        <p class="profile-role">牛肉専門卸問屋 マーケター</p>
+        <p class="story-p">私はずっと、「娘だからやって当たり前」が苦しかった。時間外勤務・なんでも屋・給与は変わらない・権限はない。</p>
+        <p class="story-p">それでもマーケティングを学び続け、「絶対結果出せる」と思って挑戦し続けた。最初は反対された。やりたくても、やらせてもらえなかった。</p>
+        <div class="speech-bubble">
+          <p>「会社名を使わないならやっていい」</p>
+        </div>
+        <p class="story-p">屋号を変えて挑戦した。売上が上がった。LINE登録が増えた。お客様との関係性が変わった。そして、<strong>家族からの見られ方が変わった。</strong></p>
+        <p class="story-p" style="margin-bottom:0;">私が届けたいのは、「家業で働く女性が"お手伝い"で終わらなくていい」ということ。必要なのはセンスではなく、<strong>設計と継続</strong>です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ TIMELINE ══ -->
+<section>
+  <div class="wrap">
+    <span class="label">Schedule</span>
+    <h2>3ヶ月のスケジュール</h2>
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div class="timeline-dot">Month<br>1</div>
+        <div class="timeline-content">
+          <h3>現状把握と数字の基準を作る</h3>
+          <p>売上構造・SNS・LINE・EC導線を丸ごと棚卸し。「どこを変えれば数字が動くか」を特定し、3ヶ月の施策を設計します。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">Month<br>2</div>
+        <div class="timeline-content">
+          <h3>LINE × SNSの実装と導線構築</h3>
+          <p>LINE公式アカウントのタグ付け設計を実装。SNS投稿の添削で「届く言葉」を磨き、集客 → LINE登録 → 購買の導線を実際に動かします。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">Month<br>3</div>
+        <div class="timeline-content">
+          <h3>分析・改善・仕組みとして定着させる</h3>
+          <p>施策の結果を数字でレポート化し、成果を可視化。リピートを生むステップ配信を構築し、担当者が変わっても回る「仕組み」として定着させます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ WHO IT'S FOR ══ -->
+<section style="background:var(--bg-alt);">
+  <div class="wrap">
+    <span class="label">Who This Is For</span>
+    <h2>このサービスはこんな方へ</h2>
+    <ul class="who-list">
+      <li>家業で働いている女性</li>
+      <li>家族経営の難しさに悩んでいる方</li>
+      <li>SNSを売上につなげたい方</li>
+      <li>LINEを使いこなしたい方</li>
+      <li>売上につながる導線を作りたい方</li>
+      <li>自分の強みを形にしたい方</li>
+      <li>家業を次の世代につなげたい方</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ══ PRICING ══ -->
+<section>
+  <div class="wrap">
+    <span class="label">Investment</span>
+    <h2>料金</h2>
+    <div class="price-stack">
+      <div class="price-card">
+        <div class="price-card-head">
+          <h3>3ヶ月伴走コンサルティング</h3>
+          <p class="price-detail">90分コンサル × 6回 ＋ 随時添削サポート（週2〜3回）</p>
+        </div>
+        <div class="price-card-body">
+          <span class="price-amount">¥150,000</span>
+          <span class="price-tax">（税込）</span>
+        </div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-head">
+          <h3>LINE構築オプション</h3>
+          <p class="price-detail">初期設定 ＋ アンケート設計 ＋ 運用レクチャー</p>
+        </div>
+        <div class="price-card-body">
+          <span class="price-amount">¥100,000</span>
+          <span class="price-tax">（税込）</span>
+        </div>
+      </div>
+      <div class="price-card total">
+        <div class="price-card-head">
+          <h3>フルサポートパッケージ</h3>
+          <p class="price-detail">仕組み構築〜運用定着まで完全伴走（上記2つ含む）</p>
+        </div>
+        <div class="price-card-body">
+          <span class="price-amount">¥250,000</span>
+          <span class="price-tax">（税込）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FAQ ══ -->
+<section style="background:var(--bg-alt);">
+  <div class="wrap">
+    <span class="label">FAQ</span>
+    <h2>よくあるご質問</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-mark">Q</span>SNSが苦手で、何を投稿すればいいかもわかりません。</div>
+        <div class="faq-a">大丈夫です。私自身も最初はそうでした。投稿ネタ・構成・言葉まで一緒に整理していくので、「何も思いつかない」状態からスタートして問題ありません。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-mark">Q</span>費用をかけて成果が出なかったら怖いです。</div>
+        <div class="faq-a">まず小さく試して改善する設計を一緒に作ります。検証 → 数字で確認 → 改善のサイクルで進めるので、失敗のリスクを最小化しながら取り組めます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-mark">Q</span>センスがなく、ネタが見つからずいつも途中で止まってしまいます。</div>
+        <div class="faq-a">センスより「誰に何を届けるか」の設計が先です。コンセプトを1本通すと、ネタは自然と見つかるようになります。添削サポートで「止まる瞬間」をその都度解消していきます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FINAL CTA ══ -->
+<section class="final-cta">
+  <div class="wrap">
+    <span class="label">Apply</span>
+    <h2>家業って、簡単じゃない。<br>だからこそ、私は家業女子の味方でいたい。</h2>
+    <p>あなたの中にある強みを、一緒に形にしていきます。<br>牛肉専門卸問屋の現場で培ったマーケティングを、あなたの家業の力に変えます。</p>
+    <a class="btn-inv" href="https://docs.google.com/forms/d/e/1FAIpQLSdA5NHRBUyfmZL9h4mnwUMLjr8BhPJiQ_KX4cX-t1Dyx5k37A/viewform?usp=header" target="_blank" rel="noopener">
+      お申し込み・お問い合わせはこちら
+    </a>
+    <span class="cta-note">フォーム送信後、2営業日以内にご連絡します</span>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>© 2026 Mam — All Rights Reserved</p>
+</footer>
+
+
+</body>
+</html>

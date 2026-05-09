@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>家業女子の売れる導線診断</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      background: #FDFAF6;
+      color: #3D2B1F;
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    /* ── Globals ── */
+    .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #C4927A 0%, #A0705A 100%);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(160,112,90,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(160,112,90,0.45); }
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid #C4927A;
+      color: #C4927A;
+    }
+    .btn-ghost:hover { background: #FEF6F2; }
+    .btn-sm { padding: 10px 22px; font-size: 14px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(160deg, #FFF8F4 0%, #F5EDE4 50%, #EDE0D4 100%);
+      padding: 60px 0 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(196,146,122,0.12);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(196,146,122,0.08);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(196,146,122,0.2);
+      color: #8B5E45;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 900;
+      color: #3D2B1F;
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+    .hero h1 span { color: #C4927A; }
+    .hero-sub {
+      font-size: 15px;
+      color: #6B4A37;
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+    .hero-note {
+      font-size: 13px;
+      color: #9C7B6A;
+      margin-bottom: 32px;
+    }
+
+    /* ── Achievements strip ── */
+    .achievements {
+      background: #3D2B1F;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .achievements-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: #C4927A;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+    .achievements-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .ach-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(196,146,122,0.3);
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: #F5EDE4;
+      font-size: 13px;
+    }
+    .ach-item strong { color: #C4927A; }
+
+    /* ── Who section ── */
+    .who-section {
+      background: #FAF5EE;
+      border-bottom: 1px solid #E8D8C8;
+      padding: 40px 20px;
+    }
+    .who-inner { max-width: 680px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: #C4927A;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .who-title { font-size: 18px; font-weight: 800; color: #3D2B1F; margin-bottom: 18px; }
+    .checklist { list-style: none; display: grid; gap: 10px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #5A3A2A;
+      line-height: 1.6;
+    }
+    .checklist li::before {
+      content: '✓';
+      flex-shrink: 0;
+      color: #C4927A;
+      font-weight: bold;
+      margin-top: 1px;
+    }
+
+    /* ── Quiz wrapper ── */
+    .quiz-wrapper {
+      min-height: 100vh;
+      background: #FDFAF6;
+      padding: 0 0 80px;
+    }
+
+    /* ── Progress bar ── */
+    .progress-bar-wrap {
+      background: #EDE0D4;
+      height: 6px;
+      width: 100%;
+    }
+    .progress-bar-fill {
+      height: 6px;
+      background: linear-gradient(90deg, #C4927A, #A0705A);
+      transition: width 0.4s ease;
+      border-radius: 0 3px 3px 0;
+    }
+    .progress-header {
+      background: #FFF8F4;
+      border-bottom: 1px solid #E8D8C8;
+      padding: 14px 20px;
+    }
+    .progress-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .progress-text { font-size: 13px; color: #8B6F5E; }
+    .progress-fraction { font-size: 13px; font-weight: bold; color: #C4927A; }
+
+    /* ── Question card ── */
+    .question-section {
+      padding: 40px 20px 20px;
+    }
+    .q-inner { max-width: 680px; margin: 0 auto; }
+    .q-category {
+      display: inline-block;
+      background: rgba(196,146,122,0.15);
+      color: #8B5E45;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .q-text {
+      font-size: clamp(17px, 4vw, 20px);
+      font-weight: 800;
+      color: #3D2B1F;
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+    .options-grid { display: grid; gap: 12px; }
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 18px 20px;
+      background: #fff;
+      border: 2px solid #E8D8C8;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #3D2B1F;
+      line-height: 1.55;
+      transition: all 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-family: inherit;
+    }
+    .option-btn:hover {
+      border-color: #C4927A;
+      background: #FFF8F4;
+      transform: translateX(3px);
+    }
+    .option-btn.selected {
+      border-color: #C4927A;
+      background: linear-gradient(135deg, #FFF3ED, #FEE9DF);
+      color: #6B3A26;
+    }
+    .option-label {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #EDE0D4;
+      color: #8B6F5E;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .option-btn.selected .option-label {
+      background: #C4927A;
+      color: #fff;
+    }
+    .option-text { flex: 1; }
+
+    /* ── Nav buttons ── */
+    .quiz-nav {
+      max-width: 680px;
+      margin: 28px auto 0;
+      padding: 0 20px;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    /* ── Results ── */
+    .result-wrapper {
+      min-height: 100vh;
+      background: #FDFAF6;
+      padding-bottom: 60px;
+    }
+    .result-hero {
+      background: linear-gradient(160deg, #3D2B1F 0%, #5A3A2A 100%);
+      padding: 52px 20px 40px;
+      text-align: center;
+    }
+    .result-hero-label {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: rgba(196,146,122,0.8);
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .result-type-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #C4927A, #A0705A);
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .result-type-name {
+      font-size: clamp(22px, 5vw, 28px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+    .result-type-name span { color: #C4927A; }
+    .result-hero-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+    }
+
+    /* sub type */
+    .sub-type-bar {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(196,146,122,0.3);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+    }
+    .sub-type-bar span { color: #E8B89A; font-weight: bold; }
+
+    /* score meter */
+    .score-section {
+      background: #FAF5EE;
+      border-bottom: 1px solid #E8D8C8;
+      padding: 28px 20px;
+    }
+    .score-inner { max-width: 680px; margin: 0 auto; }
+    .score-grid { display: grid; gap: 10px; margin-top: 14px; }
+    .score-row { display: flex; align-items: center; gap: 12px; }
+    .score-label { font-size: 13px; color: #6B4A37; width: 90px; flex-shrink: 0; font-weight: 600; }
+    .score-bar-bg { flex: 1; background: #E8D8C8; border-radius: 4px; height: 8px; }
+    .score-bar-fill { height: 8px; border-radius: 4px; transition: width 0.6s ease; }
+    .score-num { font-size: 12px; color: #9C7B6A; width: 36px; text-align: right; flex-shrink: 0; }
+
+    /* result cards */
+    .result-cards { max-width: 680px; margin: 0 auto; padding: 32px 20px 0; }
+    .result-card {
+      background: #fff;
+      border: 1px solid #E8D8C8;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .card-icon { font-size: 22px; margin-bottom: 8px; }
+    .card-title {
+      font-size: 13px;
+      font-weight: bold;
+      color: #C4927A;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .card-body { font-size: 15px; color: #3D2B1F; line-height: 1.75; }
+    .improvement-list { list-style: none; display: grid; gap: 10px; margin-top: 4px; }
+    .improvement-list li {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+      color: #3D2B1F;
+      line-height: 1.6;
+    }
+    .improvement-list li::before {
+      content: '';
+      flex-shrink: 0;
+      margin-top: 7px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #C4927A;
+    }
+    .first-action {
+      background: linear-gradient(135deg, #FFF3ED, #FEE9DF);
+      border: 1px solid #E8B89A;
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 15px;
+      color: #6B3A26;
+      font-weight: 600;
+      line-height: 1.65;
+    }
+
+    /* Mam message */
+    .mam-card {
+      background: #3D2B1F;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .mam-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .mam-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C4927A, #A0705A);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .mam-name { font-size: 14px; font-weight: bold; color: #C4927A; }
+    .mam-title { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+    .mam-message { font-size: 15px; color: #F5EDE4; line-height: 1.85; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(160deg, #FFF8F4 0%, #F5EDE4 100%);
+      border: 1px solid #E8D8C8;
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .cta-title { font-size: 18px; font-weight: 800; color: #3D2B1F; margin-bottom: 8px; line-height: 1.5; }
+    .cta-sub { font-size: 14px; color: #6B4A37; margin-bottom: 24px; line-height: 1.7; }
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(135deg, #C4927A 0%, #8B5E45 100%);
+      color: #fff;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(160,112,90,0.4);
+      transition: all 0.25s;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(160,112,90,0.5); }
+    .cta-note { font-size: 12px; color: #9C7B6A; margin-top: 12px; }
+
+    /* Retry */
+    .retry-section { text-align: center; padding: 8px 20px 0; max-width: 680px; margin: 0 auto; }
+
+    /* ── Fade animation ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeInUp 0.4s ease both; }
+
+    /* ── Mobile tweaks ── */
+    @media (max-width: 480px) {
+      .hero { padding: 48px 0 36px; }
+      .option-btn { padding: 15px 16px; font-size: 14px; }
+      .result-hero { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    /* ── データ定義 ── */
+    const QUESTIONS = [
+      {
+        id: 1,
+        category: "現状把握",
+        text: "SNSの発信状況を教えてください",
+        options: [
+          { text: "週に複数回、定期的に投稿している", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "月に数回程度、不定期に投稿している", scores: { A: 0, B: 1, C: 0, D: 1 } },
+          { text: "投稿したいけど時間がなくて追いつかない", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "何を投稿すればいいか分からず、あまり発信できていない", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 2,
+        category: "現状把握",
+        text: "SNSを投稿したとき、どんな反応が多いですか？",
+        options: [
+          { text: "いいね・コメントはあるが、問い合わせや購入につながらない", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "既存のお客様が反応してくれるが、新規の反応は少ない", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "確認する余裕がなくて、反応を把握できていない", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "投稿内容が刺さっているか自信がなく、反応が気になる", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 3,
+        category: "集客導線",
+        text: "LINE公式アカウントの活用状況は？",
+        options: [
+          { text: "あるが、SNSからLINEへの登録誘導ができていない", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "あるが、既存客との連絡用になっている", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "あるが、設定や運用が複雑で手が回っていない", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "ない、またはLINEで何をすべきか分からない", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 4,
+        category: "集客導線",
+        text: "新規のお客様の獲得状況は？",
+        options: [
+          { text: "SNSのフォロワーは増えているが、実際の購入・問い合わせが少ない", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "紹介・口コミがメインで、新規獲得の仕組みがない", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "新規・既存両方の対応で手一杯になっている", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "商品・サービスの良さはあると思うが、新規に届いていない", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 5,
+        category: "集客導線",
+        text: "お客様が問い合わせや購入するとき、どこが入口になっていますか？",
+        options: [
+          { text: "SNSは見てもらえているが、次の行動への誘導が弱い", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "紹介・口コミが中心で、オンラインからの流入がほぼない", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "問い合わせ対応を全部自分でやっていて大変", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "問い合わせが来ても価格や価値の伝え方が難しい", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 6,
+        category: "リピート導線",
+        text: "既存のお客様へのフォローはどうしていますか？",
+        options: [
+          { text: "購入後のLINE配信や再提案ができていない", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "常連さんとはつながっているが、仕組みがなく感覚的", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "やりたいけど時間がなくて後回しになっている", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "リピーターが喜んでくれているのに、なぜ選ばれているか言語化できていない", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 7,
+        category: "リピート導線",
+        text: "お客様の情報管理はどのようにしていますか？",
+        options: [
+          { text: "リストはあるが、LINEでのフォローや再提案に活かせていない", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "常連さんの情報は頭に入っているが、データとして管理していない", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "管理したいが、整理する時間・方法が分からない", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "お客様の声や反応を発信に活かせていない", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 8,
+        category: "発信の悩み",
+        text: "発信に関する悩みで一番近いのはどれですか？",
+        options: [
+          { text: "投稿しているのに売上・問い合わせにつながらない", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "発信しても既存のお客様にしか届かない", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "時間がなくて、発信が続かない", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "何が刺さるか分からず、自分の言葉に自信がない", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 9,
+        category: "発信の悩み",
+        text: "商品・サービスの打ち出し方について、どれが一番当てはまりますか？",
+        options: [
+          { text: "良いものを作っているのに「売り込み感」が出るのが苦手", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "既存客には伝わっているが、新しい人に伝わる言葉がない", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "言語化したいが考える時間がとれない", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "商品の価値はあるのに、価格で比べられてしまう", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 10,
+        category: "家業特有の悩み",
+        text: "家業での立場について、一番近いのはどれですか？",
+        options: [
+          { text: "マーケティング・販促を担っているが、成果が数字で見えにくい", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "既存の取引・お客様対応が中心で、新しいことをやりにくい", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "経理・現場・販促など何でもやっていて、本来やりたいことができない", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "やりたいことはあるが、権限がなくて動けない", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 11,
+        category: "家業特有の悩み",
+        text: "家族や周囲との関係で感じていることは？",
+        options: [
+          { text: "頑張っているのに「娘だから当たり前」と思われている", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "新しいことをやろうとすると「今まで通りで良い」と言われる", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "仕事量が多すぎて、改善に時間を使えない", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "意見はあるが、うまく伝える言葉が見つからない", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+      {
+        id: 12,
+        category: "これからの一歩",
+        text: "今すぐ解決したいことはどれですか？",
+        options: [
+          { text: "SNSからLINE登録・問い合わせへの導線を整えたい", scores: { A: 2, B: 0, C: 0, D: 0 } },
+          { text: "新規のお客様が継続的に来る仕組みを作りたい", scores: { A: 0, B: 2, C: 0, D: 0 } },
+          { text: "自動化・仕組み化で自分の時間を作りたい", scores: { A: 0, B: 0, C: 2, D: 0 } },
+          { text: "商品・サービスの魅力を正しく言語化・発信したい", scores: { A: 0, B: 0, C: 0, D: 2 } },
+        ],
+      },
+    ];
+
+    const RESULT_TYPES = {
+      A: {
+        badge: "発信止まりタイプ",
+        title: "投稿は頑張っているのに\n売上につながっていない",
+        color: "#C4927A",
+        barColor: "#C4927A",
+        emoji: "📣",
+        currentState:
+          "SNSでの発信はできているのに、投稿が「見て終わり」になってしまっている状態です。フォロワーは増えても問い合わせが来ない、いいねはつくのに購入につながらない——頑張っているのに結果が出ないもどかしさを感じているのではないでしょうか。",
+        problems: [
+          "SNSとLINEがつながっておらず、見込み客が蓄積されない",
+          "投稿ごとの「目的（次の行動）」が設定されていない",
+          "問い合わせや購入への入口が分かりにくい",
+        ],
+        improvements: [
+          "SNSの投稿にLINE誘導の文言・リンクを必ず入れる",
+          "LINE登録してもらえる特典（ギフト・情報）を作る",
+          "投稿ごとに「見た人に何をしてほしいか」を決める",
+        ],
+        firstAction:
+          "まずプロフィール欄にLINE登録リンクを設置し、直近の投稿1本にLINEへの誘導文を追加しましょう。小さな一歩が、大きな変化のはじまりです。",
+        mamMessage:
+          "私も最初は「投稿するだけ」でした。でもSNSの役割は「気づいてもらうこと」。その先をLINEでつなぐ仕組みを作ったとき、1投稿でLINE登録が50件来ました。導線を整えると、発信のパワーは全然違います。あなたが頑張ってきた発信、ちゃんと活かしましょう。",
+      },
+      B: {
+        badge: "常連頼みタイプ",
+        title: "既存客には愛されているのに\n新規が増えない",
+        color: "#8B8B6B",
+        barColor: "#A0A078",
+        emoji: "🌿",
+        currentState:
+          "今の常連さんには信頼されていて、リピートも安定している。でも、その常連さんが減ったら？新しいお客様が来なかったら？——心のどこかで不安を感じていませんか。オンラインでの新規獲得の仕組みが弱いのが、今の課題です。",
+        problems: [
+          "新規顧客獲得の仕組みがなく、紹介・口コミ頼み",
+          "SNSの発信が既存客向けになっていて、新規に届いていない",
+          "商品・サービスの魅力が「伝わる人にしか伝わらない」状態",
+        ],
+        improvements: [
+          "新規の方向けに「初めて知った人に刺さる投稿」を意識して作る",
+          "初回購入・初回相談への入口（特典や試せる商品）を設ける",
+          "LINEで見込み客を育てる「ステップ配信」の仕組みを作る",
+        ],
+        firstAction:
+          "「なぜうちを選んだか」を常連さんに聞いてみてください。そのリアルな言葉が、新規の人に刺さる発信のヒントになります。",
+        mamMessage:
+          "常連さんに愛されているのは、間違いなく強みです。だからこそ、その魅力を新しい人にも届ける仕組みが必要。私も家業でまず動かしたのは「なぜ選ばれているか」の言語化でした。あなたの家業の強さを、外に向けて届けましょう。",
+      },
+      C: {
+        badge: "頑張りすぎタイプ",
+        title: "全部自分でやっていて\n仕組みが追いついていない",
+        color: "#7A8C9E",
+        barColor: "#7A8C9E",
+        emoji: "⚙️",
+        currentState:
+          "やる気も行動力もある。でも全部一人でやっているから、常にキャパオーバー。新しいことに手をつけようとしても時間がない——そんな状態ではないでしょうか。あなたの努力を「仕組み」に変えることが、次のステージへの鍵です。",
+        problems: [
+          "全てが手動・属人的で、自分が動かないと止まる",
+          "時間がなく、発信・フォロー・改善が後回しになり続ける",
+          "頑張っているのに成果が見えにくく、評価されにくい",
+        ],
+        improvements: [
+          "LINEの自動返信・ステップ配信を設定して手間を減らす",
+          "よくある質問・対応をまとめたテンプレートを作る",
+          "投稿・配信の「型」を決めて、考える時間を減らす",
+        ],
+        firstAction:
+          "まず「毎日自分がやっていること」を書き出してみてください。そのうち自動化できるものが必ず見つかります。1つ仕組み化できると、ぐっと楽になります。",
+        mamMessage:
+          "私も最初は全部一人でやっていました。でも仕組み化を進めた瞬間、時間が生まれて、もっと大事なことに集中できるようになりました。頑張り屋さんのあなたが、仕組みを味方にしたときの力、一緒に引き出しましょう。",
+      },
+      D: {
+        badge: "想い埋もれタイプ",
+        title: "価値はあるのに\n伝わっていない",
+        color: "#9E7AB8",
+        barColor: "#9E7AB8",
+        emoji: "💎",
+        currentState:
+          "商品やサービスに自信はある。お客様も喜んでくれている。でも、その良さをうまく言葉にできず、価格で比べられたり、なかなか広まらなかったりしていませんか。伝え方を変えるだけで、同じ商品がまったく違って見えます。",
+        problems: [
+          "商品・サービスの価値が言語化されておらず、伝わっていない",
+          "「誰に届けたいか」が曖昧で、刺さる発信になっていない",
+          "ストーリーや背景が伝わっていないため、価格で選ばれがち",
+        ],
+        improvements: [
+          "「誰の、どんな悩みを、どう解決するか」を一言で言えるようにする",
+          "商品・サービスの背景にある想いやストーリーを発信する",
+          "お客様が「買う理由」を言語化し、価値で選ばれる見せ方にする",
+        ],
+        firstAction:
+          "「なぜこの仕事をしているか」を200字で書いてみてください。その言葉がそのまま、あなただけの発信の軸になります。",
+        mamMessage:
+          "想いがある人の商品やサービスは、本当に強い。でも「伝わらなければ存在しないのと同じ」とも私は思っています。私自身、家業の牛肉専門卸問屋で言葉一つで売上が変わる経験をしました。あなたの想い、もっと多くの人に届けましょう。",
+      },
+    };
+
+    /* ── Score計算 ── */
+    function calcScores(answers) {
+      const scores = { A: 0, B: 0, C: 0, D: 0 };
+      answers.forEach(({ questionIdx, optionIdx }) => {
+        const q = QUESTIONS[questionIdx];
+        const s = q.options[optionIdx].scores;
+        Object.keys(s).forEach(k => (scores[k] += s[k]));
+      });
+      return scores;
+    }
+
+    function getTypes(scores) {
+      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      const primary = sorted[0][0];
+      const secondary =
+        sorted.length > 1 && sorted[0][1] - sorted[1][1] <= 2
+          ? sorted[1][0]
+          : null;
+      return { primary, secondary, sorted };
+    }
+
+    /* ── Components ── */
+    function HeroSection({ onStart }) {
+      return (
+        <div className="fade-in">
+          <div className="hero">
+            <div className="container">
+              <div className="hero-tag">家業女子向け 無料診断ツール</div>
+              <h1>
+                家業女子の<br />
+                <span>売れる導線</span>診断
+              </h1>
+              <p className="hero-sub">
+                SNSを頑張っているのに売上につながらない。<br />
+                LINEを作ったけど活用できていない。<br />
+                <br />
+                あなたの家業の「どこに課題があるか」を<br />
+                12問の診断で明らかにします。
+              </p>
+              <p className="hero-note">回答時間：約3〜5分 ／ 全12問</p>
+              <button className="btn btn-primary" onClick={onStart}>
+                診断をはじめる →
+              </button>
+            </div>
+          </div>
+
+          <div className="achievements">
+            <div className="achievements-label">診断者プロフィール ／ MAM</div>
+            <div className="achievements-grid">
+              <div className="ach-item">牛肉専門卸問屋で<strong>マーケ担当</strong></div>
+              <div className="ach-item">売上<strong>前年比150%超え</strong>を1年継続</div>
+              <div className="ach-item">1投稿で<strong>LINE登録50件</strong>獲得</div>
+              <div className="ach-item"><strong>LINEタグ付け</strong>で定期顧客を構築</div>
+              <div className="ach-item">マーケ自己投資<strong>300万円以上</strong></div>
+              <div className="ach-item">"お手伝い扱い"から<strong>数字で証明</strong></div>
+            </div>
+          </div>
+
+          <div className="who-section">
+            <div className="who-inner">
+              <div className="section-label">こんな方へ</div>
+              <div className="who-title">あなたはこの悩みを抱えていませんか？</div>
+              <ul className="checklist">
+                <li>SNSを頑張っているのに売上につながらない</li>
+                <li>LINE公式を作ったけど活用できていない</li>
+                <li>家業で"お手伝い扱い"されている</li>
+                <li>意見が通りにくい、権限がない</li>
+                <li>PCや仕組み化が苦手でどこから手をつけるか分からない</li>
+                <li>既存客頼みで新規集客が弱い</li>
+                <li>投稿して終わり、次のアクションにつながっていない</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'center', padding: '48px 20px' }}>
+            <p style={{ fontSize: 15, color: '#6B4A37', marginBottom: 24, lineHeight: 1.7 }}>
+              診断は無料・3〜5分で完了します。<br />
+              まずあなたの現状を把握するところからはじめましょう。
+            </p>
+            <button className="btn btn-primary" style={{ fontSize: 17, padding: '18px 40px' }} onClick={onStart}>
+              無料で診断する →
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    function QuizSection({ onComplete, onBack }) {
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [answers, setAnswers] = useState([]);
+      const [selected, setSelected] = useState(null);
+
+      const question = QUESTIONS[currentIdx];
+      const progress = ((currentIdx) / QUESTIONS.length) * 100;
+      const labels = ['A', 'B', 'C', 'D'];
+
+      function handleSelect(optionIdx) {
+        setSelected(optionIdx);
+      }
+
+      function handleNext() {
+        if (selected === null) return;
+        const newAnswers = [
+          ...answers.filter(a => a.questionIdx !== currentIdx),
+          { questionIdx: currentIdx, optionIdx: selected },
+        ];
+        setAnswers(newAnswers);
+
+        if (currentIdx < QUESTIONS.length - 1) {
+          setCurrentIdx(currentIdx + 1);
+          const prev = newAnswers.find(a => a.questionIdx === currentIdx + 1);
+          setSelected(prev ? prev.optionIdx : null);
+        } else {
+          onComplete(newAnswers);
+        }
+      }
+
+      function handlePrev() {
+        if (currentIdx === 0) {
+          onBack();
+          return;
+        }
+        const newIdx = currentIdx - 1;
+        setCurrentIdx(newIdx);
+        const prev = answers.find(a => a.questionIdx === newIdx);
+        setSelected(prev !== undefined ? prev.optionIdx : null);
+      }
+
+      return (
+        <div className="quiz-wrapper">
+          <div className="progress-bar-wrap">
+            <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
+          </div>
+          <div className="progress-header">
+            <div className="progress-inner">
+              <span className="progress-text">質問 {currentIdx + 1} / {QUESTIONS.length}</span>
+              <span className="progress-fraction">{Math.round(progress)}% 完了</span>
+            </div>
+          </div>
+
+          <div className="question-section fade-in" key={currentIdx}>
+            <div className="q-inner">
+              <div className="q-category">#{question.category}</div>
+              <div className="q-text">Q{currentIdx + 1}. {question.text}</div>
+
+              <div className="options-grid">
+                {question.options.map((opt, i) => (
+                  <button
+                    key={i}
+                    className={`option-btn${selected === i ? ' selected' : ''}`}
+                    onClick={() => handleSelect(i)}
+                  >
+                    <span className="option-label">{labels[i]}</span>
+                    <span className="option-text">{opt.text}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="quiz-nav">
+            <button className="btn btn-ghost btn-sm" onClick={handlePrev}>
+              ← 戻る
+            </button>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={handleNext}
+              style={{ opacity: selected === null ? 0.5 : 1 }}
+              disabled={selected === null}
+            >
+              {currentIdx < QUESTIONS.length - 1 ? '次へ →' : '結果を見る →'}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    function ScoreBar({ label, score, maxScore, color }) {
+      const pct = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+      return (
+        <div className="score-row">
+          <span className="score-label">{label}</span>
+          <div className="score-bar-bg">
+            <div
+              className="score-bar-fill"
+              style={{ width: `${pct}%`, background: color }}
+            />
+          </div>
+          <span className="score-num">{score}pt</span>
+        </div>
+      );
+    }
+
+    const TYPE_LABELS = {
+      A: '発信止まりタイプ',
+      B: '常連頼みタイプ',
+      C: '頑張りすぎタイプ',
+      D: '想い埋もれタイプ',
+    };
+    const TYPE_COLORS = {
+      A: '#C4927A',
+      B: '#A0A078',
+      C: '#7A8C9E',
+      D: '#9E7AB8',
+    };
+
+    function ResultSection({ answers, onRetry }) {
+      const scores = calcScores(answers);
+      const { primary, secondary, sorted } = getTypes(scores);
+      const result = RESULT_TYPES[primary];
+      const maxScore = Math.max(...Object.values(scores));
+
+      useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, []);
+
+      return (
+        <div className="result-wrapper fade-in">
+          {/* Hero */}
+          <div className="result-hero">
+            <div className="result-hero-label">あなたの診断結果</div>
+            <div className="result-type-badge">{result.emoji} {result.badge}</div>
+            <div className="result-type-name" style={{ whiteSpace: 'pre-line' }}>
+              {result.title}
+            </div>
+            {secondary && (
+              <div className="sub-type-bar">
+                サブタイプ：<span>{TYPE_LABELS[secondary]}</span> の傾向もあります
+              </div>
+            )}
+          </div>
+
+          {/* Score */}
+          <div className="score-section">
+            <div className="score-inner">
+              <div className="section-label">スコア内訳</div>
+              <div className="score-grid">
+                {sorted.map(([type, score]) => (
+                  <ScoreBar
+                    key={type}
+                    label={`${type}：${TYPE_LABELS[type].replace('タイプ','')}`}
+                    score={score}
+                    maxScore={maxScore || 1}
+                    color={TYPE_COLORS[type]}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Result cards */}
+          <div className="result-cards">
+
+            {/* 今の状態 */}
+            <div className="result-card">
+              <div className="card-icon">📍</div>
+              <div className="card-title">今の状態</div>
+              <div className="card-body">{result.currentState}</div>
+            </div>
+
+            {/* 起きている問題 */}
+            <div className="result-card">
+              <div className="card-icon">⚠️</div>
+              <div className="card-title">起きている問題</div>
+              <ul className="improvement-list">
+                {result.problems.map((p, i) => (
+                  <li key={i}>{p}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 改善ポイント */}
+            <div className="result-card">
+              <div className="card-icon">✨</div>
+              <div className="card-title">改善ポイント3つ</div>
+              <ul className="improvement-list">
+                {result.improvements.map((imp, i) => (
+                  <li key={i}>{imp}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* まずやること */}
+            <div className="result-card">
+              <div className="card-icon">🎯</div>
+              <div className="card-title">まずやるべきこと</div>
+              <div className="first-action">{result.firstAction}</div>
+            </div>
+
+            {/* Mamからのひとこと */}
+            <div className="mam-card">
+              <div className="mam-header">
+                <div className="mam-avatar">🌿</div>
+                <div>
+                  <div className="mam-name">Mam</div>
+                  <div className="mam-title">家業女子のLINE×SNS伴走サポート</div>
+                </div>
+              </div>
+              <div className="mam-message">{result.mamMessage}</div>
+            </div>
+
+            {/* CTA */}
+            <div className="cta-section">
+              <div className="cta-title">
+                あなたの家業に合わせた<br />
+                売れる導線を一緒に整理する
+              </div>
+              <div className="cta-sub">
+                診断結果をもとに、何から始めればいいかを<br />
+                無料相談でお話しします。<br />
+                30分で今の課題が明確になります。
+              </div>
+              <a className="cta-btn" href="#contact">
+                無料相談に申し込む →
+              </a>
+              <p className="cta-note">※ 完全無料 ／ 押しつけ一切なし ／ オンライン対応</p>
+            </div>
+
+            {/* Retry */}
+            <div className="retry-section">
+              <button className="btn btn-ghost btn-sm" onClick={onRetry}>
+                もう一度診断する
+              </button>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    /* ── App ── */
+    function App() {
+      const [phase, setPhase] = useState('hero');
+      const [finalAnswers, setFinalAnswers] = useState([]);
+
+      function handleStart() {
+        setPhase('quiz');
+        window.scrollTo({ top: 0 });
+      }
+
+      function handleComplete(answers) {
+        setFinalAnswers(answers);
+        setPhase('result');
+      }
+
+      function handleRetry() {
+        setFinalAnswers([]);
+        setPhase('hero');
+        window.scrollTo({ top: 0 });
+      }
+
+      if (phase === 'hero') return <HeroSection onStart={handleStart} />;
+      if (phase === 'quiz') return <QuizSection onComplete={handleComplete} onBack={() => setPhase('hero')} />;
+      if (phase === 'result') return <ResultSection answers={finalAnswers} onRetry={handleRetry} />;
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
