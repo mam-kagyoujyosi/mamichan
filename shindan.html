@@ -455,6 +455,95 @@
     /* Retry */
     .retry-section { text-align: center; padding: 8px 20px 0; max-width: 680px; margin: 0 auto; }
 
+    /* ── Consultation CTA ── */
+    .consult-cta {
+      background: linear-gradient(160deg, #FAF5EE 0%, #F0E6D8 100%);
+      border-top: 2px solid #E8D8C8;
+      margin-top: 40px;
+      padding: 56px 20px 64px;
+    }
+    .consult-cta-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .consult-leaf {
+      font-size: 28px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .consult-tagline {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: #9C7B6A;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .consult-heading {
+      font-size: clamp(18px, 4.5vw, 22px);
+      font-weight: 900;
+      color: #3D2B1F;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .consult-heading em {
+      font-style: normal;
+      color: #C4927A;
+    }
+    .consult-body {
+      font-size: 15px;
+      color: #5A3A2A;
+      line-height: 2;
+      margin-bottom: 36px;
+      text-align: left;
+      background: #fff;
+      border: 1px solid #E8D8C8;
+      border-radius: 14px;
+      padding: 24px 22px;
+    }
+    .consult-body p { margin-bottom: 12px; }
+    .consult-body p:last-child { margin-bottom: 0; }
+    .consult-cta-btn {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 14px;
+      padding: 22px 20px;
+      background: linear-gradient(135deg, #C4927A 0%, #8B5E45 100%);
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(160,112,90,0.45);
+      transition: all 0.25s;
+      line-height: 1.4;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    .consult-cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(160,112,90,0.55);
+    }
+    .consult-cta-btn small {
+      display: block;
+      font-size: 12px;
+      font-weight: normal;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+    .consult-note {
+      font-size: 12px;
+      color: #9C7B6A;
+      line-height: 1.7;
+    }
+    @media (max-width: 480px) {
+      .consult-cta { padding: 48px 16px 56px; }
+      .consult-body { padding: 20px 18px; }
+    }
+
     /* ── Fade animation ── */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -475,6 +564,10 @@
 
   <script type="text/babel">
     const { useState, useEffect } = React;
+
+    /* ── 定数 ── */
+    const CONSULT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform'
+
 
     /* ── データ定義 ── */
     const QUESTIONS = [
@@ -1008,23 +1101,6 @@
               <div className="mam-message">{result.mamMessage}</div>
             </div>
 
-            {/* CTA */}
-            <div className="cta-section">
-              <div className="cta-title">
-                あなたの家業に合わせた<br />
-                売れる導線を一緒に整理する
-              </div>
-              <div className="cta-sub">
-                診断結果をもとに、何から始めればいいかを<br />
-                無料相談でお話しします。<br />
-                30分で今の課題が明確になります。
-              </div>
-              <a className="cta-btn" href="#contact">
-                無料相談に申し込む →
-              </a>
-              <p className="cta-note">※ 完全無料 ／ 押しつけ一切なし ／ オンライン対応</p>
-            </div>
-
             {/* Retry */}
             <div className="retry-section">
               <button className="btn btn-ghost btn-sm" onClick={onRetry}>
@@ -1033,6 +1109,36 @@
             </div>
 
           </div>
+
+          {/* 無料相談CTA */}
+          <div className="consult-cta">
+            <div className="consult-cta-inner">
+              <span className="consult-leaf">🌿</span>
+              <div className="consult-tagline">診断お疲れさまでした</div>
+              <div className="consult-body">
+                <p>今の状態をさらに整理したい方は、<br />無料相談にお申し込みください。</p>
+                <p>家業の現状やSNS・LINEの状況を見ながら、<br />「まず何から整えるべきか」を一緒に整理します。</p>
+              </div>
+              <a
+                className="consult-cta-btn"
+                href="https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open('https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform?usp=header', '_blank');
+                }}
+              >
+                無料相談に申し込む
+                <small>Googleフォームへ移動します（無料・約1分）</small>
+              </a>
+              <p className="consult-note">
+                完全無料 ／ 押しつけ一切なし ／ オンライン対応<br />
+                ご回答後、2〜3営業日以内にご連絡します
+              </p>
+            </div>
+          </div>
+
         </div>
       );
     }
