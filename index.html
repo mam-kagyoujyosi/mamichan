@@ -168,94 +168,89 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ================================
-       HERO
+       HERO — mobile-first vertical
     ================================ */
     #hero { padding: 0; }
 
-    .hero-photo {
-      position: relative;
-      width: 100%;
-      height: 88svh;
-      max-height: 620px;
-      overflow: hidden;
-    }
-    .hero-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-    }
-    .hero-photo::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.04) 0%,
-        rgba(0,0,0,0.00) 20%,
-        rgba(15,8,4,0.48) 60%,
-        rgba(15,8,4,0.78) 100%
-      );
-    }
-    .hero-badge {
-      position: absolute;
-      top: 20px; left: 16px;
-      z-index: 2;
-      background: rgba(255,255,255,0.94);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      box-shadow: var(--shadow);
-    }
-    .hero-badge-sub {
-      font-size: 11px;
-      color: var(--text-sub);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      line-height: 1.4;
-    }
-    .hero-badge-main {
-      font-size: 13px;
-      color: var(--accent);
-      font-weight: 800;
-      line-height: 1.5;
-    }
-    .hero-text {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 2;
-      padding: 24px 24px 32px;
-    }
-    .hero-text h1 {
-      color: #fff;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
-      margin-bottom: 10px;
-    }
-    .hero-text p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.8;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-    }
-    .hero-text p strong {
-      color: #fff;
-      font-weight: 700;
+    /* Upper: warm background + photo */
+    .hero-upper {
+      background: var(--bg-section);
+      padding: 36px 24px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
-    .hero-below {
-      background: var(--bg);
-      padding: 32px 24px 48px;
-    }
-    .hero-lead {
-      font-size: 16px;
-      line-height: 1.85;
-      color: var(--text-sub);
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: var(--accent);
       margin-bottom: 24px;
     }
-    .hero-lead strong { color: var(--text); }
+
+    /* Circle photo wrapper */
+    .hero-img-wrap {
+      position: relative;
+      width: min(300px, 80vw);
+    }
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-light);
+      opacity: 0.7;
+    }
+    .hero-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 50%;
+    }
+
+    /* Wave divider svg */
+    .hero-wave {
+      display: block;
+      width: 100%;
+      background: var(--bg-section);
+      line-height: 0;
+    }
+    .hero-wave svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Lower: off-white + text + CTA */
+    .hero-lower {
+      background: var(--bg);
+      padding: 8px 24px 48px;
+    }
+    .hero-lower h1 {
+      font-size: clamp(24px, 7.5vw, 36px);
+      font-weight: 800;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .hero-lower h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--text-sub);
+      margin-bottom: 28px;
+    }
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
     .hero-tag {
       font-size: 12px;
@@ -667,32 +662,32 @@
 
 
 <!-- ================================
-     HERO
+     HERO — mobile-first vertical
 ================================ -->
 <section id="hero">
-  <div class="hero-photo">
-    <img src="claude使用写真/date3.png" alt="牛肉卸会社で働くMami">
 
-    <div class="hero-badge">
-      <div class="hero-badge-sub">牛肉専門卸問屋の娘が実証した</div>
-      <div class="hero-badge-main">家業の売れる仕組み整理サポート</div>
-    </div>
-
-    <div class="hero-text">
-      <h1>SNS投稿に疲れた<br>家業女子へ。</h1>
-      <p>
-        フォロワーが少なくても、LINEを使って<br>
-        <strong>「またあなたから買いたい」を増やす。</strong>
-      </p>
+  <!-- 上段：ウォームベージュ背景 + 円形写真 -->
+  <div class="hero-upper">
+    <p class="hero-eyebrow">牛肉専門卸問屋の娘が実証した</p>
+    <div class="hero-img-wrap fade-up">
+      <img src="claude使用写真/date3.png" alt="Mami — 牛肉卸会社で働く家業女子">
     </div>
   </div>
 
-  <div class="hero-below">
-    <p class="hero-lead">
-      投稿し続けても売上につながらない。<br>
-      フォロワー数を追うことに疲れた。<br><br>
-      そんな家業女子のために、<br>
-      <strong>SNSとLINEの流れを整えて、<br>お客様との関係が続く仕組みを作る</strong>伴走サポートです。
+  <!-- ウェーブ区切り -->
+  <div class="hero-wave">
+    <svg viewBox="0 0 375 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0 Q187.5 48 375 0 L375 40 L0 40 Z" fill="#faf8f5"/>
+    </svg>
+  </div>
+
+  <!-- 下段：テキスト + CTA -->
+  <div class="hero-lower">
+    <h1>家業女子のための<br><em>頑張らなくても</em><br>回る仕組み化</h1>
+
+    <p class="hero-sub">
+      SNSもLINEも、発信し続けなくていい。<br>
+      流れを整えるだけで、「またあなたから」が増えていく。
     </p>
 
     <div class="hero-tags">
@@ -709,6 +704,7 @@
     </div>
     <p class="cta-note note">診断・相談はすべて無料です</p>
   </div>
+
 </section>
 
 
