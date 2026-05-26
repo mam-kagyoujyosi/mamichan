@@ -35,19 +35,18 @@
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
 
-    /* ===== Layout ===== */
+    /* ===== Layout — mobile-first ===== */
     .container {
       width: 100%;
       max-width: 600px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;          /* mobile base */
     }
-    section {
-      padding: 64px 0;
-    }
-    @media (max-width: 600px) {
-      section { padding: 48px 0; }
-      .container { padding: 0 20px; }
+    section { padding: 48px 0; } /* mobile base */
+
+    @media (min-width: 601px) {
+      .container { padding: 0 24px; }
+      section    { padding: 64px 0; }
     }
 
     /* ===== Typography ===== */
@@ -168,37 +167,42 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ================================
-       HERO — mobile-first vertical
+       HERO — mobile-first, 100svh fit
     ================================ */
-    #hero { padding: 0; }
+    #hero {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100svh;       /* 全体をビューポートに収める */
+    }
 
-    /* Upper: warm background + photo */
+    /* ── 上段：写真エリア ── */
     .hero-upper {
       background: var(--bg-section);
-      padding: 36px 24px 0;
+      padding: 18px 20px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
+      flex-shrink: 0;
     }
-
     .hero-eyebrow {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       color: var(--accent);
-      margin-bottom: 24px;
+      margin-bottom: 12px;
     }
 
-    /* Circle photo wrapper */
+    /* 円形写真 — モバイルは小さく */
     .hero-img-wrap {
       position: relative;
-      width: min(300px, 80vw);
+      width: min(188px, 50vw);  /* モバイル基準値 */
     }
     .hero-img-wrap::before {
       content: '';
       position: absolute;
-      inset: -8px;
+      inset: -6px;
       border-radius: 50%;
       border: 2px solid var(--accent-light);
       opacity: 0.7;
@@ -210,30 +214,35 @@
       border-radius: 50%;
     }
 
-    /* Wave divider svg */
+    /* ── ウェーブ区切り ── */
     .hero-wave {
       display: block;
       width: 100%;
       background: var(--bg-section);
       line-height: 0;
+      flex-shrink: 0;
     }
     .hero-wave svg {
       display: block;
       width: 100%;
-      height: auto;
+      height: 22px;             /* モバイルでは薄く */
     }
 
-    /* Lower: off-white + text + CTA */
+    /* ── 下段：テキスト＋CTA ── */
     .hero-lower {
       background: var(--bg);
-      padding: 8px 24px 48px;
+      padding: 10px 20px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .hero-lower h1 {
-      font-size: clamp(24px, 7.5vw, 36px);
+      font-size: clamp(20px, 5.6vw, 26px); /* モバイル優先で小さく */
       font-weight: 800;
-      line-height: 1.5;
+      line-height: 1.45;
       color: var(--text);
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       letter-spacing: -0.01em;
     }
     .hero-lower h1 em {
@@ -241,17 +250,13 @@
       color: var(--accent);
     }
     .hero-sub {
-      font-size: 15px;
-      line-height: 1.85;
+      font-size: 13px;
+      line-height: 1.75;
       color: var(--text-sub);
-      margin-bottom: 28px;
+      margin-bottom: 0;
     }
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
+    /* タグはモバイルでは非表示（画面に収めるため） */
+    .hero-tags { display: none; }
     .hero-tag {
       font-size: 12px;
       font-weight: 600;
@@ -261,6 +266,9 @@
       padding: 4px 12px;
       border-radius: var(--radius-sm);
     }
+    /* ヒーロー内ボタンをコンパクトに */
+    .hero-lower .btn-stack { margin-top: 16px; gap: 10px; }
+    .hero-lower .btn        { padding: 13px 20px; font-size: 15px; }
 
     /* ================================
        EMPATHY
@@ -781,6 +789,97 @@
     .goal-main {
       font-size: clamp(16px, 4vw, 19px); font-weight: 700;
       color: var(--accent); margin-top: 16px; line-height: 1.65;
+    }
+
+    /* ================================
+       RESPONSIVE — tablet 601px+
+    ================================ */
+    @media (min-width: 601px) {
+
+      /* Hero */
+      .hero-upper  { padding: 28px 32px 0; }
+      .hero-eyebrow { margin-bottom: 18px; }
+      .hero-img-wrap { width: min(260px, 44vw); }
+      .hero-wave svg { height: 36px; }
+      .hero-lower  { padding: 12px 32px 32px; }
+      .hero-lower h1 { font-size: clamp(24px, 4.5vw, 34px); margin-bottom: 12px; }
+      .hero-sub    { font-size: 15px; }
+      .hero-tags   { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+      .hero-lower .btn       { padding: 16px 24px; font-size: 16px; }
+      .hero-lower .btn-stack { margin-top: 20px; gap: 12px; }
+
+      /* Buttons */
+      .btn { padding: 18px 24px; font-size: 16px; }
+
+      /* Worry list */
+      .worry-list li { font-size: 16px; }
+
+      /* Do list */
+      .do-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+      /* Outcome */
+      .outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+      /* Profile */
+      .profile-wrap { flex-direction: row; align-items: flex-start; }
+      .profile-photo { width: 140px; height: 140px; }
+
+      /* Before / After */
+      .ba-wrap      { flex-direction: row; gap: 0; align-items: stretch; }
+      .ba-arrow     { flex-direction: column; justify-content: center; padding: 0 12px; }
+      .ba-arrow svg { transform: rotate(-90deg); }
+      .ba-col       { flex: 1; }
+
+      /* Steps */
+      .step-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+      /* Format */
+      .format-key { min-width: 72px; }
+
+      /* Profile numbers */
+      .profile-numbers {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+    }
+
+    /* ================================
+       RESPONSIVE — desktop 900px+
+    ================================ */
+    @media (min-width: 900px) {
+
+      /* Hero: 横並びレイアウト */
+      #hero {
+        flex-direction: row;
+        min-height: 100svh;
+      }
+      .hero-upper {
+        flex: 1;
+        padding: 48px 40px 48px;
+        justify-content: center;
+        min-height: 100svh;
+      }
+      .hero-eyebrow { margin-bottom: 24px; }
+      .hero-img-wrap { width: min(320px, 36vw); }
+      .hero-wave { display: none; }
+      .hero-lower {
+        flex: 1;
+        padding: 48px 48px;
+        justify-content: center;
+        min-height: 100svh;
+      }
+      .hero-lower h1 { font-size: clamp(28px, 3.2vw, 40px); margin-bottom: 16px; }
+      .hero-sub      { font-size: 16px; }
+      .hero-tags     { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+      .hero-lower .btn       { padding: 18px 24px; font-size: 16px; }
+      .hero-lower .btn-stack { margin-top: 28px; gap: 12px; }
+
+      /* Do list */
+      .do-list { grid-template-columns: 1fr 1fr 1fr; }
+
+      /* Service steps */
+      .step-list { grid-template-columns: 1fr 1fr; }
     }
 
     /* ================================
