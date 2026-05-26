@@ -118,8 +118,13 @@
       background: #06C755;
       color: #fff;
       box-shadow: 0 4px 16px rgba(6,199,85,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
     .btn-line:hover { opacity: 0.88; }
+    .btn-line svg { flex-shrink: 0; }
     .btn-ghost {
       background: transparent;
       color: var(--accent);
@@ -289,12 +294,14 @@
     .worry-list li::before {
       content: '';
       display: block;
-      width: 3px;
-      min-height: 20px;
-      background: var(--accent-light);
-      border-radius: 2px;
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      min-height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='4' fill='none' stroke='%23C07A58' stroke-width='1.5' stroke-opacity='0.55'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
     .empathy-close {
@@ -349,11 +356,14 @@
       position: relative;
     }
     .what-not-list li::before {
-      content: '×';
+      content: '';
       position: absolute;
       left: 0;
-      color: #c4a090;
-      font-weight: 700;
+      top: 2px;
+      width: 16px;
+      height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='4' y1='4' x2='12' y2='12' stroke='%23c4a090' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='12' y1='4' x2='4' y2='12' stroke='%23c4a090' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
     }
 
     .what-yes {
@@ -423,6 +433,18 @@
       font-weight: 700;
       color: var(--text);
       margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .do-list li .do-title::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9h8M10 5l4 4-4 4' stroke='%23C07A58' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
+      flex-shrink: 0;
     }
     .do-list li .do-desc {
       font-size: 16px;
@@ -449,13 +471,12 @@
       padding: 18px 20px;
       box-shadow: var(--shadow);
     }
-    .outcome-marker {
-      width: 4px;
-      min-height: 24px;
-      background: var(--accent);
-      border-radius: 2px;
+    .outcome-icon {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
       flex-shrink: 0;
-      margin-top: 4px;
+      margin-top: 2px;
     }
     .outcome-item .o-title {
       font-size: 16px;
@@ -616,11 +637,14 @@
       position: relative;
     }
     .benefit-list li::before {
-      content: '—';
+      content: '';
       position: absolute;
       left: 0;
-      color: var(--accent);
-      font-weight: 700;
+      top: 3px;
+      width: 16px;
+      height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' stroke='%23C07A58' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
     }
 
     /* ================================
@@ -680,7 +704,7 @@
     </div>
 
     <div class="btn-stack fade-up">
-      <a href="#cta-section" class="btn btn-line">まずは無料診断を受ける</a>
+      <a href="#cta-section" class="btn btn-line"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>まずは無料診断を受ける</a>
       <a href="#cta-section" class="btn btn-primary">モニターに申し込む</a>
     </div>
     <p class="cta-note note">診断・相談はすべて無料です</p>
@@ -714,7 +738,7 @@
     </div>
 
     <div class="btn-stack fade-up">
-      <a href="#cta-section" class="btn btn-line">まずは無料診断を受ける</a>
+      <a href="#cta-section" class="btn btn-line"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>まずは無料診断を受ける</a>
     </div>
   </div>
 </section>
@@ -834,42 +858,60 @@
 
     <div class="outcome-grid">
       <div class="outcome-item fade-up">
-        <div class="outcome-marker"></div>
+        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         <div>
           <div class="o-title">頭の中が整理される</div>
           <div class="o-desc">やることが多くて混乱している状態から、優先順位が見えてくる。</div>
         </div>
       </div>
       <div class="outcome-item fade-up">
-        <div class="outcome-marker"></div>
+        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         <div>
           <div class="o-title">SNSが売上につながりやすくなる</div>
           <div class="o-desc">投稿→LINE→購入の流れが整い、発信が無駄にならなくなる。</div>
         </div>
       </div>
       <div class="outcome-item fade-up">
-        <div class="outcome-marker"></div>
+        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         <div>
           <div class="o-title">LINE配信の迷いが減る</div>
           <div class="o-desc">何を配信すればいいか、誰に届ければいいかが明確になる。</div>
         </div>
       </div>
       <div class="outcome-item fade-up">
-        <div class="outcome-marker"></div>
+        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         <div>
           <div class="o-title">常連さん・リピーターが増える</div>
           <div class="o-desc">関係が続く仕組みができて、「またあなたから買いたい」が増えていく。</div>
         </div>
       </div>
       <div class="outcome-item fade-up">
-        <div class="outcome-marker"></div>
+        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         <div>
           <div class="o-title">発信ネタに困りづらくなる</div>
           <div class="o-desc">「誰に何を届けるか」が明確になると、ネタは自然に出てくる。</div>
         </div>
       </div>
       <div class="outcome-item fade-up">
-        <div class="outcome-marker"></div>
+        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         <div>
           <div class="o-title">自分しか回せない状態が減っていく</div>
           <div class="o-desc">仕組みが整うことで、少しずつ自分の時間を取り戻せる。</div>
@@ -968,7 +1010,7 @@
     </div>
 
     <div class="btn-stack fade-up">
-      <a href="#cta" class="btn btn-line">まずは無料診断を受ける</a>
+      <a href="#cta" class="btn btn-line"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>まずは無料診断を受ける</a>
       <a href="#cta" class="btn btn-primary">モニターに申し込む</a>
       <a href="#cta" class="btn btn-ghost">今の導線を見てもらう</a>
     </div>
@@ -985,7 +1027,7 @@
 
 <!-- 固定CTA -->
 <div class="sticky-cta" id="stickyCta">
-  <a href="#cta-section" class="btn btn-line">まずは無料診断を受ける</a>
+  <a href="#cta-section" class="btn btn-line"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>まずは無料診断を受ける</a>
 </div>
 
 
