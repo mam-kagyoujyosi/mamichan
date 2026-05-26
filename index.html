@@ -643,6 +643,147 @@
     }
 
     /* ================================
+       SERVICE DETAIL
+    ================================ */
+    #service { background: var(--bg); }
+
+    .service-intro {
+      background: var(--bg-section);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    .service-intro p { font-size: 16px; line-height: 1.85; color: var(--text-sub); }
+    .service-intro p + p { margin-top: 12px; }
+    .service-intro strong { color: var(--text); }
+
+    /* Why 3months */
+    .why-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 40px;
+    }
+    .why-card h3 { margin-bottom: 12px; }
+    .why-card > p { font-size: 16px; line-height: 1.85; color: var(--text-sub); }
+    .why-tags {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;
+    }
+    .why-tag {
+      font-size: 12px; color: var(--text-sub);
+      background: var(--bg-section);
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    /* Before / After */
+    .ba-section-title {
+      font-size: 12px; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.1em;
+      text-align: center; margin-bottom: 20px;
+    }
+    .ba-wrap { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
+    .ba-col { border-radius: var(--radius-md); padding: 22px 20px; }
+    .ba-col--before { background: #ede9e5; }
+    .ba-col--after {
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--accent-light);
+    }
+    .ba-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; margin-bottom: 16px;
+    }
+    .ba-label--before { color: #9a8070; }
+    .ba-label--after  { color: var(--accent); }
+    .ba-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .ba-list li { font-size: 15px; line-height: 1.6; padding-left: 20px; position: relative; }
+    .ba-col--before .ba-list li { color: #7a6a60; }
+    .ba-col--before .ba-list li::before {
+      content: ''; position: absolute; left: 0; top: 4px; width: 14px; height: 14px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cline x1='3' y1='3' x2='11' y2='11' stroke='%23c4a090' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='11' y1='3' x2='3' y2='11' stroke='%23c4a090' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
+    }
+    .ba-col--after .ba-list li { color: var(--text); }
+    .ba-col--after .ba-list li::before {
+      content: ''; position: absolute; left: 0; top: 4px; width: 14px; height: 14px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7l3.5 3.5L12 3' stroke='%23C07A58' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
+    }
+    .ba-arrow {
+      display: flex; justify-content: center; padding: 14px 0; color: var(--accent);
+    }
+
+    /* Steps */
+    .steps-head {
+      font-size: clamp(17px, 4vw, 20px);
+      font-weight: 700; color: var(--text); margin-bottom: 24px;
+    }
+    .step-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+    .step-item {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 24px; box-shadow: var(--shadow);
+    }
+    .step-num {
+      font-size: 11px; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.12em; margin-bottom: 8px;
+    }
+    .step-item h4 {
+      font-size: clamp(16px, 4vw, 18px); font-weight: 700;
+      color: var(--text); margin-bottom: 10px; line-height: 1.4;
+    }
+    .step-item > p { font-size: 15px; line-height: 1.75; color: var(--text-sub); margin-bottom: 14px; }
+    .step-sub {
+      list-style: none; display: flex; flex-direction: column; gap: 6px;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .step-sub li {
+      font-size: 14px; color: var(--text-sub);
+      padding-left: 14px; position: relative; line-height: 1.6;
+    }
+    .step-sub li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--accent-light);
+    }
+
+    /* Format */
+    .format-box {
+      background: var(--bg-section); border-radius: var(--radius-md);
+      padding: 24px; margin-bottom: 24px;
+    }
+    .format-title {
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      letter-spacing: 0.1em; margin-bottom: 20px;
+    }
+    .format-grid { display: flex; flex-direction: column; gap: 0; }
+    .format-row {
+      display: flex; gap: 16px; align-items: baseline;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .format-row:first-of-type { padding-top: 0; }
+    .format-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .format-key {
+      font-size: 12px; color: var(--text-sub); font-weight: 600;
+      min-width: 56px; flex-shrink: 0;
+    }
+    .format-val { font-size: 15px; color: var(--text); line-height: 1.65; }
+
+    /* Goal */
+    .goal-box {
+      background: var(--bg-card); border-radius: var(--radius-md);
+      padding: 28px 24px; border-top: 3px solid var(--accent);
+      box-shadow: var(--shadow); margin-bottom: 32px;
+    }
+    .goal-box > p { font-size: 16px; line-height: 1.85; color: var(--text-sub); }
+    .goal-main {
+      font-size: clamp(16px, 4vw, 19px); font-weight: 700;
+      color: var(--accent); margin-top: 16px; line-height: 1.65;
+    }
+
+    /* ================================
        FOOTER
     ================================ */
     footer {
@@ -767,6 +908,169 @@
         お客様との<strong>関係が続く仕組み</strong>を一緒に作るサポートです。
       </p>
     </div>
+  </div>
+</section>
+
+
+<!-- ================================
+     SERVICE DETAIL
+================================ -->
+<section id="service">
+  <div class="container">
+    <span class="section-label">SERVICE</span>
+    <h2>売れる仕組み整理<br>3ヶ月伴走サポート</h2>
+    <div class="divider"></div>
+
+    <!-- 1. サービスとは -->
+    <div class="service-intro fade-up">
+      <p>SNS・LINE・接客・現場対応など、家業の中でひとりで抱えながら頑張っている女性のための、<strong>「売れる仕組み」を整理する3ヶ月伴走サービスです。</strong></p>
+      <p>SNS投稿を増やすことが目的ではありません。<br>LINEをただ構築することが目的でもありません。</p>
+      <p>今のぐちゃぐちゃした状態を整理し、お客様との関係が続き、<strong>「またあなたから買いたい」が増える状態</strong>を一緒に作っていきます。</p>
+    </div>
+
+    <!-- 2. なぜ3ヶ月か -->
+    <div class="why-card fade-up">
+      <h3>なぜ3ヶ月なのか</h3>
+      <p>家業の課題は、SNSだけ・LINEだけで解決するものではありません。</p>
+      <div class="why-tags">
+        <span class="why-tag">現場</span>
+        <span class="why-tag">家族</span>
+        <span class="why-tag">接客</span>
+        <span class="why-tag">顧客管理</span>
+        <span class="why-tag">発信</span>
+        <span class="why-tag">売上</span>
+        <span class="why-tag">自分の役割</span>
+      </div>
+      <p>これらが複雑に絡み合っているからこそ、1回の相談ではなく、<strong>3ヶ月かけて整理しながら実践していく形</strong>にしています。</p>
+    </div>
+
+    <!-- 3. Before → After -->
+    <p class="ba-section-title">3ヶ月で目指す変化</p>
+    <div class="ba-wrap fade-up">
+      <div class="ba-col ba-col--before">
+        <div class="ba-label ba-label--before">BEFORE — 今の状態</div>
+        <ul class="ba-list">
+          <li>SNS投稿に追われている</li>
+          <li>毎回ゼロから投稿を考えている</li>
+          <li>LINEで何を送ればいいか分からない</li>
+          <li>発信が売上につながっていない</li>
+          <li>常連さんを増やしたいけど、仕組みがない</li>
+          <li>自分が休むと回らない</li>
+          <li>感覚で頑張っている</li>
+          <li>何から手をつければいいか分からない</li>
+        </ul>
+      </div>
+
+      <div class="ba-arrow" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M14 4v20M7 17l7 7 7-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="ba-col ba-col--after">
+        <div class="ba-label ba-label--after">AFTER — 3ヶ月後</div>
+        <ul class="ba-list">
+          <li>"誰に何を届けるか"が明確になる</li>
+          <li>SNSとLINEの役割が整理される</li>
+          <li>LINEが関係構築ツールになる</li>
+          <li>リピーター導線が見える</li>
+          <li>常連さんを増やす流れができる</li>
+          <li>発信の軸ができる</li>
+          <li>"あなたから買いたい"が増える</li>
+          <li>自分が頑張り続けなくても回る仕組みが見えてくる</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. 実際に行うこと（4ステップ） -->
+    <p class="steps-head">実際に行うこと</p>
+    <div class="step-list">
+      <div class="step-item fade-up">
+        <div class="step-num">STEP 01</div>
+        <h4>現状整理</h4>
+        <p>何に疲れているのか、どこが詰まっているのかを一緒に見える化します。</p>
+        <ul class="step-sub">
+          <li>何に疲れているのか</li>
+          <li>どこが詰まっているのか</li>
+          <li>SNS・LINE・接客・現場で何が起きているのか</li>
+          <li>何を優先すべきか</li>
+        </ul>
+      </div>
+
+      <div class="step-item fade-up">
+        <div class="step-num">STEP 02</div>
+        <h4>お客様理解の整理</h4>
+        <p>リピーターや常連さんを増やすために、まずお客様を理解します。</p>
+        <ul class="step-sub">
+          <li>誰が買っているのか</li>
+          <li>なぜ買っているのか</li>
+          <li>どんな人がリピーターになっているのか</li>
+          <li>お客様は何を求めているのか</li>
+          <li>どんな言葉で届けると伝わるのか</li>
+        </ul>
+      </div>
+
+      <div class="step-item fade-up">
+        <div class="step-num">STEP 03</div>
+        <h4>SNSとLINE導線の整理</h4>
+        <p>SNSとLINEを別々に見るのではなく、お客様との関係が続く流れとして整理します。</p>
+        <ul class="step-sub">
+          <li>SNSの役割 / LINEの役割</li>
+          <li>LINE登録後の流れ</li>
+          <li>配信内容・タグ設計</li>
+          <li>リピート導線</li>
+          <li>"またお願いしたい"につながる流れ</li>
+        </ul>
+      </div>
+
+      <div class="step-item fade-up">
+        <div class="step-num">STEP 04</div>
+        <h4>"自分しか回せない状態"の整理</h4>
+        <p>「私がやらないと回らない」を整理し、手放せるものを見つけます。</p>
+        <ul class="step-sub">
+          <li>何をやめるか / 何を残すか</li>
+          <li>何を仕組みにするか</li>
+          <li>何を人に渡せるか</li>
+          <li>どこをLINEや仕組みで補えるか</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. サービス形式 -->
+    <div class="format-box fade-up">
+      <div class="format-title">サービス形式</div>
+      <div class="format-grid">
+        <div class="format-row">
+          <span class="format-key">期間</span>
+          <span class="format-val">3ヶ月</span>
+        </div>
+        <div class="format-row">
+          <span class="format-key">相談</span>
+          <span class="format-val">オンライン相談 月2回</span>
+        </div>
+        <div class="format-row">
+          <span class="format-key">サポート</span>
+          <span class="format-val">LINE相談サポートあり</span>
+        </div>
+        <div class="format-row">
+          <span class="format-key">内容</span>
+          <span class="format-val">SNS・LINE導線整理 / 顧客理解整理 / リピーター導線整理 / 優先順位の整理 / 必要に応じて投稿・配信内容の添削</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. ゴール -->
+    <div class="goal-box fade-up">
+      <p>SNSを頑張り続けることではなく、少ないフォロワーでも、LINEを使ってお客様との関係を深め、「またあなたから買いたい」が増える状態を作ること。</p>
+      <p class="goal-main">家業の中で自分だけが抱え込む状態から、<br>売れる仕組みが見える状態へ。</p>
+    </div>
+
+    <!-- 7. CTA -->
+    <div class="btn-stack fade-up">
+      <a href="#cta-section" class="btn btn-line"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>まずは無料診断を受ける</a>
+      <a href="#cta-section" class="btn btn-primary">モニターに申し込む</a>
+    </div>
+    <p class="cta-note note">診断・相談はすべて無料です</p>
   </div>
 </section>
 
