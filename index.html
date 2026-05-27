@@ -7,14 +7,15 @@
   <style>
     /* ===== CSS Variables ===== */
     :root {
-      --accent:       #C07A58;
-      --accent-light: #E8C9B8;
+      --accent:       #D16070;   /* ローズコーラル（参考サイトのピンク→落ち着かせた色） */
+      --accent-light: #F2C4C8;   /* ソフトローズ */
+      --accent2:      #3ABDB5;   /* ティール（参考サイトの青緑アクセント） */
       --text:         #1e1e1e;
       --text-sub:     #6a6a6a;
-      --bg:           #faf8f5;
-      --bg-section:   #f3ede6;
+      --bg:           #FDF8F8;   /* ほぼ白・わずかにローズ */
+      --bg-section:   #FAF0F1;   /* ソフトブラッシュ */
       --bg-card:      #ffffff;
-      --border:       #e5ddd6;
+      --border:       #EDD5D8;   /* ピンク寄りのボーダー */
       --radius-sm:    8px;
       --radius-md:    16px;
       --shadow:       0 8px 30px rgba(0,0,0,0.05);
@@ -69,7 +70,7 @@
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.16em;
-      color: var(--accent);
+      color: var(--accent2);    /* ティール */
       text-transform: uppercase;
       margin-bottom: 12px;
       display: block;
@@ -110,7 +111,7 @@
     .btn-primary {
       background: var(--accent);
       color: #fff;
-      box-shadow: 0 4px 16px rgba(192,122,88,0.3);
+      box-shadow: 0 4px 16px rgba(209,96,112,0.28);
     }
     .btn-primary:hover { opacity: 0.88; }
     .btn-line {
@@ -151,7 +152,7 @@
     /* ===== Sticky CTA ===== */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250,248,245,0.96); backdrop-filter: blur(10px);
+      background: rgba(253,248,248,0.96); backdrop-filter: blur(10px);
       padding: 12px 20px 24px;
       box-shadow: 0 -1px 24px rgba(0,0,0,0.08);
       display: none;
@@ -190,7 +191,7 @@
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.14em;
-      color: var(--accent);
+      color: var(--accent2);    /* ティール */
       margin-bottom: 12px;
     }
 
@@ -261,7 +262,7 @@
       font-size: 12px;
       font-weight: 600;
       color: var(--accent);
-      background: #f5ede6;
+      background: #FAF0F1;
       border: 1px solid var(--accent-light);
       padding: 4px 12px;
       border-radius: var(--radius-sm);
@@ -301,7 +302,7 @@
       height: 16px;
       min-width: 16px;
       min-height: 16px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='4' fill='none' stroke='%23C07A58' stroke-width='1.5' stroke-opacity='0.55'/%3E%3C/svg%3E") no-repeat center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='4' fill='none' stroke='%23D16070' stroke-width='1.5' stroke-opacity='0.55'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain;
       flex-shrink: 0;
       margin-top: 4px;
@@ -336,12 +337,12 @@
       padding: 24px;
       box-shadow: var(--shadow);
       margin-bottom: 16px;
-      border-top: 3px solid #d4b0a0;
+      border-top: 3px solid #E8B0B8;
     }
     .what-not-title {
       font-size: 11px;
       font-weight: 700;
-      color: #a07060;
+      color: #B06070;
       letter-spacing: 0.1em;
       margin-bottom: 16px;
     }
@@ -365,7 +366,7 @@
       top: 2px;
       width: 16px;
       height: 16px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='4' y1='4' x2='12' y2='12' stroke='%23c4a090' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='12' y1='4' x2='4' y2='12' stroke='%23c4a090' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='4' y1='4' x2='12' y2='12' stroke='%23E09BA5' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='12' y1='4' x2='4' y2='12' stroke='%23E09BA5' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain;
     }
 
@@ -445,7 +446,7 @@
       width: 18px;
       height: 18px;
       min-width: 18px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9h8M10 5l4 4-4 4' stroke='%23C07A58' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9h8M10 5l4 4-4 4' stroke='%23D16070' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain;
       flex-shrink: 0;
     }
@@ -527,7 +528,7 @@
     }
     .profile-role {
       font-size: 12px;
-      color: var(--accent);
+      color: var(--accent2);    /* ティール */
       font-weight: 600;
       letter-spacing: 0.06em;
       margin-bottom: 20px;
@@ -598,7 +599,7 @@
       font-size: 11px;
       font-weight: 700;
       color: var(--accent);
-      background: #f5ede6;
+      background: #FAF0F1;
       border: 1px solid var(--accent-light);
       padding: 4px 14px;
       border-radius: var(--radius-sm);
@@ -622,7 +623,7 @@
     .benefit-box-title {
       font-size: 12px;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--accent2);    /* ティール */
       letter-spacing: 0.1em;
       margin-bottom: 16px;
     }
@@ -646,7 +647,7 @@
       top: 3px;
       width: 16px;
       height: 16px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' stroke='%23C07A58' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' stroke='%23D16070' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain;
     }
 
@@ -705,19 +706,19 @@
       letter-spacing: 0.12em; margin-bottom: 16px;
     }
     .ba-label--before { color: #9a8070; }
-    .ba-label--after  { color: var(--accent); }
+    .ba-label--after  { color: var(--accent2); } /* ティール */
     .ba-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .ba-list li { font-size: 15px; line-height: 1.6; padding-left: 20px; position: relative; }
     .ba-col--before .ba-list li { color: #7a6a60; }
     .ba-col--before .ba-list li::before {
       content: ''; position: absolute; left: 0; top: 4px; width: 14px; height: 14px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cline x1='3' y1='3' x2='11' y2='11' stroke='%23c4a090' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='11' y1='3' x2='3' y2='11' stroke='%23c4a090' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cline x1='3' y1='3' x2='11' y2='11' stroke='%23E09BA5' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='11' y1='3' x2='3' y2='11' stroke='%23E09BA5' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain;
     }
     .ba-col--after .ba-list li { color: var(--text); }
     .ba-col--after .ba-list li::before {
       content: ''; position: absolute; left: 0; top: 4px; width: 14px; height: 14px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7l3.5 3.5L12 3' stroke='%23C07A58' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7l3.5 3.5L12 3' stroke='%23D16070' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain;
     }
     .ba-arrow {
@@ -737,7 +738,7 @@
     }
     .step-num {
       font-size: 11px; font-weight: 700;
-      color: var(--accent); letter-spacing: 0.12em; margin-bottom: 8px;
+      color: var(--accent2); letter-spacing: 0.12em; margin-bottom: 8px; /* ティール */
     }
     .step-item h4 {
       font-size: clamp(16px, 4vw, 18px); font-weight: 700;
@@ -763,7 +764,7 @@
       padding: 24px; margin-bottom: 24px;
     }
     .format-title {
-      font-size: 12px; font-weight: 700; color: var(--accent);
+      font-size: 12px; font-weight: 700; color: var(--accent2); /* ティール */
       letter-spacing: 0.1em; margin-bottom: 20px;
     }
     .format-grid { display: flex; flex-direction: column; gap: 0; }
@@ -886,7 +887,7 @@
        FOOTER
     ================================ */
     footer {
-      background: #2a2018;
+      background: #201828;
       color: rgba(255,255,255,0.5);
       text-align: center;
       padding: 24px 20px 40px;
@@ -1062,7 +1063,7 @@
 
       <div class="ba-arrow" aria-hidden="true">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <path d="M14 4v20M7 17l7 7 7-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 4v20M7 17l7 7 7-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
 
@@ -1258,8 +1259,8 @@
     <div class="outcome-grid">
       <div class="outcome-item fade-up">
         <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         <div>
           <div class="o-title">頭の中が整理される</div>
@@ -1268,8 +1269,8 @@
       </div>
       <div class="outcome-item fade-up">
         <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         <div>
           <div class="o-title">SNSが売上につながりやすくなる</div>
@@ -1278,8 +1279,8 @@
       </div>
       <div class="outcome-item fade-up">
         <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         <div>
           <div class="o-title">LINE配信の迷いが減る</div>
@@ -1288,8 +1289,8 @@
       </div>
       <div class="outcome-item fade-up">
         <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         <div>
           <div class="o-title">常連さん・リピーターが増える</div>
@@ -1298,8 +1299,8 @@
       </div>
       <div class="outcome-item fade-up">
         <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         <div>
           <div class="o-title">発信ネタに困りづらくなる</div>
@@ -1308,8 +1309,8 @@
       </div>
       <div class="outcome-item fade-up">
         <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#f5ede6"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#C07A58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         <div>
           <div class="o-title">自分しか回せない状態が減っていく</div>
