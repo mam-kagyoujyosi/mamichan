@@ -378,28 +378,28 @@
 <!-- SVG スプライト（再利用アイコン定義） -->
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
   <defs>
-<!-- チェックマーク（ティール） -->
-    <symbol id="icon-check-teal" viewBox="0 0 22 22">
+<!-- チェック（サーモン丸 + ブリック） -->
+    <symbol id="icon-check" viewBox="0 0 22 22">
       <circle cx="11" cy="11" r="10" fill="#FAE2D8"/>
       <path d="M6.5 11.5l3 3 6-6" stroke="#BC3C28" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     </symbol>
-    <!-- SNS（シェア）アイコン -->
+    <!-- SNS（シェア・ネットワーク） -->
     <symbol id="icon-sns" viewBox="0 0 24 24">
-      <circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="18" cy="5"  r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
       <circle cx="6"  cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
       <circle cx="18" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
       <path d="M8.3 10.8l7.5-4.1M8.3 13.2l7.5 4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
     </symbol>
-    <!-- メッセージ（LINE）アイコン -->
-    <symbol id="icon-msg" viewBox="0 0 24 24">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- LINE 公式ロゴ（フロー図用・1色） -->
+    <symbol id="icon-line-logo" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
     </symbol>
-    <!-- タグ（商品）アイコン -->
+    <!-- タグ（商品・導線） -->
     <symbol id="icon-tag" viewBox="0 0 24 24">
       <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="7" cy="7" r="1.3" fill="currentColor"/>
     </symbol>
-    <!-- リフレッシュ（リピーター）アイコン -->
+    <!-- リピート（リピーター） -->
     <symbol id="icon-repeat" viewBox="0 0 24 24">
       <path d="M23 4v6h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M1 20v-6h6"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -521,7 +521,7 @@
       </div>
       <div class="flow-step">
         <div class="flow-icon-box">
-          <svg width="22" height="22" aria-hidden="true"><use href="#icon-msg"/></svg>
+          <svg width="22" height="22" aria-hidden="true"><use href="#icon-line-logo"/></svg>
         </div>
         <div>
           <div class="flow-channel">LINE</div>
@@ -580,27 +580,27 @@
 
     <div class="future-grid">
       <div class="future-item fade-up">
-        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>なんとなく投稿する状態から抜け出せる</span>
       </div>
       <div class="future-item fade-up">
-        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>LINEでお客様と関係性を育てられる</span>
       </div>
       <div class="future-item fade-up">
-        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>リピーターが増える流れが見えてくる</span>
       </div>
       <div class="future-item fade-up">
-        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>家族や経営者に説明できる数字を持てる</span>
       </div>
       <div class="future-item fade-up">
-        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>「お手伝い」ではなく「売上を作れる人」になれる</span>
       </div>
       <div class="future-item fade-up">
-        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>自分の仕事に、自信が持てる</span>
       </div>
     </div>
@@ -733,31 +733,31 @@
 
     <div class="outcome-grid">
       <div class="outcome-item fade-up">
-        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>何を投稿すればいいか迷う時間が減る</span>
       </div>
       <div class="outcome-item fade-up">
-        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>LINEに登録してもらった後の流れができる</span>
       </div>
       <div class="outcome-item fade-up">
-        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>お客様に合わせた案内ができる</span>
       </div>
       <div class="outcome-item fade-up">
-        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>家族や経営者に数字で説明できる</span>
       </div>
       <div class="outcome-item fade-up">
-        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>自分の仕事が売上につながっていると実感できる</span>
       </div>
       <div class="outcome-item fade-up">
-        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>家業の中で、自分の役割に自信が持てる</span>
       </div>
       <div class="outcome-item fade-up">
-        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check"/></svg>
         <span>SNSやLINEが作業ではなく、売上につながる道具になる</span>
       </div>
     </div>
