@@ -3,1400 +3,623 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>家業女子のための LINE×売れる仕組み整理サポート</title>
+  <title>家業女子の売れる動線づくり ｜ Mami</title>
+  <!--
+  ╔══════════════════════════════════════════════════════╗
+  ║  CTA リンク管理                                      ║
+  ║  JS 内の CTA_URL を変更すると全ボタンに反映されます  ║
+  ╚══════════════════════════════════════════════════════╝
+  -->
   <style>
-    /* ===== CSS Variables ===== */
+    /* ============================================================
+       CSS Variables
+    ============================================================ */
     :root {
-      --accent:       #D16070;   /* ローズコーラル（参考サイトのピンク→落ち着かせた色） */
-      --accent-light: #F2C4C8;   /* ソフトローズ */
-      --accent2:      #3ABDB5;   /* ティール（参考サイトの青緑アクセント） */
+      --accent:       #D16070;   /* ローズコーラル */
+      --accent-light: #F2C4C8;
+      --accent2:      #3ABDB5;   /* ティール */
       --text:         #1e1e1e;
       --text-sub:     #6a6a6a;
-      --bg:           #FDF8F8;   /* ほぼ白・わずかにローズ */
-      --bg-section:   #FAF0F1;   /* ソフトブラッシュ */
+      --bg:           #FDF8F8;
+      --bg-section:   #FAF0F1;
       --bg-card:      #ffffff;
-      --border:       #EDD5D8;   /* ピンク寄りのボーダー */
+      --border:       #EDD5D8;
       --radius-sm:    8px;
       --radius-md:    16px;
       --shadow:       0 8px 30px rgba(0,0,0,0.05);
-      --font-main:    'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+      --font:         'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
     }
 
-    /* ===== Reset ===== */
+    /* ============================================================
+       Reset
+    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-main);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.75;
-      -webkit-font-smoothing: antialiased;
-    }
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    img  { max-width: 100%; display: block; }
+    a    { color: inherit; text-decoration: none; }
+    details summary::-webkit-details-marker { display: none; }
 
-    /* ===== Layout — mobile-first ===== */
-    .container {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 0 20px;          /* mobile base */
-    }
-    section { padding: 48px 0; } /* mobile base */
-
+    /* ============================================================
+       Layout — mobile-first
+    ============================================================ */
+    .container { width: 100%; max-width: 600px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 56px 0; }
     @media (min-width: 601px) {
-      .container { padding: 0 24px; }
-      section    { padding: 64px 0; }
+      .container { padding: 0 28px; }
+      section    { padding: 72px 0; }
     }
 
-    /* ===== Typography ===== */
-    h1 {
-      font-size: clamp(28px, 7vw, 48px);
-      font-weight: 800;
-      line-height: 1.35;
-    }
-    h2 {
-      font-size: clamp(22px, 5vw, 32px);
-      font-weight: 700;
-      line-height: 1.35;
-    }
-    h3 {
-      font-size: clamp(17px, 4vw, 22px);
-      font-weight: 700;
-      line-height: 1.35;
-    }
+    /* ============================================================
+       Typography
+    ============================================================ */
+    h1 { font-size: clamp(24px, 6.5vw, 40px); font-weight: 800; line-height: 1.4; }
+    h2 { font-size: clamp(20px, 5.2vw, 30px); font-weight: 700; line-height: 1.42; }
+    h3 { font-size: clamp(16px, 4vw, 20px); font-weight: 700; line-height: 1.4; }
+
     .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      color: var(--accent2);    /* ティール */
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      display: block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+      color: var(--accent2); text-transform: uppercase;
+      margin-bottom: 10px; display: block;
     }
-    .note {
-      font-size: 12px;
-      color: var(--text-sub);
-      line-height: 1.7;
-    }
-    .body-text {
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--text-sub);
-    }
-    .divider {
-      width: 32px;
-      height: 2px;
-      background: var(--accent-light);
-      border-radius: 2px;
-      margin: 16px 0 24px;
-    }
+    .divider { width: 28px; height: 2px; background: var(--accent-light); border-radius: 2px; margin: 14px 0 22px; }
+    .note    { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
 
-    /* ===== Buttons ===== */
+    /* ============================================================
+       Buttons
+    ============================================================ */
     .btn {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      border-radius: var(--radius-sm);
-      font-size: 16px;
-      font-weight: 700;
-      text-align: center;
-      cursor: pointer;
-      border: none;
-      letter-spacing: 0.04em;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 15px 24px;
+      border-radius: var(--radius-sm); font-size: 15px; font-weight: 700;
+      cursor: pointer; border: none; letter-spacing: 0.04em;
       transition: opacity 0.2s, transform 0.15s;
     }
     .btn:active { transform: scale(0.98); }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(209,96,112,0.28);
-    }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(209,96,112,0.28); }
     .btn-primary:hover { opacity: 0.88; }
-    .btn-line {
-      background: #06C755;
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(6,199,85,0.28);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
+    .btn-line    { background: #06C755; color: #fff; box-shadow: 0 4px 14px rgba(6,199,85,0.25); }
     .btn-line:hover { opacity: 0.88; }
-    .btn-line svg { flex-shrink: 0; }
-    .btn-ghost {
-      background: transparent;
-      color: var(--accent);
-      border: 1.5px solid var(--accent);
-    }
+    .btn-ghost   { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
     .btn-ghost:hover { background: var(--bg-section); }
-    .btn-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 32px;
-    }
-    .cta-note {
-      text-align: center;
-      margin-top: 12px;
-    }
+    .btn-stack   { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+    .cta-note    { text-align: center; margin-top: 10px; }
 
-    /* ===== Progress bar ===== */
+    /* ============================================================
+       Progress bar
+    ============================================================ */
     .progress-bar {
-      position: fixed; top: 0; left: 0; height: 2px;
+      position: fixed; top: 0; left: 0; height: 3px;
       background: var(--accent); z-index: 200; width: 0%;
       transition: width 0.1s linear;
     }
 
-    /* ===== Sticky CTA ===== */
+    /* ============================================================
+       Sticky CTA
+    ============================================================ */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
       background: rgba(253,248,248,0.96); backdrop-filter: blur(10px);
-      padding: 12px 20px 24px;
-      box-shadow: 0 -1px 24px rgba(0,0,0,0.08);
+      padding: 10px 20px 22px; box-shadow: 0 -1px 20px rgba(0,0,0,0.08);
       display: none;
     }
     .sticky-cta .btn { max-width: 480px; margin: 0 auto; }
 
-    /* ===== Fade animation ===== */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
+    /* ============================================================
+       Fade animation
+    ============================================================ */
+    .fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ================================
-       HERO — mobile-first, 100svh fit
-    ================================ */
-    #hero {
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100svh;       /* 全体をビューポートに収める */
-    }
+    /* ============================================================
+       HERO — mobile-first 100svh
+    ============================================================ */
+    #hero { padding: 0; display: flex; flex-direction: column; min-height: 100svh; }
 
-    /* ── 上段：写真エリア ── */
     .hero-upper {
       background: var(--bg-section);
-      padding: 18px 20px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      padding: 20px 20px 0;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
       flex-shrink: 0;
     }
-    .hero-eyebrow {
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: var(--accent2);    /* ティール */
-      margin-bottom: 12px;
-    }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: var(--accent2); margin-bottom: 14px; }
 
-    /* 円形写真 — モバイルは小さく */
-    .hero-img-wrap {
-      position: relative;
-      width: min(188px, 50vw);  /* モバイル基準値 */
-    }
+    .hero-img-wrap { position: relative; width: min(188px, 50vw); }
     .hero-img-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      border: 2px solid var(--accent-light);
-      opacity: 0.7;
+      content: ''; position: absolute; inset: -6px; border-radius: 50%;
+      border: 2px solid var(--accent-light); opacity: 0.7;
     }
-    .hero-img-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 50%;
-    }
+    .hero-img-wrap img { width: 100%; height: auto; display: block; border-radius: 50%; }
 
-    /* ── ウェーブ区切り ── */
-    .hero-wave {
-      display: block;
-      width: 100%;
-      background: var(--bg-section);
-      line-height: 0;
-      flex-shrink: 0;
-    }
-    .hero-wave svg {
-      display: block;
-      width: 100%;
-      height: 22px;             /* モバイルでは薄く */
-    }
+    .hero-wave { display: block; width: 100%; background: var(--bg-section); line-height: 0; flex-shrink: 0; }
+    .hero-wave svg { display: block; width: 100%; height: 22px; }
 
-    /* ── 下段：テキスト＋CTA ── */
     .hero-lower {
-      background: var(--bg);
-      padding: 10px 20px 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      background: var(--bg); padding: 10px 20px 22px;
+      flex: 1; display: flex; flex-direction: column; justify-content: center;
     }
-    .hero-lower h1 {
-      font-size: clamp(20px, 5.6vw, 26px); /* モバイル優先で小さく */
-      font-weight: 800;
-      line-height: 1.45;
-      color: var(--text);
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
-    .hero-lower h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-    .hero-sub {
-      font-size: 13px;
-      line-height: 1.75;
-      color: var(--text-sub);
-      margin-bottom: 0;
-    }
-    /* タグはモバイルでは非表示（画面に収めるため） */
-    .hero-tags { display: none; }
-    .hero-tag {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      background: #FAF0F1;
-      border: 1px solid var(--accent-light);
-      padding: 4px 12px;
-      border-radius: var(--radius-sm);
-    }
-    /* ヒーロー内ボタンをコンパクトに */
-    .hero-lower .btn-stack { margin-top: 16px; gap: 10px; }
-    .hero-lower .btn        { padding: 13px 20px; font-size: 15px; }
+    .hero-precopy { font-size: clamp(13px, 3.5vw, 15px); color: var(--text-sub); line-height: 1.65; margin-bottom: 12px; }
+    .hero-lower h1 { font-size: clamp(19px, 5.4vw, 26px); line-height: 1.48; color: var(--text); margin-bottom: 8px; }
+    .hero-lower h1 em { font-style: normal; color: var(--accent); }
+    .hero-tagline { font-size: clamp(11px, 3vw, 13px); font-weight: 600; color: var(--accent2); letter-spacing: 0.06em; }
+    .hero-lower .btn-stack { margin-top: 18px; gap: 10px; }
+    .hero-lower .btn { padding: 13px 20px; font-size: 15px; }
 
-    /* ================================
+    /* ============================================================
        EMPATHY
-    ================================ */
+    ============================================================ */
     #empathy { background: var(--bg); }
 
-    .worry-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 32px;
-    }
+    .empathy-intro { font-size: 15px; line-height: 1.85; color: var(--text-sub); margin-bottom: 24px; }
+    .empathy-intro strong { color: var(--text); }
+
+    .worry-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
     .worry-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      background: var(--bg-card);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      box-shadow: var(--shadow);
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text);
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--bg-card); border-radius: var(--radius-sm);
+      padding: 14px 16px; box-shadow: var(--shadow);
+      font-size: 15px; line-height: 1.7; color: var(--text);
     }
     .worry-list li::before {
-      content: '';
-      display: block;
-      width: 16px;
-      height: 16px;
-      min-width: 16px;
-      min-height: 16px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='4' fill='none' stroke='%23D16070' stroke-width='1.5' stroke-opacity='0.55'/%3E%3C/svg%3E") no-repeat center;
-      background-size: contain;
-      flex-shrink: 0;
-      margin-top: 4px;
+      content: ''; display: block; width: 16px; height: 16px; min-width: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='4' fill='none' stroke='%23D16070' stroke-width='1.5' stroke-opacity='0.6'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain; flex-shrink: 0; margin-top: 4px;
     }
-
-    /* ── Story block ── */
-    .story-block {
-      background: var(--bg-section);
-      border-radius: var(--radius-md);
-      padding: 32px 28px;
-      line-height: 2;
-      color: var(--text);
-      font-size: 15px;
-    }
-    .story-block p { margin-bottom: 18px; }
-    .story-block p:last-child { margin-bottom: 0; }
-    .story-lead {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 6px !important;
-    }
-    .story-me {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 22px !important;
-    }
-    .story-voice {
-      background: #fff;
-      border-left: 3px solid var(--accent);
-      border-radius: 0 8px 8px 0;
-      padding: 14px 18px;
-      font-style: italic;
-      color: var(--text-sub);
-      line-height: 1.9;
-    }
-    .story-close {
-      font-size: 16px;
-      color: var(--text);
-    }
-
     .empathy-close {
-      background: var(--bg-section);
-      border-radius: var(--radius-md);
-      padding: 24px;
-    }
-    .turning-point {
-      text-align: center;
-      padding: 32px 16px 8px;
-    }
-    .turning-point p {
-      font-size: clamp(19px, 5vw, 24px);
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1.6;
-      letter-spacing: 0.02em;
-    }
-    .empathy-close p {
-      font-size: 16px;
-      line-height: 1.85;
-      color: var(--text);
+      background: var(--bg-section); border-radius: var(--radius-md); padding: 22px 20px;
+      font-size: 16px; line-height: 1.85; color: var(--text);
     }
     .empathy-close .accent-line {
-      font-size: clamp(17px, 4vw, 20px);
-      font-weight: 700;
-      color: var(--accent);
-      margin-top: 12px;
-      line-height: 1.5;
+      font-size: clamp(15px, 3.8vw, 17px); font-weight: 700; color: var(--accent);
+      margin-top: 12px; display: block; line-height: 1.55;
     }
 
-    /* ================================
-       WHAT
-    ================================ */
-    #what { background: var(--bg-section); }
+    /* ============================================================
+       PROBLEM
+    ============================================================ */
+    #problem { background: var(--bg-section); }
 
-    .what-not {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      margin-bottom: 16px;
-      border-top: 3px solid #E8B0B8;
-    }
-    .what-not-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: #B06070;
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
-    }
-    .what-not-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .what-not-list li {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-sub);
-      padding-left: 20px;
-      position: relative;
-    }
-    .what-not-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 2px;
-      width: 16px;
-      height: 16px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='4' y1='4' x2='12' y2='12' stroke='%23E09BA5' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='12' y1='4' x2='4' y2='12' stroke='%23E09BA5' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
-      background-size: contain;
-    }
+    .problem-lead { font-size: 16px; line-height: 1.88; color: var(--text-sub); margin-bottom: 28px; }
+    .problem-lead p + p { margin-top: 12px; }
+    .problem-lead strong { color: var(--text); }
 
-    .what-yes {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      border-top: 3px solid var(--accent);
+    .flow-wrap { display: flex; flex-direction: column; gap: 0; margin-bottom: 28px; }
+    .flow-step {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg-card); border-radius: var(--radius-sm);
+      padding: 14px 18px; box-shadow: var(--shadow);
     }
-    .what-yes-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
+    .flow-icon-box {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg-section); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent2);
     }
-    .what-yes-body {
-      font-size: 16px;
-      line-height: 1.85;
-      color: var(--text);
-    }
-    .what-yes-body strong { color: var(--accent); }
+    .flow-channel { font-size: 11px; font-weight: 700; color: var(--accent2); letter-spacing: 0.08em; margin-bottom: 1px; }
+    .flow-action  { font-size: 15px; font-weight: 700; color: var(--text); }
+    .flow-connector { display: flex; padding: 4px 0 4px 29px; color: var(--accent-light); }
 
-    /* ================================
-       PHILOSOPHY
-    ================================ */
-    #philosophy { background: var(--bg); }
+    .problem-box {
+      background: var(--bg-card); border-radius: var(--radius-md);
+      padding: 22px 20px; box-shadow: var(--shadow);
+      border-top: 3px solid var(--accent2);
+    }
+    .problem-box p { font-size: 15px; line-height: 1.85; color: var(--text-sub); }
+    .problem-box p + p { margin-top: 10px; }
+    .problem-box strong { color: var(--text); }
 
-    .philosophy-card {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 32px 24px;
-      box-shadow: var(--shadow);
-      margin-bottom: 16px;
-    }
-    .philosophy-card h3 {
-      margin-bottom: 16px;
-      color: var(--text);
-    }
-    .philosophy-card p {
-      font-size: 16px;
-      line-height: 1.85;
-      color: var(--text-sub);
-    }
-    .philosophy-card strong { color: var(--text); }
+    /* ============================================================
+       FUTURE
+    ============================================================ */
+    #future { background: var(--bg); }
 
-    /* ================================
-       WHAT WE DO
-    ================================ */
-    #whatwedo { background: var(--bg-section); }
+    .future-sub { font-size: 15px; line-height: 1.8; color: var(--text-sub); margin-bottom: 24px; }
+    .future-grid { display: flex; flex-direction: column; gap: 10px; }
+    .future-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--bg-card); border-radius: var(--radius-sm);
+      padding: 15px 18px; box-shadow: var(--shadow);
+    }
+    .future-chk { width: 22px; height: 22px; min-width: 22px; flex-shrink: 0; margin-top: 1px; }
+    .future-item span { font-size: 15px; line-height: 1.7; color: var(--text); }
 
-    .do-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .do-list li {
-      background: var(--bg-card);
-      border-radius: var(--radius-sm);
-      padding: 18px 20px;
-      box-shadow: var(--shadow);
-      border-left: 3px solid var(--accent);
-    }
-    .do-list li .do-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .do-list li .do-title::before {
-      content: '';
-      width: 18px;
-      height: 18px;
-      min-width: 18px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9h8M10 5l4 4-4 4' stroke='%23D16070' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
-      background-size: contain;
-      flex-shrink: 0;
-    }
-    .do-list li .do-desc {
-      font-size: 16px;
-      line-height: 1.75;
-      color: var(--text-sub);
-    }
-
-    /* ================================
-       OUTCOME
-    ================================ */
-    #outcome { background: var(--bg); }
-
-    .outcome-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .outcome-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      background: var(--bg-card);
-      border-radius: var(--radius-sm);
-      padding: 18px 20px;
-      box-shadow: var(--shadow);
-    }
-    .outcome-icon {
-      width: 24px;
-      height: 24px;
-      min-width: 24px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .outcome-item .o-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-    .outcome-item .o-desc {
-      font-size: 16px;
-      line-height: 1.75;
-      color: var(--text-sub);
-    }
-
-    /* ================================
+    /* ============================================================
        PROFILE
-    ================================ */
+    ============================================================ */
     #profile { background: var(--bg-section); }
 
-    .profile-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-    }
-    .profile-photo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--accent-light);
-      box-shadow: var(--shadow);
-      flex-shrink: 0;
-    }
-    .profile-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center 15%;
-    }
+    .profile-wrap { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .profile-photo { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 3px solid var(--accent-light); box-shadow: var(--shadow); flex-shrink: 0; }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
     .profile-info { width: 100%; }
-    .profile-name {
-      font-size: clamp(20px, 5vw, 26px);
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .profile-role {
-      font-size: 12px;
-      color: var(--accent2);    /* ティール */
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      margin-bottom: 20px;
-    }
-    .profile-body {
-      font-size: 16px;
-      line-height: 1.85;
-      color: var(--text-sub);
-    }
-    .profile-body p + p { margin-top: 16px; }
+    .profile-name { font-size: clamp(20px, 5vw, 26px); font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .profile-role { font-size: 12px; color: var(--accent2); font-weight: 600; letter-spacing: 0.06em; margin-bottom: 18px; }
+    .profile-story { font-size: 15px; line-height: 1.88; color: var(--text-sub); }
+    .profile-story p + p { margin-top: 14px; }
+    .profile-story strong { color: var(--text); }
 
-    .profile-numbers {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 24px;
-    }
-    .profile-num-item {
-      background: var(--bg-card);
-      border-radius: var(--radius-sm);
-      padding: 16px 20px;
-      box-shadow: var(--shadow);
+    .profile-stats { display: flex; flex-direction: column; gap: 8px; margin-top: 22px; }
+    .profile-stat {
+      background: var(--bg-card); border-radius: var(--radius-sm);
+      padding: 14px 18px; box-shadow: var(--shadow);
       border-left: 3px solid var(--accent-light);
     }
-    .profile-num-item .num {
-      font-size: clamp(17px, 4vw, 20px);
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1.3;
-    }
-    .profile-num-item .label {
-      font-size: 14px;
-      color: var(--text-sub);
-      margin-top: 2px;
-    }
+    .stat-num   { font-size: clamp(15px, 3.8vw, 17px); font-weight: 800; color: var(--accent); line-height: 1.3; }
+    .stat-label { font-size: 13px; color: var(--text-sub); margin-top: 2px; }
 
-    /* ================================
-       TESTIMONIALS PLACEHOLDER
-    ================================ */
-    #testimonials { background: var(--bg); }
+    /* ============================================================
+       SERVICE
+    ============================================================ */
+    #service { background: var(--bg); }
 
-    .testimonial-placeholder {
-      background: var(--bg-section);
-      border-radius: var(--radius-md);
-      padding: 32px 24px;
-      text-align: center;
-      border: 1.5px dashed var(--border);
+    .service-sub { font-size: 15px; line-height: 1.8; color: var(--text-sub); margin-bottom: 28px; }
+    .service-grid { display: flex; flex-direction: column; gap: 14px; }
+    .service-card {
+      background: var(--bg-card); border-radius: var(--radius-md);
+      padding: 22px 20px; box-shadow: var(--shadow);
+      border-left: 3px solid var(--accent);
     }
-    .testimonial-placeholder p {
-      font-size: 14px;
-      color: var(--text-sub);
-      line-height: 1.75;
-    }
-    .testimonial-placeholder strong {
-      display: block;
-      font-size: 16px;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
+    .service-num   { font-size: 11px; font-weight: 700; color: var(--accent2); letter-spacing: 0.12em; margin-bottom: 6px; }
+    .service-title { font-size: clamp(15px, 4vw, 17px); font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.42; }
+    .service-items { list-style: none; display: flex; flex-direction: column; gap: 6px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .service-items li { font-size: 14px; color: var(--text-sub); padding-left: 14px; position: relative; line-height: 1.6; }
+    .service-items li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-light); }
 
-    /* ================================
-       CTA
-    ================================ */
+    /* ============================================================
+       OUTCOME
+    ============================================================ */
+    #outcome { background: var(--bg-section); }
+
+    .outcome-grid { display: flex; flex-direction: column; gap: 10px; }
+    .outcome-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--bg-card); border-radius: var(--radius-sm);
+      padding: 15px 18px; box-shadow: var(--shadow);
+    }
+    .outcome-chk { width: 22px; height: 22px; min-width: 22px; flex-shrink: 0; margin-top: 1px; }
+    .outcome-item span { font-size: 15px; line-height: 1.7; color: var(--text); }
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    #faq { background: var(--bg); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item { background: var(--bg-card); border-radius: var(--radius-sm); box-shadow: var(--shadow); overflow: hidden; }
+    .faq-item summary {
+      padding: 17px 20px; font-size: 15px; font-weight: 700; color: var(--text);
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .faq-toggle {
+      width: 22px; height: 22px; border-radius: 50%; background: var(--bg-section);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--accent2);
+      font-size: 20px; font-weight: 300; line-height: 1;
+      transition: transform 0.25s;
+    }
+    .faq-item[open] .faq-toggle { transform: rotate(45deg); }
+    .faq-body { padding: 0 20px 16px; font-size: 15px; line-height: 1.82; color: var(--text-sub); }
+
+    /* ============================================================
+       FINAL CTA
+    ============================================================ */
     #cta-section { background: var(--bg-section); padding-bottom: 96px; }
 
     .monitor-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--accent);
-      background: #FAF0F1;
+      display: inline-block; font-size: 11px; font-weight: 700;
+      color: var(--accent); background: #FDF8F8;
       border: 1px solid var(--accent-light);
-      padding: 4px 14px;
-      border-radius: var(--radius-sm);
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
+      padding: 4px 14px; border-radius: var(--radius-sm);
+      letter-spacing: 0.1em; margin-bottom: 14px;
     }
-    .cta-body {
-      font-size: 16px;
-      line-height: 1.85;
-      color: var(--text-sub);
-      margin-bottom: 24px;
-    }
+    .cta-lead { font-size: 15px; line-height: 1.88; color: var(--text-sub); margin-bottom: 24px; }
+    .cta-lead p + p { margin-top: 10px; }
+    .cta-lead strong { color: var(--text); }
 
-    .benefit-box {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      margin-bottom: 32px;
-    }
-    .benefit-box-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent2);    /* ティール */
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
-    }
-    .benefit-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .benefit-list li {
-      font-size: 16px;
-      line-height: 1.75;
-      color: var(--text);
-      padding-left: 18px;
-      position: relative;
-    }
-    .benefit-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 3px;
-      width: 16px;
-      height: 16px;
+    .benefit-box { background: var(--bg-card); border-radius: var(--radius-md); padding: 22px 20px; box-shadow: var(--shadow); margin-bottom: 24px; }
+    .benefit-title { font-size: 11px; font-weight: 700; color: var(--accent2); letter-spacing: 0.12em; margin-bottom: 14px; }
+    .benefit-items { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .benefit-items li { font-size: 15px; color: var(--text); padding-left: 22px; position: relative; line-height: 1.65; }
+    .benefit-items li::before {
+      content: ''; position: absolute; left: 0; top: 3px; width: 16px; height: 16px;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' stroke='%23D16070' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain;
     }
 
-    /* ================================
-       SERVICE DETAIL
-    ================================ */
-    #service { background: var(--bg); }
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer { background: #201828; color: rgba(255,255,255,0.45); text-align: center; padding: 24px 20px 40px; font-size: 12px; line-height: 1.7; }
+    footer p + p { margin-top: 6px; }
 
-    .service-intro {
-      background: var(--bg-section);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      margin-bottom: 40px;
-    }
-    .service-intro p { font-size: 16px; line-height: 1.85; color: var(--text-sub); }
-    .service-intro p + p { margin-top: 12px; }
-    .service-intro strong { color: var(--text); }
-
-    /* Why 3months */
-    .why-card {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      margin-bottom: 40px;
-    }
-    .why-card h3 { margin-bottom: 12px; }
-    .why-card > p { font-size: 16px; line-height: 1.85; color: var(--text-sub); }
-    .why-tags {
-      display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;
-    }
-    .why-tag {
-      font-size: 12px; color: var(--text-sub);
-      background: var(--bg-section);
-      padding: 4px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-    }
-
-    /* Before / After */
-    .ba-section-title {
-      font-size: 12px; font-weight: 700;
-      color: var(--accent); letter-spacing: 0.1em;
-      text-align: center; margin-bottom: 20px;
-    }
-    .ba-wrap { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
-    .ba-col { border-radius: var(--radius-md); padding: 22px 20px; }
-    .ba-col--before { background: #ede9e5; }
-    .ba-col--after {
-      background: var(--bg-card);
-      box-shadow: var(--shadow);
-      border: 1.5px solid var(--accent-light);
-    }
-    .ba-label {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; margin-bottom: 16px;
-    }
-    .ba-label--before { color: #9a8070; }
-    .ba-label--after  { color: var(--accent2); } /* ティール */
-    .ba-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .ba-list li { font-size: 15px; line-height: 1.6; padding-left: 20px; position: relative; }
-    .ba-col--before .ba-list li { color: #7a6a60; }
-    .ba-col--before .ba-list li::before {
-      content: ''; position: absolute; left: 0; top: 4px; width: 14px; height: 14px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cline x1='3' y1='3' x2='11' y2='11' stroke='%23E09BA5' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='11' y1='3' x2='3' y2='11' stroke='%23E09BA5' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
-      background-size: contain;
-    }
-    .ba-col--after .ba-list li { color: var(--text); }
-    .ba-col--after .ba-list li::before {
-      content: ''; position: absolute; left: 0; top: 4px; width: 14px; height: 14px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7l3.5 3.5L12 3' stroke='%23D16070' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
-      background-size: contain;
-    }
-    .ba-arrow {
-      display: flex; justify-content: center; padding: 14px 0; color: var(--accent);
-    }
-
-    /* Steps */
-    .steps-head {
-      font-size: clamp(17px, 4vw, 20px);
-      font-weight: 700; color: var(--text); margin-bottom: 24px;
-    }
-    .step-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
-    .step-item {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 24px; box-shadow: var(--shadow);
-    }
-    .step-num {
-      font-size: 11px; font-weight: 700;
-      color: var(--accent2); letter-spacing: 0.12em; margin-bottom: 8px; /* ティール */
-    }
-    .step-item h4 {
-      font-size: clamp(16px, 4vw, 18px); font-weight: 700;
-      color: var(--text); margin-bottom: 10px; line-height: 1.4;
-    }
-    .step-item > p { font-size: 15px; line-height: 1.75; color: var(--text-sub); margin-bottom: 14px; }
-    .step-sub {
-      list-style: none; display: flex; flex-direction: column; gap: 6px;
-      padding-top: 14px; border-top: 1px solid var(--border);
-    }
-    .step-sub li {
-      font-size: 14px; color: var(--text-sub);
-      padding-left: 14px; position: relative; line-height: 1.6;
-    }
-    .step-sub li::before {
-      content: ''; position: absolute; left: 0; top: 7px;
-      width: 5px; height: 5px; border-radius: 50%; background: var(--accent-light);
-    }
-
-    /* Format */
-    .format-box {
-      background: var(--bg-section); border-radius: var(--radius-md);
-      padding: 24px; margin-bottom: 24px;
-    }
-    .format-title {
-      font-size: 12px; font-weight: 700; color: var(--accent2); /* ティール */
-      letter-spacing: 0.1em; margin-bottom: 20px;
-    }
-    .format-grid { display: flex; flex-direction: column; gap: 0; }
-    .format-row {
-      display: flex; gap: 16px; align-items: baseline;
-      padding: 14px 0; border-bottom: 1px solid var(--border);
-    }
-    .format-row:first-of-type { padding-top: 0; }
-    .format-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .format-key {
-      font-size: 12px; color: var(--text-sub); font-weight: 600;
-      min-width: 56px; flex-shrink: 0;
-    }
-    .format-val { font-size: 15px; color: var(--text); line-height: 1.65; }
-
-    /* Goal */
-    .goal-box {
-      background: var(--bg-card); border-radius: var(--radius-md);
-      padding: 28px 24px; border-top: 3px solid var(--accent);
-      box-shadow: var(--shadow); margin-bottom: 32px;
-    }
-    .goal-box > p { font-size: 16px; line-height: 1.85; color: var(--text-sub); }
-    .goal-main {
-      font-size: clamp(16px, 4vw, 19px); font-weight: 700;
-      color: var(--accent); margin-top: 16px; line-height: 1.65;
-    }
-
-    /* ================================
+    /* ============================================================
        RESPONSIVE — tablet 601px+
-    ================================ */
+    ============================================================ */
     @media (min-width: 601px) {
-
       /* Hero */
-      .hero-upper  { padding: 28px 32px 0; }
-      .hero-eyebrow { margin-bottom: 18px; }
+      .hero-upper    { padding: 28px 32px 0; }
       .hero-img-wrap { width: min(260px, 44vw); }
       .hero-wave svg { height: 36px; }
-      .hero-lower  { padding: 12px 32px 32px; }
-      .hero-lower h1 { font-size: clamp(24px, 4.5vw, 34px); margin-bottom: 12px; }
-      .hero-sub    { font-size: 15px; }
-      .hero-tags   { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-      .hero-lower .btn       { padding: 16px 24px; font-size: 16px; }
+      .hero-lower    { padding: 14px 32px 32px; }
+      .hero-lower h1 { font-size: clamp(22px, 4vw, 30px); }
+      .hero-lower .btn { padding: 15px 24px; font-size: 16px; }
       .hero-lower .btn-stack { margin-top: 20px; gap: 12px; }
-
-      /* Buttons */
-      .btn { padding: 18px 24px; font-size: 16px; }
-
-      /* Worry list */
+      /* Worry */
       .worry-list li { font-size: 16px; }
-
-      /* Do list */
-      .do-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-      /* Outcome */
-      .outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
+      /* Future */
+      .future-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
       /* Profile */
-      .profile-wrap { flex-direction: row; align-items: flex-start; }
+      .profile-wrap  { flex-direction: row; align-items: flex-start; }
       .profile-photo { width: 140px; height: 140px; }
-
-      /* Before / After */
-      .ba-wrap      { flex-direction: row; gap: 0; align-items: stretch; }
-      .ba-arrow     { flex-direction: column; justify-content: center; padding: 0 12px; }
-      .ba-arrow svg { transform: rotate(-90deg); }
-      .ba-col       { flex: 1; }
-
-      /* Steps */
-      .step-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-      /* Format */
-      .format-key { min-width: 72px; }
-
-      /* Profile numbers */
-      .profile-numbers {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
+      .profile-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      /* Service */
+      .service-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      /* Outcome */
+      .outcome-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     }
 
-    /* ================================
+    /* ============================================================
        RESPONSIVE — desktop 900px+
-    ================================ */
+    ============================================================ */
     @media (min-width: 900px) {
-
-      /* Hero: 横並びレイアウト */
-      #hero {
-        flex-direction: row;
-        min-height: 100svh;
-      }
-      .hero-upper {
-        flex: 1;
-        padding: 48px 40px 48px;
-        justify-content: center;
-        min-height: 100svh;
-      }
-      .hero-eyebrow { margin-bottom: 24px; }
+      #hero { flex-direction: row; }
+      .hero-upper { flex: 1; padding: 48px 40px; justify-content: center; min-height: 100svh; }
       .hero-img-wrap { width: min(320px, 36vw); }
-      .hero-wave { display: none; }
-      .hero-lower {
-        flex: 1;
-        padding: 48px 48px;
-        justify-content: center;
-        min-height: 100svh;
-      }
-      .hero-lower h1 { font-size: clamp(28px, 3.2vw, 40px); margin-bottom: 16px; }
-      .hero-sub      { font-size: 16px; }
-      .hero-tags     { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-      .hero-lower .btn       { padding: 18px 24px; font-size: 16px; }
-      .hero-lower .btn-stack { margin-top: 28px; gap: 12px; }
-
-      /* Do list */
-      .do-list { grid-template-columns: 1fr 1fr 1fr; }
-
-      /* Service steps */
-      .step-list { grid-template-columns: 1fr 1fr; }
+      .hero-wave  { display: none; }
+      .hero-lower { flex: 1; padding: 48px 48px; justify-content: center; min-height: 100svh; }
+      .hero-lower h1 { font-size: clamp(26px, 3vw, 36px); }
+      .hero-lower .btn { padding: 16px 24px; font-size: 16px; }
+      .hero-lower .btn-stack { margin-top: 26px; }
     }
-
-    /* ================================
-       FOOTER
-    ================================ */
-    footer {
-      background: #201828;
-      color: rgba(255,255,255,0.5);
-      text-align: center;
-      padding: 24px 20px 40px;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-    footer p + p { margin-top: 6px; }
   </style>
 </head>
 <body>
 
-<div class="progress-bar" id="progressBar"></div>
+<!-- SVG スプライト（再利用アイコン定義） -->
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <!-- LINE 公式ロゴ -->
+    <symbol id="icon-line" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+    </symbol>
+    <!-- チェックマーク（ティール） -->
+    <symbol id="icon-check-teal" viewBox="0 0 22 22">
+      <circle cx="11" cy="11" r="10" fill="#FAF0F1"/>
+      <path d="M6.5 11.5l3 3 6-6" stroke="#3ABDB5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </symbol>
+    <!-- SNS（シェア）アイコン -->
+    <symbol id="icon-sns" viewBox="0 0 24 24">
+      <circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="6"  cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="18" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M8.3 10.8l7.5-4.1M8.3 13.2l7.5 4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <!-- メッセージ（LINE）アイコン -->
+    <symbol id="icon-msg" viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- タグ（商品）アイコン -->
+    <symbol id="icon-tag" viewBox="0 0 24 24">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="7" cy="7" r="1.3" fill="currentColor"/>
+    </symbol>
+    <!-- リフレッシュ（リピーター）アイコン -->
+    <symbol id="icon-repeat" viewBox="0 0 24 24">
+      <path d="M23 4v6h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M1 20v-6h6"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- 下矢印 -->
+    <symbol id="icon-arrow-down" viewBox="0 0 20 20">
+      <path d="M10 4v12M4 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- プログレスバー -->
+<div class="progress-bar" id="progressBar" role="progressbar" aria-hidden="true"></div>
 
 
-<!-- ================================
-     HERO — mobile-first vertical
-================================ -->
-<section id="hero">
+<!-- ================================================================
+     1. HERO — ファーストビュー
+================================================================ -->
+<section id="hero" aria-label="ファーストビュー">
 
-  <!-- 上段：ウォームベージュ背景 + 円形写真 -->
   <div class="hero-upper">
-    <p class="hero-eyebrow">牛肉専門卸問屋の娘が実証した</p>
+    <p class="hero-eyebrow">家業で働く女性へ</p>
     <div class="hero-img-wrap fade-up">
-      <img src="claude使用写真/date3.png" alt="Mami — 牛肉卸会社で働く家業女子">
+      <img src="claude使用写真/date3.png" alt="牛肉卸会社で働くMami">
     </div>
   </div>
 
-  <!-- ウェーブ区切り -->
-  <div class="hero-wave">
-    <svg viewBox="0 0 375 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0 Q187.5 48 375 0 L375 40 L0 40 Z" fill="#faf8f5"/>
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 375 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0 Q187.5 30 375 0 L375 22 L0 22 Z" fill="#FDF8F8"/>
     </svg>
   </div>
 
-  <!-- 下段：テキスト + CTA -->
   <div class="hero-lower">
-    <h1>家業女子のための<br><em>頑張らなくても</em><br>回る仕組み化</h1>
-
-    <p class="hero-sub">
-      SNSもLINEも、発信し続けなくていい。<br>
-      流れを整えるだけで、「またあなたから買いたい」が増えていく。
-    </p>
-
-    <div class="hero-tags">
-      <span class="hero-tag">LINE活用</span>
-      <span class="hero-tag">リピーター導線</span>
-      <span class="hero-tag">SNS改善</span>
-      <span class="hero-tag">仕組み整理</span>
-      <span class="hero-tag">家業特化</span>
-    </div>
+    <p class="hero-precopy">SNSを頑張っているのに、売上につながらない。<br>家業の中で<strong>なんでも屋さん</strong>になっているあなたへ。</p>
+    <h1>少ないフォロワーでも、<br><em>「あなたから買いたい」</em><br>を増やせる。</h1>
+    <p class="hero-tagline">家業女子の売れる動線づくり</p>
 
     <div class="btn-stack fade-up">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn btn-primary">無料相談に申し込む</a>
+      <a href="https://example.com" data-cta class="btn btn-line">
+        <svg width="20" height="20" aria-hidden="true"><use href="#icon-line"/></svg>
+        無料診断を受けてみる
+      </a>
+      <a href="https://example.com" data-cta class="btn btn-ghost">まずは相談してみる</a>
     </div>
-    <p class="cta-note note">診断・相談はすべて無料です</p>
+    <p class="cta-note note">診断・ご相談はすべて無料です</p>
   </div>
 
 </section>
 
 
-<!-- ================================
-     EMPATHY
-================================ -->
-<section id="empathy">
+<!-- ================================================================
+     2. EMPATHY — 共感
+================================================================ -->
+<section id="empathy" aria-label="共感パート">
   <div class="container">
-    <span class="section-label">EMPATHY</span>
-    <h2>こんな状況、<br>ありませんか？</h2>
+    <span class="section-label">Empathy</span>
+    <h2>こんなふうに感じたことは、<br>ありませんか？</h2>
     <div class="divider"></div>
+
+    <p class="empathy-intro fade-up">
+      ひとつでも「あ、これ私のことだ」と思ったら、<strong>最後まで読んでみてください。</strong>
+    </p>
 
     <ul class="worry-list">
-      <li class="fade-up">SNSを頑張っているのに、売上につながらない</li>
-      <li class="fade-up">投稿ネタを考えるだけで、しんどい</li>
-      <li class="fade-up">LINE登録はあるけど、その後につながらない</li>
-      <li class="fade-up">常連さん・リピーターをもっと増やしたい</li>
-      <li class="fade-up">自分が休むと、お店が回らない</li>
-      <li class="fade-up">現場・接客・経理・SNS、全部自分に来る</li>
-      <li class="fade-up">何から手をつければいいか分からない</li>
+      <li class="fade-up">SNSを更新しているけど、売上につながっている実感がない</li>
+      <li class="fade-up">LINEを始めた方がいいのは分かるけど、何を送ればいいか分からない</li>
+      <li class="fade-up">家業のために動いているのに、成果として評価されにくい</li>
+      <li class="fade-up">投稿も接客も事務もやっていて、気づけばなんでも屋さんになっている</li>
+      <li class="fade-up">家族経営だから、自分の意見が通りづらいことがある</li>
+      <li class="fade-up">毎日頑張っているのに、「売れる仕組み」になっていない気がする</li>
+      <li class="fade-up">毎日忙しいのに、自分の実績が積み上がっていない気がする</li>
     </ul>
-
-    <div class="story-block fade-up">
-      <p class="story-lead">こんなふうに感じたことはありませんか？</p>
-      <p class="story-me">実は、私も同じでした。</p>
-      <p>40年以上続く家業で働く中で、<br>
-      「家族のため」「会社のため」と思って動いているのに、<br>
-      気づけば私は、なんでも屋さんのような存在になっていました。</p>
-      <p>事務も、現場も、SNSも、販売も、家族のフォローも。<br>
-      やることは終わらない。<br>
-      でも、どれだけ頑張っても評価されている実感がない。</p>
-      <p>実績も、キャリアも、積み上がっている感じがしない。</p>
-      <p class="story-voice">「私はこのままでいいのかな」<br>
-      「家業の中で、私の役割って何なんだろう」</p>
-      <p>そんなモヤモヤを抱えていた私が、<br>
-      LINEやSNSを使って売れる導線を整えたことで、<br>
-      <strong>"自分の仕事"を数字で見える形に変えることができました。</strong></p>
-      <p class="story-close">家業の中で、ただ手伝う人ではなく、<br>
-      <strong>売上をつくる人になる。</strong></p>
-      <p>このサービスは、そんな一歩を踏み出したい家業女子のためのものです。</p>
-    </div>
 
     <div class="empathy-close fade-up">
-      <p>頑張っていないわけじゃない。<br>むしろ、頑張りすぎているくらい。</p>
-    </div>
-
-    <div class="turning-point fade-up">
-      <p>ただ、仕組みが整っていないだけかもしれない。</p>
+      <p>頑張っていないわけじゃない。むしろ、誰よりも動いていると思う。</p>
+      <p>ただ、何かがかみ合っていない感じがある。</p>
+      <span class="accent-line">そのモヤモヤは、あなたの努力が足りないからではありません。</span>
     </div>
 
     <div class="btn-stack fade-up">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn btn-primary">無料相談に申し込む</a>
+      <a href="https://example.com" data-cta class="btn btn-line">
+        <svg width="20" height="20" aria-hidden="true"><use href="#icon-line"/></svg>
+        無料診断を受けてみる
+      </a>
     </div>
+    <p class="cta-note note">診断・ご相談はすべて無料です</p>
   </div>
 </section>
 
 
-<!-- ================================
-     WHAT
-================================ -->
-<section id="what">
+<!-- ================================================================
+     3. PROBLEM — 問題の本質
+================================================================ -->
+<section id="problem" aria-label="問題の本質">
   <div class="container">
-    <span class="section-label">WHAT IS THIS</span>
-    <h2>このサービスは、<br>何をするものか。</h2>
+    <span class="section-label">Problem</span>
+    <h2>頑張っているのに売れないのは、<br>あなたの努力が足りないからではありません。</h2>
     <div class="divider"></div>
 
-    <div class="what-not fade-up">
-      <div class="what-not-title">このサービスではないもの</div>
-      <ul class="what-not-list">
-        <li>SNS運用を代わりにやるサービス</li>
-        <li>LINEをただ構築するだけのサービス</li>
-        <li>フォロワーを増やすためのサービス</li>
-        <li>投稿を量産させるサービス</li>
-      </ul>
+    <div class="problem-lead fade-up">
+      <p>売上につながらない本当の原因は、<strong>投稿数が少ないからでも、センスがないからでもありません。</strong></p>
+      <p>SNS・LINE・商品・お客様の流れが、バラバラでつながっていないことにあります。</p>
     </div>
 
-    <div class="what-yes fade-up">
-      <div class="what-yes-title">このサービスが提供するもの</div>
-      <p class="what-yes-body">
-        現場・接客・経理・SNS・LINE対応まで抱えている家業女子が、<br><br>
-        <strong>「頑張り続けないと回らない状態」を整理し、</strong><br><br>
-        お客様との<strong>関係が続く仕組み</strong>を一緒に作るサポートです。
-      </p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================
-     SERVICE DETAIL
-================================ -->
-<section id="service">
-  <div class="container">
-    <span class="section-label">SERVICE</span>
-    <h2>売れる仕組み整理<br>3ヶ月伴走サポート</h2>
-    <div class="divider"></div>
-
-    <!-- 1. サービスとは -->
-    <div class="service-intro fade-up">
-      <p>SNS・LINE・接客・現場対応など、家業の中でひとりで抱えながら頑張っている女性のための、<strong>「売れる仕組み」を整理する3ヶ月伴走サービスです。</strong></p>
-      <p>SNS投稿を増やすことが目的ではありません。<br>LINEをただ構築することが目的でもありません。</p>
-      <p>今のぐちゃぐちゃした状態を整理し、お客様との関係が続き、<strong>「またあなたから買いたい」が増える状態</strong>を一緒に作っていきます。</p>
-    </div>
-
-    <!-- 2. なぜ3ヶ月か -->
-    <div class="why-card fade-up">
-      <h3>なぜ3ヶ月なのか</h3>
-      <p>家業の課題は、SNSだけ・LINEだけで解決するものではありません。</p>
-      <div class="why-tags">
-        <span class="why-tag">現場</span>
-        <span class="why-tag">家族</span>
-        <span class="why-tag">接客</span>
-        <span class="why-tag">顧客管理</span>
-        <span class="why-tag">発信</span>
-        <span class="why-tag">売上</span>
-        <span class="why-tag">自分の役割</span>
-      </div>
-      <p>これらが複雑に絡み合っているからこそ、1回の相談ではなく、<strong>3ヶ月かけて整理しながら実践していく形</strong>にしています。</p>
-    </div>
-
-    <!-- 3. Before → After -->
-    <p class="ba-section-title">3ヶ月で目指す変化</p>
-    <div class="ba-wrap fade-up">
-      <div class="ba-col ba-col--before">
-        <div class="ba-label ba-label--before">BEFORE — 今の状態</div>
-        <ul class="ba-list">
-          <li>SNS投稿に追われている</li>
-          <li>毎回ゼロから投稿を考えている</li>
-          <li>LINEで何を送ればいいか分からない</li>
-          <li>発信が売上につながっていない</li>
-          <li>常連さんを増やしたいけど、仕組みがない</li>
-          <li>自分が休むと回らない</li>
-          <li>感覚で頑張っている</li>
-          <li>何から手をつければいいか分からない</li>
-        </ul>
-      </div>
-
-      <div class="ba-arrow" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <path d="M14 4v20M7 17l7 7 7-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <div class="ba-col ba-col--after">
-        <div class="ba-label ba-label--after">AFTER — 3ヶ月後</div>
-        <ul class="ba-list">
-          <li>"誰に何を届けるか"が明確になる</li>
-          <li>SNSとLINEの役割が整理される</li>
-          <li>LINEが関係構築ツールになる</li>
-          <li>リピーター導線が見える</li>
-          <li>常連さんを増やす流れができる</li>
-          <li>発信の軸ができる</li>
-          <li>"あなたから買いたい"が増える</li>
-          <li>自分が頑張り続けなくても回る仕組みが見えてくる</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 4. 実際に行うこと（4ステップ） -->
-    <p class="steps-head">実際に行うこと</p>
-    <div class="step-list">
-      <div class="step-item fade-up">
-        <div class="step-num">STEP 01</div>
-        <h4>現状整理</h4>
-        <p>何に疲れているのか、どこが詰まっているのかを一緒に見える化します。</p>
-        <ul class="step-sub">
-          <li>何に疲れているのか</li>
-          <li>どこが詰まっているのか</li>
-          <li>SNS・LINE・接客・現場で何が起きているのか</li>
-          <li>何を優先すべきか</li>
-        </ul>
-      </div>
-
-      <div class="step-item fade-up">
-        <div class="step-num">STEP 02</div>
-        <h4>お客様理解の整理</h4>
-        <p>リピーターや常連さんを増やすために、まずお客様を理解します。</p>
-        <ul class="step-sub">
-          <li>誰が買っているのか</li>
-          <li>なぜ買っているのか</li>
-          <li>どんな人がリピーターになっているのか</li>
-          <li>お客様は何を求めているのか</li>
-          <li>どんな言葉で届けると伝わるのか</li>
-        </ul>
-      </div>
-
-      <div class="step-item fade-up">
-        <div class="step-num">STEP 03</div>
-        <h4>SNSとLINE導線の整理</h4>
-        <p>SNSとLINEを別々に見るのではなく、お客様との関係が続く流れとして整理します。</p>
-        <ul class="step-sub">
-          <li>SNSの役割 / LINEの役割</li>
-          <li>LINE登録後の流れ</li>
-          <li>配信内容・タグ設計</li>
-          <li>リピート導線</li>
-          <li>"またお願いしたい"につながる流れ</li>
-        </ul>
-      </div>
-
-      <div class="step-item fade-up">
-        <div class="step-num">STEP 04</div>
-        <h4>"自分しか回せない状態"の整理</h4>
-        <p>「私がやらないと回らない」を整理し、手放せるものを見つけます。</p>
-        <ul class="step-sub">
-          <li>何をやめるか / 何を残すか</li>
-          <li>何を仕組みにするか</li>
-          <li>何を人に渡せるか</li>
-          <li>どこをLINEや仕組みで補えるか</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 5. サービス形式 -->
-    <div class="format-box fade-up">
-      <div class="format-title">サービス形式</div>
-      <div class="format-grid">
-        <div class="format-row">
-          <span class="format-key">期間</span>
-          <span class="format-val">3ヶ月</span>
+    <div class="flow-wrap fade-up" aria-label="売れる動線のフロー">
+      <div class="flow-step">
+        <div class="flow-icon-box">
+          <svg width="22" height="22" aria-hidden="true"><use href="#icon-sns"/></svg>
         </div>
-        <div class="format-row">
-          <span class="format-key">相談</span>
-          <span class="format-val">オンライン相談 月2回</span>
+        <div>
+          <div class="flow-channel">SNS</div>
+          <div class="flow-action">知ってもらう</div>
         </div>
-        <div class="format-row">
-          <span class="format-key">サポート</span>
-          <span class="format-val">LINE相談サポートあり</span>
+      </div>
+      <div class="flow-connector" aria-hidden="true">
+        <svg width="20" height="20"><use href="#icon-arrow-down"/></svg>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon-box">
+          <svg width="22" height="22" aria-hidden="true"><use href="#icon-msg"/></svg>
         </div>
-        <div class="format-row">
-          <span class="format-key">内容</span>
-          <span class="format-val">SNS・LINE導線整理 / 顧客理解整理 / リピーター導線整理 / 優先順位の整理 / 必要に応じて投稿・配信内容の添削</span>
+        <div>
+          <div class="flow-channel">LINE</div>
+          <div class="flow-action">関係を深める</div>
+        </div>
+      </div>
+      <div class="flow-connector" aria-hidden="true">
+        <svg width="20" height="20"><use href="#icon-arrow-down"/></svg>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon-box">
+          <svg width="22" height="22" aria-hidden="true"><use href="#icon-tag"/></svg>
+        </div>
+        <div>
+          <div class="flow-channel">商品</div>
+          <div class="flow-action">欲しいタイミングで届ける</div>
+        </div>
+      </div>
+      <div class="flow-connector" aria-hidden="true">
+        <svg width="20" height="20"><use href="#icon-arrow-down"/></svg>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon-box">
+          <svg width="22" height="22" aria-hidden="true"><use href="#icon-repeat"/></svg>
+        </div>
+        <div>
+          <div class="flow-channel">リピーター</div>
+          <div class="flow-action">また来てもらう</div>
         </div>
       </div>
     </div>
 
-    <!-- 6. ゴール -->
-    <div class="goal-box fade-up">
-      <p>SNSを頑張り続けることではなく、少ないフォロワーでも、LINEを使ってお客様との関係を深め、「またあなたから買いたい」が増える状態を作ること。</p>
-      <p class="goal-main">家業の中で自分だけが抱え込む状態から、<br>売れる仕組みが見える状態へ。</p>
+    <div class="problem-box fade-up">
+      <p><strong>この流れが整うと、フォロワーが少なくても、毎日投稿しなくても、売上につながり始めます。</strong></p>
+      <p>必要なのは根性ではなく、売れる動線を作ること。それだけです。</p>
     </div>
 
-    <!-- 7. CTA -->
     <div class="btn-stack fade-up">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn btn-primary">無料相談に申し込む</a>
+      <a href="https://example.com" data-cta class="btn btn-primary">今の売れる動線をチェックする</a>
     </div>
-    <p class="cta-note note">診断・相談はすべて無料です</p>
+    <p class="cta-note note">診断・ご相談はすべて無料です</p>
   </div>
 </section>
 
 
-<!-- ================================
-     PHILOSOPHY
-================================ -->
-<section id="philosophy">
+<!-- ================================================================
+     4. FUTURE — 理想の未来
+================================================================ -->
+<section id="future" aria-label="理想の未来">
   <div class="container">
-    <span class="section-label">PHILOSOPHY</span>
-    <h2>大切にしている<br>考え方</h2>
+    <span class="section-label">Future</span>
+    <h2>目指すのは、投稿を増やすことではなく、あなたの頑張りが売上につながる流れを作ること。</h2>
     <div class="divider"></div>
 
-    <div class="philosophy-card fade-up">
-      <h3>フォロワー数より、<br>大切なのは「関係性」。</h3>
-      <p>
-        家業は、一度きりのお客様より常連さん・リピーター・紹介・長いお付き合いで成り立っていることが多いです。<br><br>
-        だからこのサービスでは、「どう集客するか」だけでなく、<strong>「どう関係を続けるか」</strong>を大切にします。<br><br>
-        フォロワーが少なくても、LINEを通じた丁寧な関係作りで「またあなたから買いたい」は増えていきます。
-      </p>
-    </div>
+    <p class="future-sub fade-up">このサービスが終わる頃には、こんな状態を目指します。</p>
 
-    <div class="philosophy-card fade-up">
-      <h3>頑張る量を増やすのではなく、<br>仕組みを整える。</h3>
-      <p>
-        発信を増やせば売上が上がるわけでも、LINEを作れば自動で売れるわけでもない。<br><br>
-        大切なのは、<strong>SNS・LINE・接客・リピートの流れが繋がっているかどうか。</strong><br><br>
-        頑張る量を増やすのではなく、仕組みを整えることで、自分が休んでも回る状態を目指します。
-      </p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================
-     WHAT WE DO
-================================ -->
-<section id="whatwedo">
-  <div class="container">
-    <span class="section-label">WHAT WE DO</span>
-    <h2>実際に行うこと</h2>
-    <div class="divider"></div>
-    <p class="body-text" style="margin-bottom:32px;">
-      難しいことはしません。今の状態を一緒に整理するところから始めます。
-    </p>
-
-    <ul class="do-list">
-      <li class="fade-up">
-        <div class="do-title">今のSNS・LINE導線を整理する</div>
-        <div class="do-desc">どこが繋がっていて、どこが切れているかを見える化します。</div>
-      </li>
-      <li class="fade-up">
-        <div class="do-title">「誰に届けるか」を明確にする</div>
-        <div class="do-desc">お客様のタイプを整理し、届けたい相手を言語化します。</div>
-      </li>
-      <li class="fade-up">
-        <div class="do-title">LINEのタグ設計・配信を整理する</div>
-        <div class="do-desc">欲しい人にだけ届ける仕組みを設計します。</div>
-      </li>
-      <li class="fade-up">
-        <div class="do-title">リピーター導線を整理する</div>
-        <div class="do-desc">一度来てくれたお客様が「また来たい」と思う流れを作ります。</div>
-      </li>
-      <li class="fade-up">
-        <div class="do-title">発信と売上を繋げる流れを作る</div>
-        <div class="do-desc">「投稿して終わり」から、売上につながる流れへ。</div>
-      </li>
-      <li class="fade-up">
-        <div class="do-title">今、何を優先すべきかを整理する</div>
-        <div class="do-desc">やることが多すぎる状態を整理して、動ける状態にします。</div>
-      </li>
-    </ul>
-  </div>
-</section>
-
-
-<!-- ================================
-     OUTCOME
-================================ -->
-<section id="outcome">
-  <div class="container">
-    <span class="section-label">OUTCOME</span>
-    <h2>得られる変化</h2>
-    <div class="divider"></div>
-
-    <div class="outcome-grid">
-      <div class="outcome-item fade-up">
-        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        <div>
-          <div class="o-title">頭の中が整理される</div>
-          <div class="o-desc">やることが多くて混乱している状態から、優先順位が見えてくる。</div>
-        </div>
+    <div class="future-grid">
+      <div class="future-item fade-up">
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>なんとなく投稿する状態から抜け出せる</span>
       </div>
-      <div class="outcome-item fade-up">
-        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        <div>
-          <div class="o-title">SNSが売上につながりやすくなる</div>
-          <div class="o-desc">投稿→LINE→購入の流れが整い、発信が無駄にならなくなる。</div>
-        </div>
+      <div class="future-item fade-up">
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>LINEでお客様と関係性を育てられる</span>
       </div>
-      <div class="outcome-item fade-up">
-        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        <div>
-          <div class="o-title">LINE配信の迷いが減る</div>
-          <div class="o-desc">何を配信すればいいか、誰に届ければいいかが明確になる。</div>
-        </div>
+      <div class="future-item fade-up">
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>リピーターが増える流れが見えてくる</span>
       </div>
-      <div class="outcome-item fade-up">
-        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        <div>
-          <div class="o-title">常連さん・リピーターが増える</div>
-          <div class="o-desc">関係が続く仕組みができて、「またあなたから買いたい」が増えていく。</div>
-        </div>
+      <div class="future-item fade-up">
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>家族や経営者に説明できる数字を持てる</span>
       </div>
-      <div class="outcome-item fade-up">
-        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        <div>
-          <div class="o-title">発信ネタに困りづらくなる</div>
-          <div class="o-desc">「誰に何を届けるか」が明確になると、ネタは自然に出てくる。</div>
-        </div>
+      <div class="future-item fade-up">
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>「お手伝い」ではなく「売上を作れる人」になれる</span>
       </div>
-      <div class="outcome-item fade-up">
-        <svg class="outcome-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#FAF0F1"/>
-            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#D16070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        <div>
-          <div class="o-title">自分しか回せない状態が減っていく</div>
-          <div class="o-desc">仕組みが整うことで、少しずつ自分の時間を取り戻せる。</div>
-        </div>
+      <div class="future-item fade-up">
+        <svg class="future-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>自分の仕事に、自信が持てる</span>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- ================================
-     PROFILE
-================================ -->
-<section id="profile">
+<!-- ================================================================
+     5. PROFILE — 自己紹介
+================================================================ -->
+<section id="profile" aria-label="自己紹介">
   <div class="container">
-    <span class="section-label">PROFILE</span>
-    <h2>はじめまして</h2>
+    <span class="section-label">Profile</span>
+    <h2>私も、家業の中で<br>"なんでも屋さん"になっていたひとりです。</h2>
     <div class="divider"></div>
 
     <div class="profile-wrap">
@@ -1406,27 +629,27 @@
 
       <div class="profile-info fade-up">
         <p class="profile-name">Mami</p>
-        <p class="profile-role">家業女子のための 売れる仕組み整理サポート</p>
+        <p class="profile-role">家業女子の売れる動線づくり</p>
 
-        <div class="profile-body">
-          <p>家業の牛肉卸会社で、経理からスタートし、EC・SNS・LINE運用を担当してきました。</p>
-          <p>アンケートやLINEタグ設計を活用しながら、「欲しい人に、欲しい情報を届ける」仕組みを実際に作ってきました。</p>
-          <p>フォロワーを増やすことよりも、「またお願いしたい」と言ってもらえる関係作りを大切にしています。</p>
-          <p>同じように家業の中で頑張る女性の力になりたいと思い、このサービスを始めました。</p>
+        <div class="profile-story">
+          <p>40年以上続く家業の牛肉卸問屋の娘として、最初は経理や事務からスタートしました。</p>
+          <p>その後、ECサイト運用、SNS発信、LINE運用、お客様対応、現場の調整と、気づけばひとりでなんでもこなす状態になっていました。毎日動いているのに、「自分の仕事が売上につながっているのか分からない」という感覚が続いていました。</p>
+          <p>でも、LINEやSNS、数字管理を一つひとつ整えていくことで、<strong>ECでは毎月前年比150%超えを継続。</strong>SNSの1投稿からLINE登録50件につながった実績も作ることができました。</p>
+          <p>同じように家業の中で頑張っている女性に、感覚や根性だけでなく、<strong>数字で自分の価値を伝えられる状態</strong>を作ってほしい。そう思って、このサービスを始めました。</p>
         </div>
 
-        <div class="profile-numbers">
-          <div class="profile-num-item fade-up">
-            <div class="num">EC売上 前年比150%以上</div>
-            <div class="label">1年間継続（毎月更新）</div>
+        <div class="profile-stats">
+          <div class="profile-stat fade-up">
+            <div class="stat-num">EC売上 前年比150%超えを継続</div>
+            <div class="stat-label">1年以上、毎月更新中</div>
           </div>
-          <div class="profile-num-item fade-up">
-            <div class="num">1投稿でLINE登録50件</div>
-            <div class="label">SNSからの導線設計で実現</div>
+          <div class="profile-stat fade-up">
+            <div class="stat-num">1投稿でLINE登録50件</div>
+            <div class="stat-label">SNSからの導線設計で実現</div>
           </div>
-          <div class="profile-num-item fade-up">
-            <div class="num">LINEタグ設計・運用</div>
-            <div class="label">飲食店向け・一般向けを分けた顧客管理を構築</div>
+          <div class="profile-stat fade-up">
+            <div class="stat-num">LINEタグ設計・顧客管理</div>
+            <div class="stat-label">飲食店向け・一般向けを分けた仕組みを構築</div>
           </div>
         </div>
       </div>
@@ -1435,75 +658,269 @@
 </section>
 
 
-<!-- ================================
-     TESTIMONIALS PLACEHOLDER
-================================ -->
-<section id="testimonials">
+<!-- ================================================================
+     6. SERVICE — サービス内容
+================================================================ -->
+<section id="service" aria-label="サービス内容">
   <div class="container">
-    <span class="section-label">VOICE</span>
-    <h2>お客様の声</h2>
+    <span class="section-label">Service</span>
+    <h2>家業の中で売上につながる動線を、一緒に整えていきます。</h2>
     <div class="divider"></div>
 
-    <div class="testimonial-placeholder">
-      <strong>ここにお客様の声を入れます</strong>
-      <p>モニター募集後、実際にサポートを受けた方の感想・変化を掲載予定です。<br>架空の声は掲載しません。</p>
+    <p class="service-sub fade-up">
+      何でもかんでもやるのではなく、今のあなたの状態に合わせて、4つの視点から一つずつ整理します。
+    </p>
+
+    <div class="service-grid">
+      <div class="service-card fade-up">
+        <div class="service-num">01</div>
+        <div class="service-title">現状整理・数字の見える化</div>
+        <ul class="service-items">
+          <li>今どこで止まっているのかを整理</li>
+          <li>SNS、LINE、売上、リピーター、商品導線を確認</li>
+          <li>改善ポイントを見つける</li>
+          <li>家族や経営者に説明できる数字を整える</li>
+        </ul>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-num">02</div>
+        <div class="service-title">SNSの発信設計</div>
+        <ul class="service-items">
+          <li>LINE登録や問い合わせにつながる発信に整える</li>
+          <li>誰に何を届けるのかを明確にする</li>
+          <li>投稿の切り口や導線を一緒に考える</li>
+        </ul>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-num">03</div>
+        <div class="service-title">LINE導線づくり</div>
+        <ul class="service-items">
+          <li>登録後に何を届けるかを設計</li>
+          <li>アンケート内容を整理</li>
+          <li>お客様をタグ分けして情報を整理</li>
+          <li>欲しい人に、欲しいタイミングで案内できる流れを作る</li>
+        </ul>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-num">04</div>
+        <div class="service-title">リピーターを増やす仕組みづくり</div>
+        <ul class="service-items">
+          <li>一度買って終わりではなく、また買いたくなる流れを作る</li>
+          <li>既存のお客様との関係性を深める</li>
+          <li>「あなたから買いたい」を増やす</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="btn-stack fade-up">
+      <a href="https://example.com" data-cta class="btn btn-line">
+        <svg width="20" height="20" aria-hidden="true"><use href="#icon-line"/></svg>
+        まずは相談してみる
+      </a>
+      <a href="https://example.com" data-cta class="btn btn-ghost">私の家業の場合を相談してみる</a>
+    </div>
+    <p class="cta-note note">診断・ご相談はすべて無料です</p>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     7. OUTCOME — 受けた後の変化
+================================================================ -->
+<section id="outcome" aria-label="受けた後の変化">
+  <div class="container">
+    <span class="section-label">After</span>
+    <h2>受けた後は、こんな状態を目指します。</h2>
+    <div class="divider"></div>
+
+    <div class="outcome-grid">
+      <div class="outcome-item fade-up">
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>何を投稿すればいいか迷う時間が減る</span>
+      </div>
+      <div class="outcome-item fade-up">
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>LINEに登録してもらった後の流れができる</span>
+      </div>
+      <div class="outcome-item fade-up">
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>お客様に合わせた案内ができる</span>
+      </div>
+      <div class="outcome-item fade-up">
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>家族や経営者に数字で説明できる</span>
+      </div>
+      <div class="outcome-item fade-up">
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>自分の仕事が売上につながっていると実感できる</span>
+      </div>
+      <div class="outcome-item fade-up">
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>家業の中で、自分の役割に自信が持てる</span>
+      </div>
+      <div class="outcome-item fade-up">
+        <svg class="outcome-chk" aria-hidden="true"><use href="#icon-check-teal"/></svg>
+        <span>SNSやLINEが作業ではなく、売上につながる道具になる</span>
+      </div>
     </div>
   </div>
 </section>
 
 
-<!-- ================================
-     CTA
-================================ -->
-<section id="cta-section">
-  <div class="container" id="cta">
-    <span class="section-label">FREE CONSULTATION</span>
-    <h2>まずは、今の状態を<br>一緒に整理してみませんか？</h2>
+<!-- ================================================================
+     8. FAQ — 不安解消
+================================================================ -->
+<section id="faq" aria-label="よくある不安">
+  <div class="container">
+    <span class="section-label">FAQ</span>
+    <h2>こんな不安があっても<br>大丈夫です。</h2>
     <div class="divider"></div>
 
-    <p class="cta-body">
-      投稿し続けても成果が出ないのは、才能の問題ではありません。<br><br>
-      SNSとLINEの流れが繋がっていないだけかもしれない。<br><br>
-      無料相談で、あなたの現状を見ながら<br>
-      「まず何から整えるべきか」を一緒に整理します。
-    </p>
+    <div class="faq-list fade-up">
+      <details class="faq-item">
+        <summary>
+          PCが苦手です
+          <span class="faq-toggle" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-body">
+          難しいツールを完璧に使えることが目的ではありません。今できる方法から一緒に整えますので、PC操作が不安でもご安心ください。
+        </div>
+      </details>
 
+      <details class="faq-item">
+        <summary>
+          SNSが苦手です
+          <span class="faq-toggle" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-body">
+          毎日投稿を頑張るサービスではありません。少ない投稿でも、LINEや相談につながる流れを作ることが目的です。SNSが苦手な方でも取り組めます。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          時間がありません
+          <span class="faq-toggle" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-body">
+          家業の中で忙しいことを前提にしています。今の仕事の中で無理なくできる形に落とし込みながら進めますので、「まず整理するだけでいい」くらいの気持ちで始めてもらえれば大丈夫です。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          家族に理解されるか不安です
+          <span class="faq-toggle" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-body">
+          感覚ではなく、数字や流れで説明できる状態を作ります。「こういう仕組みで、こういう成果につながります」と家族や経営者に伝えられるようになることも、サポートの一部です。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          何から始めればいいか分かりません
+          <span class="faq-toggle" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-body">
+          何も分からない状態でも大丈夫です。最初に現状を整理し、今いちばん効果が出やすいところから一つずつ整えていきます。「何をすればいいか分からない」がスタート地点でも、一緒に動けます。
+        </div>
+      </details>
+    </div>
 
     <div class="btn-stack fade-up">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn btn-primary">無料相談に申し込む</a>
+      <a href="https://example.com" data-cta class="btn btn-line">
+        <svg width="20" height="20" aria-hidden="true"><use href="#icon-line"/></svg>
+        無料診断を受けてみる
+      </a>
+      <a href="https://example.com" data-cta class="btn btn-ghost">私の家業の場合を相談してみる</a>
     </div>
-    <p class="cta-note note">診断・相談はすべて無料です。しつこい営業は一切しません。</p>
+    <p class="cta-note note">診断・ご相談はすべて無料です</p>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     9. FINAL CTA — 無料診断・相談への導線
+================================================================ -->
+<section id="cta-section" aria-label="無料診断・相談">
+  <div class="container">
+    <span class="section-label">Start Here</span>
+    <div class="monitor-badge">モニター募集中</div>
+    <h2>まずは、あなたの家業の中でどこが売上につながりにくくなっているのか、一緒に整理してみませんか？</h2>
+    <div class="divider"></div>
+
+    <div class="cta-lead fade-up">
+      <p>難しいことは何もしません。</p>
+      <p>今のSNS・LINE・リピーター導線のどこが止まっているのかを確認し、<strong>今いちばん効果が出やすいところから整えていきます。</strong></p>
+      <p>まずは今の状態を整理するだけでも大丈夫です。</p>
+    </div>
+
+    <div class="benefit-box fade-up">
+      <div class="benefit-title">無料診断で分かること</div>
+      <ul class="benefit-items">
+        <li>今のSNS・LINEのどこが止まっているか</li>
+        <li>何から整えると売上につながりやすくなるか</li>
+        <li>あなたの家業に合った改善の方向性</li>
+      </ul>
+    </div>
+
+    <div class="btn-stack fade-up">
+      <a href="https://example.com" data-cta class="btn btn-line">
+        <svg width="20" height="20" aria-hidden="true"><use href="#icon-line"/></svg>
+        無料診断を受けてみる
+      </a>
+      <a href="https://example.com" data-cta class="btn btn-primary">今の売れる動線をチェックする</a>
+      <a href="https://example.com" data-cta class="btn btn-ghost">まずは相談してみる</a>
+    </div>
+    <p class="cta-note note">診断・ご相談はすべて無料です。しつこい営業は一切しません。</p>
   </div>
 </section>
 
 
 <footer>
-  <p style="color:rgba(255,255,255,0.75);font-size:13px;">家業女子のための 売れる仕組み整理サポート</p>
+  <p style="color:rgba(255,255,255,0.75);font-size:13px;">家業女子の売れる動線づくり ｜ Mami</p>
   <p>© 2025 Mami All Rights Reserved.</p>
 </footer>
 
 
-<!-- 固定CTA -->
-<div class="sticky-cta" id="stickyCta">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn btn-primary">無料相談に申し込む</a>
+<!-- 固定CTA（スクロール後に表示） -->
+<div class="sticky-cta" id="stickyCta" aria-label="固定CTAバー">
+  <a href="https://example.com" data-cta class="btn btn-line">
+    <svg width="20" height="20" aria-hidden="true"><use href="#icon-line"/></svg>
+    無料診断を受けてみる
+  </a>
 </div>
 
 
 <script>
-  // Progress bar & sticky CTA
+  /* ============================================================
+     ★ CTA URL — ここを変更すると全ボタンに反映されます ★
+  ============================================================ */
+  const CTA_URL = 'https://example.com';
+
+  /* CTA リンク一括設定 */
+  document.querySelectorAll('[data-cta]').forEach(el => { el.href = CTA_URL; });
+
+  /* プログレスバー & 固定CTA */
+  const progressBar = document.getElementById('progressBar');
+  const stickyCta   = document.getElementById('stickyCta');
+  const hero        = document.getElementById('hero');
+
   window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
-    const hero = document.getElementById('hero');
-    document.getElementById('stickyCta').style.display =
-      hero.getBoundingClientRect().bottom < 0 ? 'block' : 'none';
+    const scrollTop  = window.scrollY;
+    const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+    stickyCta.style.display = hero.getBoundingClientRect().bottom < 0 ? 'block' : 'none';
   }, { passive: true });
 
-  // Fade up
+  /* フェードアップ */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  }, { threshold: 0.07, rootMargin: '0px 0px -24px 0px' });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 </body>
