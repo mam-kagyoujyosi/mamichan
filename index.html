@@ -15,18 +15,18 @@
        CSS Variables
     ============================================================ */
     :root {
-      --accent:       #D0556A;   /* ディープローズコーラル（参考サイトのピンクを落ち着かせた） */
-      --accent-light: #F5BEC8;   /* ウォームライトローズ */
-      --accent2:      #3ABDB5;   /* ティール（参考サイトのサブカラー） */
-      --text:         #1e1e1e;
-      --text-sub:     #5c5c5c;
-      --bg:           #FEF4F5;   /* ウォームピンクホワイト */
-      --bg-section:   #FDE2E6;   /* ブラッシュピンク（参考サイトのピンク系を淡く） */
+      --accent:       #C42864;   /* マゼンタローズ（THE CAMPUSのホットピンクを落ち着かせた） */
+      --accent-light: #EFAFC4;   /* ライトピンクモーヴ */
+      --accent2:      #BC3C28;   /* ブリックテラコッタ（THE CAMPUSのダークサークル色） */
+      --text:         #181818;   /* ほぼ黒（THE CAMPUSの力強いテキスト） */
+      --text-sub:     #4a4a4a;
+      --bg:           #FDF2EE;   /* ライトサーモンクリーム */
+      --bg-section:   #FAE2D8;   /* ウォームサーモン（THE CAMPUSのヘッダー背景から） */
       --bg-card:      #ffffff;
-      --border:       #F0C4CA;
+      --border:       #EEBFB4;
       --radius-sm:    8px;
       --radius-md:    16px;
-      --shadow:       0 8px 28px rgba(208,85,106,0.09); /* ピンク色相シャドウ */
+      --shadow:       0 8px 28px rgba(180,48,32,0.09); /* ブリック色相シャドウ */
       --font:         'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
     }
 
@@ -76,7 +76,7 @@
       transition: opacity 0.2s, transform 0.15s;
     }
     .btn:active { transform: scale(0.98); }
-    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(208,85,106,0.28); }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(196,40,100,0.28); }
     .btn-primary:hover { opacity: 0.88; }
     .btn-line    { background: #06C755; color: #fff; box-shadow: 0 4px 14px rgba(6,199,85,0.25); }
     .btn-line:hover { opacity: 0.88; }
@@ -99,7 +99,7 @@
     ============================================================ */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(254,244,245,0.97); backdrop-filter: blur(12px);
+      background: rgba(253,242,238,0.97); backdrop-filter: blur(12px);
       padding: 10px 20px 22px; box-shadow: 0 -1px 20px rgba(0,0,0,0.08);
       display: none;
     }
@@ -117,8 +117,8 @@
     #hero { padding: 0; display: flex; flex-direction: column; min-height: 100svh; }
 
     .hero-upper {
-      /* 参考サイトのコーラル→ピーチグラデを淡く翻訳 */
-      background: linear-gradient(168deg, #FDD2DC 0%, #FDE2E6 60%, #FEF0F2 100%);
+      /* THE CAMPUSのサーモンヘッダーを淡く翻訳 */
+      background: linear-gradient(168deg, #F2AEA0 0%, #F0CAB8 60%, #FAE2D8 100%);
       padding: 20px 20px 0;
       display: flex; flex-direction: column; align-items: center; text-align: center;
       flex-shrink: 0;
@@ -163,7 +163,7 @@
     }
     .worry-list li::before {
       content: ''; display: block; width: 16px; height: 16px; min-width: 16px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='4' fill='none' stroke='%23D16070' stroke-width='1.5' stroke-opacity='0.6'/%3E%3C/svg%3E") no-repeat center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='4' fill='none' stroke='%23C42864' stroke-width='1.5' stroke-opacity='0.6'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain; flex-shrink: 0; margin-top: 4px;
     }
     .empathy-close {
@@ -309,7 +309,7 @@
 
     .monitor-badge {
       display: inline-block; font-size: 11px; font-weight: 700;
-      color: var(--accent); background: #FEF4F5;
+      color: var(--accent); background: #FDF2EE;
       border: 1px solid var(--accent-light);
       padding: 4px 14px; border-radius: var(--radius-sm);
       letter-spacing: 0.1em; margin-bottom: 14px;
@@ -324,14 +324,14 @@
     .benefit-items li { font-size: 15px; color: var(--text); padding-left: 22px; position: relative; line-height: 1.65; }
     .benefit-items li::before {
       content: ''; position: absolute; left: 0; top: 3px; width: 16px; height: 16px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' stroke='%23D16070' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' stroke='%23C42864' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center;
       background-size: contain;
     }
 
     /* ============================================================
        FOOTER
     ============================================================ */
-    footer { background: #2A1420; color: rgba(255,255,255,0.45); text-align: center; padding: 24px 20px 40px; font-size: 12px; line-height: 1.7; }
+    footer { background: #1E1010; color: rgba(255,255,255,0.45); text-align: center; padding: 24px 20px 40px; font-size: 12px; line-height: 1.7; }
     footer p + p { margin-top: 6px; }
 
     /* ============================================================
@@ -365,7 +365,7 @@
     ============================================================ */
     @media (min-width: 900px) {
       #hero { flex-direction: row; }
-      .hero-upper { flex: 1; padding: 48px 40px; justify-content: center; min-height: 100svh; background: linear-gradient(170deg, #FDD2DC 0%, #FDE2E6 70%, #FEF0F2 100%); }
+      .hero-upper { flex: 1; padding: 48px 40px; justify-content: center; min-height: 100svh; background: linear-gradient(170deg, #F2AEA0 0%, #F0CAB8 70%, #FAE2D8 100%); }
       .hero-img-wrap { width: min(320px, 36vw); }
       .hero-wave  { display: none; }
       .hero-lower { flex: 1; padding: 48px 48px; justify-content: center; min-height: 100svh; }
@@ -386,8 +386,8 @@
     </symbol>
     <!-- チェックマーク（ティール） -->
     <symbol id="icon-check-teal" viewBox="0 0 22 22">
-      <circle cx="11" cy="11" r="10" fill="#FAF0F1"/>
-      <path d="M6.5 11.5l3 3 6-6" stroke="#3ABDB5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="11" cy="11" r="10" fill="#FAE2D8"/>
+      <path d="M6.5 11.5l3 3 6-6" stroke="#BC3C28" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     </symbol>
     <!-- SNS（シェア）アイコン -->
     <symbol id="icon-sns" viewBox="0 0 24 24">
@@ -436,7 +436,7 @@
 
   <div class="hero-wave" aria-hidden="true">
     <svg viewBox="0 0 375 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0 Q187.5 30 375 0 L375 22 L0 22 Z" fill="#FEF4F5"/>
+      <path d="M0 0 Q187.5 30 375 0 L375 22 L0 22 Z" fill="#FDF2EE"/>
     </svg>
   </div>
 
