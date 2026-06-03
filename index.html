@@ -110,50 +110,59 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ============================================================
-       HERO — mobile-first 100svh
+       HERO — テキスト×写真 融合レイアウト
     ============================================================ */
-    /* ヒーロー全体を1つのグラデーションで統合 */
     #hero {
-      padding: 0;
-      display: flex; flex-direction: column;
-      min-height: 100svh;
-      background: linear-gradient(
-        175deg,
-        #F0ACA0 0%,
-        #F5C4B0 28%,
-        #FAD8C8 48%,
-        #FDF2EE 72%
-      );
+      min-height: 100svh; padding: 0;
+      display: flex; flex-direction: column; justify-content: center;
+      background: linear-gradient(175deg, #F0ACA0 0%, #F5C4B0 28%, #FAD8C8 50%, #FDF2EE 75%);
+    }
+    .hero-inner {
+      max-width: 600px; margin: 0 auto;
+      width: 100%; padding: 32px 20px 36px;
+    }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; color: var(--accent2);
+      margin-bottom: 18px; display: block;
     }
 
-    .hero-upper {
-      background: transparent;   /* 親のグラデを透過 */
-      padding: 20px 20px 0;
-      display: flex; flex-direction: column; align-items: center; text-align: center;
-      flex-shrink: 0;
+    /* ── 見出し × 写真 横並び（融合の核心） ── */
+    .hero-main {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
     }
-    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: var(--accent2); margin-bottom: 14px; }
+    .hero-copy { flex: 1; }
+    .hero-copy h1 {
+      font-size: clamp(20px, 5.6vw, 28px);
+      font-weight: 800; line-height: 1.45;
+      color: var(--text); margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .hero-copy h1 em { font-style: normal; color: var(--accent); }
+    .hero-tagline {
+      font-size: clamp(10px, 2.8vw, 12px); font-weight: 600;
+      color: var(--accent2); letter-spacing: 0.06em; line-height: 1.6;
+    }
 
-    .hero-img-wrap { position: relative; width: min(200px, 54vw); }
+    /* 写真（右側・コンパクト） */
+    .hero-img-wrap {
+      position: relative; width: min(115px, 30vw); flex-shrink: 0;
+    }
     .hero-img-wrap::before {
-      content: ''; position: absolute; inset: -6px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.7);
+      content: ''; position: absolute; inset: -5px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.75);
     }
     .hero-img-wrap img { width: 100%; height: auto; display: block; border-radius: 50%; }
 
-    .hero-wave { display: none; }  /* 区切り線を削除 */
-
-    .hero-lower {
-      background: transparent;   /* 親のグラデを透過 */
-      padding: 16px 20px 28px;
-      flex: 1; display: flex; flex-direction: column; justify-content: center;
+    /* サブコピー・CTA */
+    .hero-precopy {
+      font-size: clamp(13px, 3.5vw, 15px); color: var(--text-sub);
+      line-height: 1.72; margin-bottom: 0;
     }
-    .hero-precopy { font-size: clamp(13px, 3.5vw, 15px); color: var(--text-sub); line-height: 1.65; margin-bottom: 12px; }
-    .hero-lower h1 { font-size: clamp(19px, 5.4vw, 26px); line-height: 1.48; color: var(--text); margin-bottom: 8px; }
-    .hero-lower h1 em { font-style: normal; color: var(--accent); }
-    .hero-tagline { font-size: clamp(11px, 3vw, 13px); font-weight: 600; color: var(--accent2); letter-spacing: 0.06em; }
-    .hero-lower .btn-stack { margin-top: 18px; gap: 10px; }
-    .hero-lower .btn { padding: 13px 20px; font-size: 15px; }
+    .hero-precopy strong { color: var(--text); }
+    .hero-inner .btn-stack { margin-top: 20px; gap: 10px; }
+    .hero-inner .btn      { padding: 14px 20px; font-size: 15px; }
 
     /* ============================================================
        EMPATHY
@@ -347,14 +356,12 @@
        RESPONSIVE — tablet 601px+
     ============================================================ */
     @media (min-width: 601px) {
-      /* Hero */
-      .hero-upper    { padding: 28px 32px 0; }
-      .hero-img-wrap { width: min(260px, 44vw); }
-      .hero-wave svg { height: 36px; }
-      .hero-lower    { padding: 14px 32px 32px; }
-      .hero-lower h1 { font-size: clamp(22px, 4vw, 30px); }
-      .hero-lower .btn { padding: 15px 24px; font-size: 16px; }
-      .hero-lower .btn-stack { margin-top: 20px; gap: 12px; }
+      /* Hero — tablet */
+      .hero-inner    { padding: 44px 32px; }
+      .hero-img-wrap { width: min(145px, 26vw); }
+      .hero-copy h1  { font-size: clamp(22px, 4vw, 30px); }
+      .hero-inner .btn { padding: 16px 24px; font-size: 16px; }
+      .hero-inner .btn-stack { margin-top: 22px; gap: 12px; }
       /* Worry */
       .worry-list li { font-size: 16px; }
       /* Future */
@@ -373,17 +380,13 @@
        RESPONSIVE — desktop 900px+
     ============================================================ */
     @media (min-width: 900px) {
-      #hero {
-        flex-direction: row;
-        background: linear-gradient(105deg, #F0ACA0 0%, #F5C4B0 35%, #FAD8C8 55%, #FDF2EE 80%);
-      }
-      .hero-upper { flex: 1; padding: 48px 40px; justify-content: center; min-height: 100svh; background: transparent; }
-      .hero-img-wrap { width: min(320px, 36vw); }
-      .hero-wave  { display: none; }
-      .hero-lower { flex: 1; padding: 48px 48px; justify-content: center; min-height: 100svh; }
-      .hero-lower h1 { font-size: clamp(26px, 3vw, 36px); }
-      .hero-lower .btn { padding: 16px 24px; font-size: 16px; }
-      .hero-lower .btn-stack { margin-top: 26px; }
+      #hero { justify-content: center; }
+      .hero-inner    { padding: 56px 48px; max-width: 700px; }
+      .hero-img-wrap { width: min(180px, 22vw); }
+      .hero-copy h1  { font-size: clamp(26px, 3vw, 36px); }
+      .hero-main     { gap: 28px; margin-bottom: 28px; }
+      .hero-inner .btn { padding: 17px 28px; font-size: 16px; }
+      .hero-inner .btn-stack { margin-top: 28px; gap: 12px; }
     }
   </style>
 </head>
@@ -434,35 +437,32 @@
      1. HERO — ファーストビュー
 ================================================================ -->
 <section id="hero" aria-label="ファーストビュー">
+  <div class="hero-inner">
 
-  <div class="hero-upper">
-    <p class="hero-eyebrow">家業で働く女性へ</p>
-    <div class="hero-img-wrap fade-up">
-      <img src="claude使用写真/date3.png" alt="牛肉卸会社で働くMami">
+    <span class="hero-eyebrow">家業で働く女性へ</span>
+
+    <!-- 見出し × 写真 を横並びで融合 -->
+    <div class="hero-main fade-up">
+      <div class="hero-copy">
+        <h1>少ないフォロワーでも、<br><em>「あなたから<br>買いたい」</em><br>を増やせる。</h1>
+        <p class="hero-tagline">家業女子の売れる動線づくり</p>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="claude使用写真/date3.png" alt="牛肉卸会社で働くMami">
+      </div>
     </div>
-  </div>
 
-  <div class="hero-wave" aria-hidden="true">
-    <svg viewBox="0 0 375 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0 Q187.5 30 375 0 L375 22 L0 22 Z" fill="#FDF2EE"/>
-    </svg>
-  </div>
+    <!-- サブコピー -->
+    <p class="hero-precopy fade-up">SNSを頑張っているのに、売上につながらない。<br>家業の中で<strong>なんでも屋さん</strong>になっているあなたへ。</p>
 
-  <div class="hero-lower">
-    <p class="hero-precopy">SNSを頑張っているのに、売上につながらない。<br>家業の中で<strong>なんでも屋さん</strong>になっているあなたへ。</p>
-    <h1>少ないフォロワーでも、<br><em>「あなたから買いたい」</em><br>を増やせる。</h1>
-    <p class="hero-tagline">家業女子の売れる動線づくり</p>
-
+    <!-- CTA -->
     <div class="btn-stack fade-up">
-      <a href="https://example.com" data-cta class="btn btn-primary">
-        
-        無料診断を受けてみる
-      </a>
+      <a href="https://example.com" data-cta class="btn btn-primary">無料診断を受けてみる</a>
       <a href="https://example.com" data-cta class="btn btn-ghost">まずは相談してみる</a>
     </div>
     <p class="cta-note note">診断・ご相談はすべて無料です</p>
-  </div>
 
+  </div>
 </section>
 
 
