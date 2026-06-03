@@ -113,13 +113,16 @@
        HERO — 全画面写真 × テキストオーバーレイ（参考LP風）
     ============================================================ */
     #hero {
-      position: relative; min-height: 100svh;
-      overflow: hidden; display: flex; flex-direction: column;
+      position: relative;
+      height: 100svh;          /* 確定値にして子要素のheight:100%を有効化 */
+      overflow: hidden;
+      display: flex; flex-direction: column;
     }
 
     /* 背景写真 */
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
+      overflow: hidden;
     }
     .hero-bg img {
       width: 100%; height: 100%;
@@ -141,7 +144,7 @@
     .hero-content {
       position: relative; z-index: 1;
       display: flex; flex-direction: column;
-      min-height: 100svh; padding: 28px 20px 36px;
+      height: 100%; padding: 28px 20px 36px;
     }
 
     /* バッジ（左上・吹き出し型） */
