@@ -330,16 +330,20 @@
        PHOTO LAYOUTS
     ============================================================ */
 
-    /* セクション内アクセント写真（横長トリミング） */
-    .section-photo {
-      width: 100%; border-radius: var(--radius-md);
-      overflow: hidden; margin-bottom: 24px;
+    /* サブ写真（テキスト右横に小さく配置） */
+    .sub-photo {
+      float: right;
+      width: min(130px, 36vw);
+      margin: 0 0 12px 16px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
       box-shadow: var(--shadow);
     }
-    .section-photo img {
+    .sub-photo img {
       width: 100%; display: block;
-      aspect-ratio: 4/3; object-fit: cover;
+      aspect-ratio: 3/4; object-fit: cover;
     }
+    .clearfix::after { content: ''; display: table; clear: both; }
 
     /* プロフィール 2枚グリッド */
     .profile-photo-grid {
@@ -558,13 +562,12 @@
     <h2>頑張っているのに売れないのは、<br>あなたの努力が足りないからではありません。</h2>
     <div class="divider"></div>
 
-    <div class="problem-lead fade-up">
+    <div class="problem-lead fade-up clearfix">
+      <div class="sub-photo">
+        <img src="claude使用写真/date9.jpg" alt="今のやり方を変えよう" style="object-position: center 22%;">
+      </div>
       <p>売上につながらない本当の原因は、<strong>投稿数が少ないからでも、センスがないからでもありません。</strong></p>
       <p>SNS・LINE・商品・お客様の流れが、バラバラでつながっていないことにあります。</p>
-    </div>
-
-    <div class="section-photo fade-up">
-      <img src="claude使用写真/date9.jpg" alt="今のやり方を変えよう" style="object-position: center 22%;">
     </div>
 
     <div class="flow-wrap fade-up" aria-label="売れる動線のフロー">
