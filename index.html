@@ -112,29 +112,40 @@
     /* ============================================================
        HERO — mobile-first 100svh
     ============================================================ */
-    #hero { padding: 0; display: flex; flex-direction: column; min-height: 100svh; }
+    /* ヒーロー全体を1つのグラデーションで統合 */
+    #hero {
+      padding: 0;
+      display: flex; flex-direction: column;
+      min-height: 100svh;
+      background: linear-gradient(
+        175deg,
+        #F0ACA0 0%,
+        #F5C4B0 28%,
+        #FAD8C8 48%,
+        #FDF2EE 72%
+      );
+    }
 
     .hero-upper {
-      /* THE CAMPUSのサーモンヘッダーを淡く翻訳 */
-      background: linear-gradient(168deg, #F2AEA0 0%, #F0CAB8 60%, #FAE2D8 100%);
+      background: transparent;   /* 親のグラデを透過 */
       padding: 20px 20px 0;
       display: flex; flex-direction: column; align-items: center; text-align: center;
       flex-shrink: 0;
     }
     .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: var(--accent2); margin-bottom: 14px; }
 
-    .hero-img-wrap { position: relative; width: min(188px, 50vw); }
+    .hero-img-wrap { position: relative; width: min(200px, 54vw); }
     .hero-img-wrap::before {
       content: ''; position: absolute; inset: -6px; border-radius: 50%;
-      border: 2px solid var(--accent-light); opacity: 0.7;
+      border: 2px solid rgba(255,255,255,0.7);
     }
     .hero-img-wrap img { width: 100%; height: auto; display: block; border-radius: 50%; }
 
-    .hero-wave { display: block; width: 100%; background: var(--bg-section); line-height: 0; flex-shrink: 0; }
-    .hero-wave svg { display: block; width: 100%; height: 22px; }
+    .hero-wave { display: none; }  /* 区切り線を削除 */
 
     .hero-lower {
-      background: var(--bg); padding: 10px 20px 22px;
+      background: transparent;   /* 親のグラデを透過 */
+      padding: 16px 20px 28px;
       flex: 1; display: flex; flex-direction: column; justify-content: center;
     }
     .hero-precopy { font-size: clamp(13px, 3.5vw, 15px); color: var(--text-sub); line-height: 1.65; margin-bottom: 12px; }
@@ -362,8 +373,11 @@
        RESPONSIVE — desktop 900px+
     ============================================================ */
     @media (min-width: 900px) {
-      #hero { flex-direction: row; }
-      .hero-upper { flex: 1; padding: 48px 40px; justify-content: center; min-height: 100svh; background: linear-gradient(170deg, #F2AEA0 0%, #F0CAB8 70%, #FAE2D8 100%); }
+      #hero {
+        flex-direction: row;
+        background: linear-gradient(105deg, #F0ACA0 0%, #F5C4B0 35%, #FAD8C8 55%, #FDF2EE 80%);
+      }
+      .hero-upper { flex: 1; padding: 48px 40px; justify-content: center; min-height: 100svh; background: transparent; }
       .hero-img-wrap { width: min(320px, 36vw); }
       .hero-wave  { display: none; }
       .hero-lower { flex: 1; padding: 48px 48px; justify-content: center; min-height: 100svh; }
