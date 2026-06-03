@@ -327,6 +327,63 @@
     }
 
     /* ============================================================
+       PHOTO LAYOUTS
+    ============================================================ */
+
+    /* セクション内アクセント写真（横長トリミング） */
+    .section-photo {
+      width: 100%; border-radius: var(--radius-md);
+      overflow: hidden; margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+    .section-photo img {
+      width: 100%; display: block;
+      aspect-ratio: 4/3; object-fit: cover;
+    }
+
+    /* プロフィール 2枚グリッド */
+    .profile-photo-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 8px; margin-bottom: 24px;
+    }
+    .profile-photo-grid .photo-main,
+    .profile-photo-grid .photo-sub {
+      border-radius: var(--radius-sm);
+      overflow: hidden; box-shadow: var(--shadow);
+    }
+    .profile-photo-grid .photo-main img {
+      width: 100%; display: block;
+      aspect-ratio: 3/4; object-fit: cover;
+      object-position: center 18%;
+    }
+    .profile-photo-grid .photo-sub img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover; object-position: center 20%;
+      aspect-ratio: 3/4;
+    }
+
+    /* CTA 最上部ビジュアル */
+    .cta-visual {
+      width: 100%; border-radius: var(--radius-md);
+      overflow: hidden; margin-bottom: 28px;
+      position: relative; box-shadow: var(--shadow);
+    }
+    .cta-visual img {
+      width: 100%; display: block;
+      aspect-ratio: 4/5; object-fit: cover;
+      object-position: center 18%;
+    }
+    .cta-visual::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        var(--bg-section) 100%
+      );
+    }
+
+    /* ============================================================
        FOOTER
     ============================================================ */
     footer { background: #1E1010; color: rgba(255,255,255,0.45); text-align: center; padding: 24px 20px 40px; font-size: 12px; line-height: 1.7; }
@@ -506,6 +563,10 @@
       <p>SNS・LINE・商品・お客様の流れが、バラバラでつながっていないことにあります。</p>
     </div>
 
+    <div class="section-photo fade-up">
+      <img src="claude使用写真/date9.jpg" alt="今のやり方を変えよう" style="object-position: center 22%;">
+    </div>
+
     <div class="flow-wrap fade-up" aria-label="売れる動線のフロー">
       <div class="flow-step">
         <div class="flow-icon-box">
@@ -617,10 +678,14 @@
     <h2>私も、家業の中で<br>"なんでも屋さん"になっていたひとりです。</h2>
     <div class="divider"></div>
 
-    <div class="profile-wrap">
-      <div class="profile-photo fade-up">
-        <img src="claude使用写真/data1.jpg" alt="Mami プロフィール写真">
+    <div class="profile-photo-grid fade-up">
+      <div class="photo-main">
+        <img src="claude使用写真/date8.jpg" alt="Mami プロフィール写真">
       </div>
+      <div class="photo-sub">
+        <img src="claude使用写真/date7.jpg" alt="家業で働くMami">
+      </div>
+    </div>
 
       <div class="profile-info fade-up">
         <p class="profile-name">Mami</p>
@@ -648,7 +713,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </section>
 
@@ -843,6 +907,11 @@
 ================================================================ -->
 <section id="cta-section" aria-label="無料診断・相談">
   <div class="container">
+
+    <div class="cta-visual fade-up">
+      <img src="claude使用写真/date10.jpg" alt="売れる仕組みができた先の未来">
+    </div>
+
     <span class="section-label">Start Here</span>
     <div class="monitor-badge">モニター募集中</div>
     <h2>まずは、あなたの家業の中でどこが売上につながりにくくなっているのか、一緒に整理してみませんか？</h2>
