@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30秒でわかる、あなたのECお悩みタイプ診断</title>
+<style>
+  :root {
+    --color-main: #5c5f45;
+    --color-main-dark: #3f4130;
+    --color-sub: #ddbaae;
+    --color-bg-white: #fffdf6;
+    --color-bg-beige: #f6ead4;
+    --color-text: #45443a;
+    --color-text-light: #86816c;
+    --color-border: #e8e0cd;
+    --color-dark: #3d3c30;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+    color: var(--color-text);
+    line-height: 1.8;
+    background: linear-gradient(180deg, #efd7cf 0%, var(--color-bg-beige) 40%, var(--color-bg-white) 100%);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* ---------- Header ---------- */
+  .app-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .app-header .eyebrow {
+    display: inline-block;
+    background: var(--color-main);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    letter-spacing: 0.03em;
+  }
+
+  .app-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .app-header p {
+    font-size: 14px;
+    color: var(--color-text-light);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* ---------- Progress bar ---------- */
+  .progress-wrap {
+    margin-bottom: 24px;
+  }
+
+  .progress-track {
+    background: #e8e0cd;
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    background: var(--color-main);
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.35s ease;
+    width: 0%;
+  }
+
+  .progress-label {
+    text-align: right;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-light);
+    margin-top: 6px;
+  }
+
+  /* ---------- Card ---------- */
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  }
+
+  .q-text {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--color-text);
+  }
+
+  .choice-list {
+    list-style: none;
+  }
+
+  .choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--color-bg-white);
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .choice:hover {
+    border-color: var(--color-sub);
+    background: #fffaf3;
+  }
+
+  .choice.selected {
+    border-color: var(--color-main);
+    background: #eef0e6;
+    color: var(--color-main-dark);
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .btn-back {
+    background: none;
+    border: none;
+    color: var(--color-text-light);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 8px;
+    visibility: hidden;
+  }
+
+  .btn-back.show {
+    visibility: visible;
+  }
+
+  .btn-next {
+    display: inline-block;
+    background: var(--color-main);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 13px 28px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 5px 0 var(--color-main-dark);
+    cursor: pointer;
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn-next.enabled {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .btn-next:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 var(--color-main-dark);
+  }
+
+  /* ---------- Start screen ---------- */
+  .start-list {
+    list-style: none;
+    margin: 20px 0 26px;
+  }
+
+  .start-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .start-list li:last-child {
+    border-bottom: none;
+  }
+
+  .start-list .icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    background: var(--color-main);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .btn-start {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--color-main);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    padding: 17px 24px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 6px 0 var(--color-main-dark), 0 10px 20px rgba(92,95,69,0.35);
+    cursor: pointer;
+  }
+
+  .btn-start:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 var(--color-main-dark);
+  }
+
+  /* ---------- Result screen ---------- */
+  .result-badge {
+    display: inline-block;
+    background: var(--color-sub);
+    color: var(--color-main-dark);
+    font-size: 13px;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    letter-spacing: 0.03em;
+  }
+
+  .result-title {
+    font-size: 23px;
+    font-weight: 900;
+    color: var(--color-main-dark);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .result-lead {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 22px;
+  }
+
+  .result-section-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--color-text-light);
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .point-list {
+    list-style: none;
+  }
+
+  .point-list li {
+    background: var(--color-bg-white);
+    border-left: 4px solid var(--color-main);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .point-list.empty-note {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-light);
+    background: var(--color-bg-white);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .cta-box {
+    margin-top: 28px;
+    text-align: center;
+    background: var(--color-bg-beige);
+    border-radius: 14px;
+    padding: 22px 18px;
+  }
+
+  .cta-box p {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .btn-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--color-main);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 16px 24px;
+    border-radius: 50px;
+    box-shadow: 0 6px 0 var(--color-main-dark), 0 10px 20px rgba(92,95,69,0.3);
+    text-decoration: none;
+  }
+
+  .btn-cta:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 var(--color-main-dark);
+  }
+
+  .retry-link {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text-light);
+    cursor: pointer;
+  }
+
+  .screen {
+    display: none;
+  }
+
+  .screen.active {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="app-header">
+    <span class="eyebrow">30秒でわかる</span>
+    <h1>あなたのEC、今どこに伸びしろがある?</h1>
+    <p>6つの質問に答えるだけの無料診断です</p>
+  </div>
+
+  <!-- スタート画面 -->
+  <div class="screen active" id="screen-start">
+    <div class="card">
+      <ul class="start-list">
+        <li><span class="icon">✓</span>プラットフォーム出店・自社ECどちらでもOK</li>
+        <li><span class="icon">✓</span>質問は6つだけ、所要時間30秒</li>
+        <li><span class="icon">✓</span>今のお店に合わせて、具体的な伸びしろが分かります</li>
+      </ul>
+      <button class="btn-start" onclick="startQuiz()">診断をはじめる</button>
+    </div>
+  </div>
+
+  <!-- 質問画面 -->
+  <div class="screen" id="screen-quiz">
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-label" id="progress-label">Q1 / 6</div>
+    </div>
+    <div class="card">
+      <p class="q-text" id="q-text"></p>
+      <ul class="choice-list" id="choice-list"></ul>
+      <div class="nav-row">
+        <button class="btn-back" id="btn-back" onclick="goBack()">← 前の質問</button>
+        <button class="btn-next" id="btn-next" onclick="goNext()">次へ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 結果画面 -->
+  <div class="screen" id="screen-result">
+    <div class="card">
+      <span class="result-badge" id="result-badge"></span>
+      <h2 class="result-title" id="result-title"></h2>
+      <p class="result-lead" id="result-lead"></p>
+
+      <p class="result-section-title">特に伸びしろがありそうなポイント</p>
+      <ul class="point-list" id="point-list"></ul>
+
+      <div class="cta-box">
+        <p>診断結果をもとに、あなたのお店に合わせた具体的な改善ポイントを無料相談でお伝えします。</p>
+        <a class="btn-cta" id="cta-link" href="#" target="_blank" rel="noopener">無料相談に申し込む</a>
+      </div>
+      <span class="retry-link" onclick="startQuiz()">もう一度診断する</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // 無料相談の申込先(既存のGoogleフォームと共通)
+  var APPLY_URL = "https://docs.google.com/forms/d/e/1FAIpQLScY31pg2WXzaTt-CZ6B1qt4-ZJ7-WrhL6CAgKjePqnyiPsBzA/viewform";
+
+  var questions = [
+    {
+      axis: "type",
+      text: "今のあなたに一番近いものは?",
+      choices: [
+        { label: "ECサイトは作ったけど、正直あまり動いていない", value: "type1" },
+        { label: "ECサイトをこれから育てていきたい/始めたばかり", value: "type2" },
+        { label: "実店舗はあるけど客足が減ってきた。この商品をもっと世に出したい", value: "type3" }
+      ]
+    },
+    {
+      axis: "axis1",
+      text: "プラットフォーム(Amazon・楽天・卸サイトなど)で売れた後、そのお客さんと直接つながる手段(LINEやメルマガなど)はありますか?",
+      choices: [
+        { label: "ある、つながる仕組みがある", value: "ok" },
+        { label: "ない、売って終わりになっている", value: "weak" }
+      ],
+      weakNote: "プラットフォームで売って終わりになっていて、自分のお客さんとして繋がる手段がまだ弱いかもしれません"
+    },
+    {
+      axis: "axis2",
+      text: "商品や販促のアイデアは、どこから生まれていますか?",
+      choices: [
+        { label: "お客さんの声を聞いてから決めている", value: "ok" },
+        { label: "自分たちで考えて発信している(お客さんの声を聞く前に)", value: "weak" }
+      ],
+      weakNote: "商品や発信のアイデアが、お客さんの声より先に決まっていることが多いかもしれません"
+    },
+    {
+      axis: "axis3",
+      text: "聞いたお客さんの声は、その後どうしていますか?",
+      choices: [
+        { label: "商品ページや接客に毎回反映している", value: "ok" },
+        { label: "聞きっぱなしで終わっている", value: "weak" }
+      ],
+      weakNote: "聞いたお客さんの声が、その後の商品ページや接客に活かしきれていないかもしれません"
+    },
+    {
+      axis: "axis4",
+      text: "お客さんが何を欲しがっているか、登録時や購入時にわかる仕組みはありますか?",
+      choices: [
+        { label: "ある(アンケートやタグ分けなど)", value: "ok" },
+        { label: "ない/なんとなく", value: "weak" }
+      ],
+      weakNote: "お客さんが何を欲しがっているか、事前に見える仕組みがまだ弱いかもしれません"
+    },
+    {
+      axis: "axis5",
+      text: "新しいお客さんを増やす動きと、常連さんを育てる動き、両方同時にできていますか?",
+      choices: [
+        { label: "両方できている", value: "ok" },
+        { label: "どちらか一方に偏っている/どちらもできていない", value: "weak" }
+      ],
+      weakNote: "新規開拓と常連育成、どちらかに偏ってしまっているかもしれません"
+    }
+  ];
+
+  var typeInfo = {
+    type1: { badge: "箱はあるのに動いていないタイプ", title: "ECサイトという箱はあるのに、まだ動いていないタイプ" },
+    type2: { badge: "これから育てるタイプ", title: "これからECサイトを育てていくタイプ" },
+    type3: { badge: "もう一つの店舗を作りたいタイプ", title: "実店舗にもう一つの店舗を作りたいタイプ" }
+  };
+
+  var current = 0;
+  var answers = {};
+
+  function startQuiz() {
+    current = 0;
+    answers = {};
+    showScreen("screen-quiz");
+    renderQuestion();
+  }
+
+  function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(function (el) {
+      el.classList.remove("active");
+    });
+    document.getElementById(id).classList.add("active");
+    window.scrollTo(0, 0);
+  }
+
+  function renderQuestion() {
+    var q = questions[current];
+    document.getElementById("q-text").textContent = q.text;
+    document.getElementById("progress-label").textContent = "Q" + (current + 1) + " / " + questions.length;
+    document.getElementById("progress-fill").style.width = Math.round(((current) / questions.length) * 100) + "%";
+
+    var list = document.getElementById("choice-list");
+    list.innerHTML = "";
+    q.choices.forEach(function (choice) {
+      var li = document.createElement("li");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "choice";
+      btn.textContent = choice.label;
+      if (answers[q.axis] === choice.value) {
+        btn.classList.add("selected");
+      }
+      btn.onclick = function () {
+        answers[q.axis] = choice.value;
+        renderQuestion();
+      };
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+
+    var backBtn = document.getElementById("btn-back");
+    backBtn.classList.toggle("show", current > 0);
+
+    var nextBtn = document.getElementById("btn-next");
+    nextBtn.textContent = current === questions.length - 1 ? "結果を見る" : "次へ";
+    nextBtn.classList.toggle("enabled", !!answers[q.axis]);
+  }
+
+  function goBack() {
+    if (current > 0) {
+      current -= 1;
+      renderQuestion();
+    }
+  }
+
+  function goNext() {
+    var q = questions[current];
+    if (!answers[q.axis]) return;
+
+    if (current < questions.length - 1) {
+      current += 1;
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    var type = answers.type;
+    var info = typeInfo[type];
+
+    var weakNotes = questions
+      .filter(function (q) { return q.axis !== "type" && answers[q.axis] === "weak"; })
+      .map(function (q) { return q.weakNote; });
+
+    document.getElementById("result-badge").textContent = info.badge;
+    document.getElementById("result-title").textContent = info.title;
+
+    var leadText;
+    if (weakNotes.length === 0) {
+      leadText = "5つの視点のうち、今のところ大きな伸びしろは見当たりません。今の仕組みを土台に、次の一手を一緒に考えられる段階です。";
+    } else if (weakNotes.length <= 2) {
+      leadText = "全体の土台はできつつあります。あと" + weakNotes.length + "つのポイントを整えると、今より結果につながりやすくなりそうです。";
+    } else {
+      leadText = "今はまだ手つかずのポイントが" + weakNotes.length + "つあります。裏を返せば、ここを整えるだけで伸びる余地が大きいということです。";
+    }
+    document.getElementById("result-lead").textContent = leadText;
+
+    var pointList = document.getElementById("point-list");
+    pointList.innerHTML = "";
+    if (weakNotes.length === 0) {
+      pointList.className = "point-list empty-note";
+      var li = document.createElement("li");
+      li.textContent = "今回の回答では、特に大きな課題は見つかりませんでした。";
+      pointList.appendChild(li);
+    } else {
+      pointList.className = "point-list";
+      weakNotes.forEach(function (note) {
+        var li = document.createElement("li");
+        li.textContent = note;
+        pointList.appendChild(li);
+      });
+    }
+
+    document.getElementById("cta-link").href = APPLY_URL;
+
+    showScreen("screen-result");
+  }
+</script>
+
+</body>
+</html>
